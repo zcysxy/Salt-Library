@@ -6,8 +6,8 @@ import psycopg2
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'SaltLibrary'
 
-@app.route('/')
-@app.route('/home/')
+@app.route('/', methods=('GET', 'POST'))
+@app.route('/home/', methods=('GET', 'POST'))
 def home():
     conn, cur = con.connect()
     cur.execute('''
@@ -21,28 +21,36 @@ def home():
 
     if request.method == 'POST':
         title = request.form['title']
-
-        conn, cur = con.connect()
-        cur.execute(
-            '''
-            SELECT *
-            FROM books
-            WHERE title = %s
-            ''',
-            (title,)
-        )
-        rows = cur.fetchall()
-        cur.close()
-        conn.close()
-
-        return render_template('search_result.html', result=rows)
-
+        return redirect('/search_result?title=%s' % title)
+    
     return render_template('home.html', books=rows)
+
+@app.route('/search_result', methods=('GET','POST'))
+def search_result():
+    conn, cur = con.connect()
+    title = '%' + request.args.get('title') + '%'
+    cur.execute(
+        """
+        SELECT *
+        FROM books
+        WHERE title LIKE %s
+        """,
+        (title,)
+    )
+    rows = cur.fetchall()
+    cur.close()
+    conn.close()
+
+    if request.method == 'POST':
+        title = request.form['title']
+        return redirect('/search_result?title=%s' % title)
+
+    return render_template('search_result.html', result=rows)
+
 
 @app.route('/about/')
 @app.route('/home/about/')
 def about():
-    flash('WHATTTTT')
     return render_template('about.html')
 
 @app.route('/newbook/', methods=('GET','POST'))
