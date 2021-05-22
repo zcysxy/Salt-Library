@@ -4,5 +4,10 @@
 			"path": "."
 		}
 	],
-	"settings": {}
+	"settings": {
+		"editor.fontFamily": "Fira Code Medium, Glow Sans SC Medium, '微软雅黑', Cascadia code, Consolas, 'Courier New', monospace",
+		"editor.fontLigatures": true,
+		"editor.fontSize": 16,
+		"debug.console.fontFamily": "Fira Code Medium",
+	}
 }
