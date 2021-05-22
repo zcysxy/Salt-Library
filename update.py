@@ -26,6 +26,7 @@ def update_books(values):
         conn.commit()
         cur.close()
         conn.close()
+        print('Successfully updated!')
     except (Exception, psycopg2.DatabaseError) as error:
         print(error)
         if conn is not None:
@@ -35,4 +36,4 @@ def update_books(values):
 
 
 if __name__ == '__main__':
-    update_books((10,'18300180101'))
+    update_books([9,'18300180101'])

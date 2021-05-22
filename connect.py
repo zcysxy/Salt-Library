@@ -1,4 +1,5 @@
 import psycopg2
+import psycopg2.extras
 
 def connect():
     '''
@@ -21,8 +22,8 @@ def connect():
             password = 'SaltLibrary'
         )
 		
-        # create a cursor
-        cur = conn.cursor()
+        # create a dictionar-like cursor
+        cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
         
         # execute a statement
         print('PostgreSQL database version:')
@@ -36,8 +37,6 @@ def connect():
 
     except (Exception, psycopg2.DatabaseError) as error:
         print(error)
-        if cur is not None:
-            cur.close()
         if conn is not None:
             conn.close()
 

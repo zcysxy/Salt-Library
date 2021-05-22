@@ -1,5 +1,35 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1>{% block title %} Welcome to Salt Library {% endblock %}</h1>
+    <section class="py-5 text-center container">
+        <div class="row py-lg-5">
+        <div class="col-lg-6 col-md-8 mx-auto">
+            <h1 class="fw-bold">{% block title %}Salt Library {% endblock %}</h1>
+            <p class="lead text-muted"> Welcome to a library whose books taste salty.</p>
+            <p>
+            <a href="/newbook/" class="btn btn-primary">Add a New Book</a>
+            </p>
+            <form action="post" class="d-flex">
+            <input
+                type="text"
+                name="search"
+                placeholder="What book are you looking for?"
+                class="form-control me-2"
+                value="{{ request.form['title'] }}">&ensp;</input>
+            <button type="submit" class="btn btn-secondary">Search</button>
+            </form>
+        </div>
+        </div>
+    </section>
+
+    {% for book in books %}
+        <a href="#">
+            <h2>《{{ book['title'] }}》</h2>
+        </a>
+        <span class='badge badge-primary'>ISBN: {{ book['isbn']}}</span>
+        <span class='badge badge-primary'>Author: {{ book['author']}}</span>
+        <span class='badge badge-primary'>Publisher: {{ book['publisher']}}</span>
+        <span class='badge badge-primary'>Publish Date: {{ book['publish_year'] }}-{{ book['publish_month']}}</span>
+        <hr>
+    {% endfor %}
 {% endblock %}

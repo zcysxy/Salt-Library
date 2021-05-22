@@ -34,7 +34,29 @@ createdb -U postgres curator
 
 ]/
 
+All these command are in `ini.sql`
+
+### Schemas
+
+Now we should build schemas for our project.
+
+/[
+
+Other attributes *books* should have
+
+* translator
+* original_name
+* pages
+* language
+
+- [ ] Does the ISBN need a check?
+- [ ] Multivalue for author and translator?
+
+]/
+
 ## Psycopg2
+
+See Salt-Box for notes.
 
 ## Flask
 
@@ -66,3 +88,7 @@ Then build the app
 ```shell
 flask run
 ```
+
+### Flash
+
+Use flash to display error and success!
