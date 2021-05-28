@@ -1,0 +1,4810 @@
+/* @settings
+name: In The Shadows Settings
+id: ITS
+settings:
+    -
+        title: Text
+        id: Text-CSS
+        type: heading
+        level: 2
+    -
+        title: Fonts
+        id: text-fonts
+        type: heading
+        level: 3
+    -
+        title: Headings
+        description: Heading and Vault Title fonts.
+        id: font
+        type: variable-text
+        default: "'Calisto MT', 'Palatino Black', 'Book Antiqua', 'Georgia', 'Suez One', serif"
+    -
+        title: Text
+        description: Changes text font for preview and edit mode. 
+        id: default-font
+        type: variable-text
+        default: "Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Microsoft YaHei Light', sans-serif"
+    -
+        title: Monospace
+        id: font-monospace
+        type: variable-text
+        default: "'Fira Code Medium', 'Source Code Pro', monospace"
+    -
+        title: Font Ligatures
+        description: (Depends On Font) Text combines into symbols ie. - - > becomes -->.
+        id: lig
+        type: class-toggle
+    -
+        title: Size
+        id: text-size
+        type: heading
+        level: 3
+    -
+        title: Text Size
+        description: Adjust size for preview/editor mode. If you use the one below, this only affects editor mode.
+        id: f-s-text
+        type: variable-number-slider
+        default: 1
+        format: rem
+        min: .6
+        max: 1.5
+        step: .1
+    -
+        title: Preview Text Size
+        description: Adjust size for preview mode.
+        id: f-s-pre
+        type: variable-number-slider
+        default: 1
+        format: rem
+        min: .6
+        max: 1.5
+        step: .1
+    -
+        title: Header Weights
+        id: f-w-h
+        type: variable-number-slider
+        default: 600
+        min: 100
+        max: 900
+        step: 100
+    -
+        title: Header Height
+        id: head-h
+        type: variable-number-slider
+        default: 15
+        format: px
+        min: 0
+        max: 30
+        step: 5
+    -
+        title: Line Height
+        id: lh
+        type: variable-number-slider
+        default: 1.5
+        format: em
+        min: 1
+        max: 2
+        step: .1
+    -
+        title: Colors
+        id: text-colors
+        type: heading
+        level: 3
+    - 
+        title: Text
+        id: text
+        type: variable-themed-color
+        format: hex
+        default-dark: '#bccad8'
+        default-light: '#697580'
+    - 
+        title: Faint Text
+        id: soft-text
+        type: variable-themed-color
+        format: hex
+        default-dark: '#aab3ca'
+        default-light: '#d04e4e'
+    - 
+        title: Headings
+        description: Heading, Vault title, HR Symbol, blockquote quotation mark, and open folder icon colors.
+        id: headers
+        type: variable-themed-color
+        format: hex
+        default-dark: '#c14343'
+        default-light: '#d04e4e'
+    - 
+        title: File Title
+        description: File text color.
+        id: file
+        type: variable-themed-color
+        format: hex
+        default-dark: '#aab3ca'
+        default-light: '#7e8ea3'
+    - 
+        title: Code Text
+        id: code-text
+        type: variable-themed-color
+        format: hex
+        default-dark: '#fa4545'
+        default-light: '#ea4262'
+    -
+        title: <i></i>
+        description: <i></i> text color.
+        id: i-at
+        type: variable-themed-color
+        format: hex
+        default-dark: '#bf5e5e'
+        default-light: '#c14343'
+    - 
+        title: Footnotes
+        id: footnote
+        type: variable-themed-color
+        format: hex
+        default-dark: '#6e7e89'
+        default-light: '#8996a0'
+    -
+        title: Specific View Font Changes
+        id: Font-Specific
+        type: heading
+        level: 3
+        collapsed: true
+    -
+        title: Different Preview/Editor Text
+        description: If toggled on, Text only affects UI text.
+        id: ed-pre
+        type: class-toggle
+    -
+        title: Preview Text
+        description: Changes text font for preview mode.
+        id: pre-font
+        type: variable-text
+        default: "Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Microsoft YaHei Light', sans-serif"
+    -
+        title: Editor Text
+        description: Changes text font for edit mode.
+        id: ed-font
+        type: variable-text
+        default: "Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Microsoft YaHei Light', sans-serif"
+    -
+        title: Specific Decoration Changes
+        id: Dec-Spec
+        type: heading
+        level: 3
+		collapsed: true
+    -
+        title: Different Preview/Editor Decorations
+        description: Toggle on to use different styles for italics, bold, and strikethrough
+        id: text-spec
+        type: class-toggle
+    -
+        title: Specific Decoration Fonts
+        id: Dec-Spec-Fonts
+        type: heading
+        level: 4
+    -
+        title: Preview Italic Font
+        id: em-pre-f
+        type: variable-text
+        default: "Inter, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif"
+    -
+        title: Editor Italic Font
+        id: em-ed-f
+        type: variable-text
+        default: "Inter, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif"
+    -
+        title: Preview Bold Font
+        id: b-pre-f
+        type: variable-text
+        default: "Inter, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif"
+    -
+        title: Editor Bold Font
+        id: b-ed-f
+        type: variable-text
+        default: "Inter, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif"
+    -
+        title: Preview Strikethrough Font
+        id: del-pre-f
+        type: variable-text
+        default: "Inter, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif"
+    -
+        title: Editor Strikethrough Font
+        id: del-ed-f
+        type: variable-text
+        default: "Inter, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif"
+    -
+        title: Specific Decoration Colors
+        id: Dec-Spec-Colors
+        type: heading
+        level: 4
+    -
+        title: Preview Italic Color
+        id: em-pre-c
+        type: variable-themed-color
+        format: hex
+        default-dark: '#bccad8'
+        default-light: '#697580'
+    -
+        title: Editor Italic Color
+        id: em-ed-c
+        type: variable-themed-color
+        format: hex
+        default-dark: '#bccad8'
+        default-light: '#697580'
+    -
+        title: Preview Bold Color
+        id: b-pre-c
+        type: variable-themed-color
+        format: hex
+        default-dark: '#bccad8'
+        default-light: '#697580'
+    -
+        title: Editor Bold Color
+        id: b-ed-c
+        type: variable-themed-color
+        format: hex
+        default-dark: '#bccad8'
+        default-light: '#697580'
+    -
+        title: Preview Strikethrough Color
+        id: del-pre-c
+        type: variable-themed-color
+        format: hex
+        default-dark: '#bccad8'
+        default-light: '#697580'
+    -
+        title: Editor Strikethrough Color
+        id: del-ed-c
+        type: variable-themed-color
+        format: hex
+        default-dark: '#bccad8'
+        default-light: '#697580'
+    -
+        title: Specific View Heading Changes
+        id: Heading-Specific
+        type: heading
+        level: 3
+        collapsed: true
+    -
+		title: Specific Heading Adjustments
+		description: Toggle on to edit headings individually.
+		id: head-spec
+		type: class-toggle
+	-
+		title: Heading Fonts
+		id: Spec-Font-Head
+		type: heading
+		level: 4
+	- 
+		title: Heading 1 Font Preview
+		id: sphd-pre-ff-1
+		type: variable-text
+		default: "'Calisto MT', 'Palatino Black', 'Suez One', 'serif'"
+    - 
+		title: Heading 1 Font Editor
+		id: sphd-ed-ff-1
+		type: variable-text
+		default: "'Calisto MT', 'Palatino Black', 'Suez One', 'serif'"
+	- 
+		title: Heading 2 Font Preview
+		id: sphd-pre-ff-2
+		type: variable-text
+		default: "'Calisto MT', 'Palatino Black', 'Suez One', 'serif'"
+	- 
+		title: Heading 2 Font Editor
+		id: sphd-ed-ff-2
+		type: variable-text
+		default: "'Calisto MT', 'Palatino Black', 'Suez One', 'serif'"
+	- 
+		title: Heading 3 Font Preview
+		id: sphd-pre-ff-3
+		type: variable-text
+		default: "'Calisto MT', 'Palatino Black', 'Suez One', 'serif'"
+	- 
+		title: Heading 3 Font Editor
+		id: sphd-ed-ff-3
+		type: variable-text
+		default: "'Calisto MT', 'Palatino Black', 'Suez One', 'serif'"
+	- 
+		title: Heading 4 Font Preview
+		id: sphd-pre-ff-4
+		type: variable-text
+		default: "'Calisto MT', 'Palatino Black', 'Suez One', 'serif'"
+	- 
+		title: Heading 4 Font Editor
+		id: sphd-ed-ff-4
+		type: variable-text
+		default: "'Calisto MT', 'Palatino Black', 'Suez One', 'serif'"
+	- 
+		title: Heading 5 Font Preview
+		id: sphd-pre-ff-5
+		type: variable-text
+		default: "'Calisto MT', 'Palatino Black', 'Suez One', 'serif'"
+	- 
+		title: Heading 5 Font Editor
+		id: sphd-ed-ff-5
+		type: variable-text
+		default: "'Calisto MT', 'Palatino Black', 'Suez One', 'serif'"
+	- 
+		title: Heading 6 Font Preview
+		id: sphd-pre-ff-6
+		type: variable-text
+		default: "'Calisto MT', 'Palatino Black', 'Suez One', 'serif'"
+	- 
+		title: Heading 6 Font Editor
+		id: sphd-ed-ff-6
+		type: variable-text
+		default: "'Calisto MT', 'Palatino Black', 'Suez One', 'serif'"
+	-
+        title: Heading Size
+        id: Spec-Size-Head
+        type: heading
+        level: 4
+	-
+		title: Heading 1 Size Preview
+		id: sphd-pre-fs-1
+		type: variable-number-slider
+        default: 34
+        format: em
+        min: .8
+        max: 1.5
+        step: .1	
+	-
+		title: Heading 1 Size Editor
+		id: sphd-ed-fs-1
+		type: variable-number-slider
+        default: 34
+        format: px
+        min: 18
+        max: 40
+        step: 2
+	-
+		title: Heading 2 Size Preview
+		id: sphd-pre-fs-2
+		type: variable-number-slider
+        default: 30
+        format: px
+        min: 18
+        max: 40
+        step: 2
+	-
+		title: Heading 2 Size Editor
+		id: sphd-ed-fs-2
+		type: variable-number-slider
+        default: 28
+        format: px
+        min: 18
+        max: 40
+        step: 2
+	-
+		title: Heading 3 Size Preview
+		id: sphd-pre-fs-3
+		type: variable-number-slider
+        default: 26
+        format: px
+        min: 18
+        max: 40
+        step: 2
+	-
+		title: Heading 3 Size Editor
+		id: sphd-ed-fs-3
+		type: variable-number-slider
+        default: 24
+        format: px
+        min: 18
+        max: 40
+        step: 2
+	-
+		title: Heading 4 Size Preview
+		id: sphd-pre-fs-4
+		type: variable-number-slider
+        default: 24
+        format: px
+        min: 18
+        max: 40
+        step: 2
+	-
+		title: Heading 4 Size Editor
+		id: sphd-ed-fs-4
+		type: variable-number-slider
+        default: 22
+        format: px
+        min: 18
+        max: 40
+        step: 2
+	-
+		title: Heading 5 Size Preview
+		id: sphd-pre-fs-5
+		type: variable-number-slider
+        default: 20
+        format: px
+        min: 18
+        max: 40
+        step: 2
+	-
+		title: Heading 5 Size Editor
+		id: sphd-ed-fs-5
+		type: variable-number-slider
+        default: 20
+        format: px
+        min: 18
+        max: 40
+        step: 2	
+	-
+		title: Heading 6 Size Preview
+		id: sphd-pre-fs-6
+		type: variable-number-slider
+        default: 18
+        format: px
+        min: 18
+        max: 40
+        step: 2	
+	-
+		title: Heading 6 Size Editor
+		id: sphd-ed-fs-6
+		type: variable-number-slider
+        default: 18
+        format: px
+        min: 18
+        max: 40
+        step: 2
+	-
+        title: Heading Colors
+        id: Spec-Colors-Head
+        type: heading
+        level: 4		
+	-
+		title: Heading 1 Color Preview
+		id: sphd-pre-1
+		type: variable-themed-color
+		format: hex
+		default-dark: '#683732'
+		default-light: '#683732'
+	-
+		title: Heading 1 Color Editor
+		id: sphd-ed-1
+		type: variable-themed-color
+		format: hex
+		default-dark: '#683732'
+		default-light: '#683732'
+	-
+		title: Heading 2 Color Preview
+		id: sphd-pre-2
+		type: variable-themed-color
+		format: hex
+		default-dark: '#a13531'
+		default-light: '#a13531'
+	-
+		title: Heading 2 Color Editor
+		id: sphd-ed-2
+		type: variable-themed-color
+		format: hex
+		default-dark: '#a13531'
+		default-light: '#a13531'
+	-
+		title: Heading 3 Color Preview
+		id: sphd-pre-3
+		type: variable-themed-color
+		format: hex
+		default-dark: '#fc4435'
+		default-light: '#fc4435'
+	-
+		title: Heading 3 Color Editor
+		id: sphd-ed-3
+		type: variable-themed-color
+		format: hex
+		default-dark: '#fc4435'
+		default-light: '#fc4435'
+	-
+		title: Heading 4 Color Preview
+		id: sphd-pre-4
+		type: variable-themed-color
+		format: hex
+		default-dark: '#ff6a79'
+		default-light: '#ff6a79'
+	-
+		title: Heading 4 Color Editor
+		id: sphd-ed-4
+		type: variable-themed-color
+		format: hex
+		default-dark: '#ff6a79'
+		default-light: '#ff6a79'
+	-
+		title: Heading 5 Color Preview
+		id: sphd-pre-5
+		type: variable-themed-color
+		format: hex
+		default-dark: '#ac7782'
+		default-light: '#ac7782'
+	-
+		title: Heading 5 Color Editor
+		id: sphd-ed-5
+		type: variable-themed-color
+		format: hex
+		default-dark: '#ac7782'
+		default-light: '#ac7782'
+	-
+		title: Heading 6 Color Preview
+		id: sphd-pre-6
+		type: variable-themed-color
+		format: hex
+		default-dark: '#d6b6bc'
+		default-light: '#d6b6bc'
+	-
+		title: Heading 6 Color Editor
+		id: sphd-ed-6
+		type: variable-themed-color
+		format: hex
+		default-dark: '#d6b6bc'
+		default-light: '#d6b6bc'
+    -
+        title: Workspace
+        id: WS-CSS
+        type: heading
+        level: 2
+    -
+        title: Hide Vault Name
+        id: v-non
+        type: class-toggle
+    -
+        title: Wrap Note Title
+        id: title-wrap
+        type: class-toggle
+    -
+        title: Resize Scrollbars
+        id: scroll-size
+        type: variable-number-slider
+        default: 7
+        format: px
+        min: 0
+        max: 15
+        step: 1
+    -
+        title: Workspace Colors
+        id: Workspace-Colors
+        type: heading
+        level: 3
+    - 
+        title: Note
+        description: Note and sidebar colors.
+        id: note
+        type: variable-themed-color
+        format: hex
+        default-dark: '#1a1e24'
+        default-light: '#f8fbff'
+    - 
+        title: Outer Sidebar
+        id: outer-bar
+        type: variable-themed-color
+        format: hex
+        default-dark: '#0e0f15'
+        default-light: '#dfe7ef'
+    - 
+        title: Sidebar
+        description: Change only sidebar, right settings pane, and inactive note title background colors.
+        id: side-bar
+        type: variable-themed-color
+        format: hex
+        default-dark: '#1a1e24'
+        default-light: '#f8fbff'
+    - 
+        title: Dark Sidebar
+        description: Left settings bar, <i></i> background, graph background, and pane separator colors.
+        id: dark-sidebar
+        type: variable-themed-color
+        format: hex
+        default-dark: '#10161d'
+        default-light: '#7e8ea3'
+    - 
+        title: File
+        description: File icon color.
+        id: f-icon
+        type: variable-themed-color
+        format: hex
+        default-dark: '#586477'
+        default-light: '#a6bbde'
+    - 
+        title: Folder
+        description: Open folder icon color.
+        id: folder
+        type: variable-themed-color
+        format: hex
+        default-dark: '#e05858'
+        default-light: '#ce6d6d'
+    -
+        title: Sliding Panes Dropshadow
+        id: slide-shadow
+        type: variable-themed-color
+        format: rgb
+        opacity: true
+        default-dark: '#001c4a15'
+        default-light: '#001c4a15'
+    -
+        title: Note Elements
+        id: Other-Note
+        type: heading
+        level: 2
+    - 
+        title: Horizontal Line Symbol
+        description: Add quotations around symbol for it to work. For Example "⚡".
+        id: hr-sym
+        type: variable-text
+        default: '⚡'
+    -
+        title: No Horizontal Line Symbol
+        description: Hide the horizontal Line Symbol entirely
+        id: hr-tog
+        type: class-toggle
+    -
+        title: Hide Frontmatter 
+        id: no-m
+        type: class-toggle
+    - 
+        title: Centered Tables
+        description: Move all tables to the center of the page.
+        id: t-c
+        type: class-toggle
+    - 
+        title: Naked Embeds
+        description: Embeds that look like they're part of the note.
+        id: naked-em
+        type: class-toggle
+    -
+        title: Original Embeds
+        description: Previous style of embeds
+        id: org-em
+        type: class-toggle
+    -
+        title: Headers
+        id: Headers
+        type: heading
+        level: 3
+    -
+        title: Header Tags Above Header
+        description: Move the editor header hastags # to above the header instead.
+        id: hash-top
+        type: class-toggle
+    -
+        title: Hide Header Underline
+        id: h-line
+        type: class-toggle
+    -
+        title: Center Headings
+        id: hc
+        type: class-toggle
+    -
+        title: Center Heading With Lines
+        description: Center headings and have lines appear at either side of it.
+        id: hcl
+        type: class-toggle
+    -
+        title: Colors
+        id: Note-Element-Colors
+        type: heading
+        level: 3
+    - 
+        title: Embed/Blockquote
+        description: Embed/Blockquote color.
+        id: embed-bg
+        type: variable-themed-color
+        format: hex
+        default-dark: '#10161d'
+        default-light: '#f1f5ff'
+    - 
+        title: Code Background
+        id: code-bg
+        type: variable-themed-color
+        format: hex
+        default-dark: '#232831'
+        default-light: '#eef6ff'
+    - 
+        title: Horizontal Line
+        id: hr
+        type: variable-themed-color
+        format: hex
+        default-dark: '#3c5274'
+        default-light: '#d6deea'
+    -
+		title: Aside Background Color
+		id: aside-bg
+		description: Aside background color and dark theme setting alternating setting item color.
+		type: variable-themed-color
+		format: hex
+		default-dark: '#11151d'
+		default-light: '#eef3fd'
+    -
+        title: Lists
+        id: Lists
+        type: heading
+        level: 2
+    - 
+        title: Default Bullet Disc Shape
+        id: def-bull
+        type: class-toggle
+    - 
+        title: Custom Bullet Shape
+        description: Toggle on if you want to use the bullet shape below.
+        id: no-bull
+        type: class-toggle
+    - 
+        title: Bullet Shape
+        description: Add quotes around your new bullet. For example "~"
+        id: bullet
+        type: variable-text
+        default: '⬥'
+    - 
+        title: Original Bullet Lines
+        description: Lines appear under bullet, not beside it. ⚠Causes scrolling glitches. Recommended this is turned off, but use if you wish.
+        id: b-li-o
+        type: class-toggle
+	-
+		title: Specific Lists
+		id: Bullet-Lists
+		type: heading
+		level: 4
+        collapsed: true
+	-
+		title: Specific Line Size
+		id: b-line
+		type: variable-number-slider
+        default: 2
+        format: px
+        min: 0
+        max: 3
+        step: 1
+	-
+		title: Specific Line Color
+		id: Bullet-Line-Color
+		type: heading
+		level: 4
+        collapsed: true
+	-
+		title: Toggle Colorful Bullet Line Color
+		description: Toggle on to use the colorful bullet lines
+		id: bul-li-col
+		type: class-toggle
+	-
+		title: Bullet Line 1 Color
+		id: b-l-1
+		type: variable-themed-color
+		format: hex
+		default-dark: '#683732'
+		default-light: '#683732'
+	-
+		title: Bullet Line 2 Color
+		id: b-l-2
+		type: variable-themed-color
+		format: hex
+		default-dark: '#a13531'
+		default-light: '#ff1702'
+	-
+		title: Bullet Line 3 Color
+		id: b-l-3
+		type: variable-themed-color
+		format: hex
+		default-dark: '#fc4435'
+		default-light: '#e27777'
+	-
+		title: Bullet Line 4 Color
+		id: b-l-4
+		type: variable-themed-color
+		format: hex
+		default-dark: '#ff6a79'
+		default-light: '#ff7482'
+	-
+		title: Bullet Line 5 Color
+		id: b-l-5
+		type: variable-themed-color
+		format: hex
+		default-dark: '#ac7782'
+		default-light: '#ad8f8f'
+	-
+		title: Bullet Line 6 Color
+		id: b-l-6
+		type: variable-themed-color
+		format: hex
+		default-dark: '#d6b6bc'
+		default-light: '#d6b6bc'
+    - 
+        title: Tags
+        id: Tags
+        type: heading
+        level: 2
+    -
+        title: Bubble Tags
+        id: tag-bubble
+        type: class-toggle
+    -
+        title: Notion Tags
+        id: tag-notion
+        type: class-toggle
+    -
+        title: Outline Tags
+        id: tag-outline
+        type: class-toggle
+    -
+        title: Tag Outline Border Size
+        id: tag-o
+        type: variable-number-slider
+        default: 1
+        format: px
+        min: 0
+        max: 5
+        step: 1
+    - 
+        title: Tag Color
+        id: tag
+        type: variable-themed-color
+        format: hex
+        default-dark: '#571a1a'
+        default-light: '#c65656'
+    - 
+        title: Other Colors
+        id: Other-Colors
+        type: heading
+        level: 2
+    - 
+        title: Accent
+        id: accent
+        type: variable-themed-color
+        format: hex
+        default-dark: '#883737'
+        default-light: '#c14343'
+    - 
+        title: Lite Accent
+        description: Link hover, scrollbar active, tags, embed titles and links colors.
+        id: lite-accent
+        type: variable-themed-color
+        format: hex
+        default-dark: '#e06c75'
+        default-light: '#a35158'
+    - 
+        title: Accent 2
+        description: Arrows, lines, even bullet list line colors.
+        id: accent2
+        type: variable-themed-color
+        format: hex
+        default-dark: '#3c5274'
+        default-light: '#d6deea'
+    -
+        title: Lite Accent 2
+        description: Link color.
+        id: accent2-lite
+        type: variable-themed-color
+        format: hex
+        default-dark: '#61afef'
+        default-light: '#5599d0'
+    -
+        title: Dark Accent
+        description: File selected color.
+        id: dark-accent
+        type: variable-themed-color
+        format: hex
+        default-dark: '#571a1a'
+        default-light: '#ffeded'
+    -
+        title: Deep Dark Accent
+        description: Active note title background color.
+        id: deep-dark-accent
+        type: variable-themed-color
+        format: hex
+        default-dark: '#270f0f'
+        default-light: '#2f1010'
+    -
+        title: Inactive
+        description: Inactive note; file text; unresolved and external link, editor and external link hover; and mermaid text color.
+        id: inactive
+        type: variable-themed-color
+        format: hex
+        default-dark: '#586477'
+        default-light: '#a6bbde'
+    -
+        title: Background
+        description: Scrollbar color
+        id: bg
+        type: variable-themed-color
+        format: hex
+        default-dark: '#252c36'
+        default-light: '#dde4ef'
+    -
+        title: Lines
+        description: Explorer, heading, input box, settings, frontmatter, and mermaidjs lines
+        id: table
+        type: variable-themed-color
+        format: hex
+        default-dark: '#283846'
+        default-light: '#ccd6eb'
+    -
+		title: Foreground
+		description: Active file selected title color, Graph Node Color, Kanban Plugin Button color.
+		id: fg
+		type: variable-themed-color
+		format: hex
+		default-dark: '#cfd7dd'
+		default-light: '#912e2e'
+    -
+        title: Highlights
+        id: RGBA
+        type: heading
+        level: 3
+    -
+        title: Text Highlight
+        description: Markdown highlight color.
+        id: text-highlight-bg
+        type: variable-themed-color
+        format: rgb
+        opacity: true
+        default-dark: '#a83c3c40'
+        default-light: '#c7818140'
+    -
+        title: Search Highlight
+        description: Search result highlight color.
+        id: text-highlight-bg-active
+        type: variable-themed-color
+        format: rgb
+        opacity: true
+        default-dark: '#fd737340'
+        default-light: '#fd737340'
+    -
+        title: Search 2
+        description: Search match highlight and background transparent color for settings.
+        id: background-modifier-form-field-highlighted
+        type: variable-themed-color
+        format: rgb
+        opacity: true
+        default-dark: '#347bed22'
+        default-light: '#f0838322'
+    -
+        title: Text Selection
+        description: Cursor dragged highlights
+        id: text-selection
+        type: variable-themed-color
+        format: rgb
+        opacity: true
+        default-dark: '#4d171746'
+        default-light: '#e5959537'
+	-
+		title: Table
+		description: Alternating row/column color for table.
+		id: td
+		type: variable-themed-color
+        format: rgb
+        opacity: true
+        default-dark: '#06080c60'
+		default-light: '#d0ddef62'
+    -
+        title: Graph Colors
+        id: Graph
+        type: heading
+        level: 3
+    - 
+        title: Graph Background
+        id: graph-bg
+        type: variable-themed-color
+        format: hex
+        default-dark: '#10151B'
+        default-light: '#f8fbff'
+    - 
+        title: Graph Lines
+        id: graph-lines
+        type: variable-themed-color
+        format: hex
+        default-dark: '#571a1a'
+        default-light: '#e4e7f8'
+    - 
+        title: Graph Node
+        id: graph-node
+        type: variable-themed-color
+        format: hex
+        default-dark: '#cfd7dd'
+        default-light: '#c14343'
+    -
+        title: Graph Attachment
+        id: graph-img
+        type: variable-themed-color
+        format: hex
+        default-dark: '#4c78cc'
+        default-light: '#4c78cc'
+    -
+        title: Graph Tags
+        id: graph-tag
+        type: variable-themed-color
+        format: hex
+        default-dark: '#c14343'
+        default-light: '#000000'
+    -
+        title: Plugins
+        id: Plugins
+        type: heading
+        level: 2
+    -
+        title: Hide Text Expander
+        description: Hide text expander code block from preview
+        id: h-exp
+        type: class-toggle
+    - 
+        title: Dataview Adjustments
+        description: Personal adjustments to some elements of dataview
+        id: dv
+        type: class-toggle
+    -
+        title: Image Zoom
+        description: Hold and click an image to zoom into it.
+        id: img-zoom
+        type: class-toggle
+*/
+
+
+:root {
+    /*FONTS*/
+    --default-font: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Microsoft YaHei Light", sans-serif; /*Note text*/
+    --mermaid-font: var(--default-font); /*mermaidjs text*/
+    --reveal-font: var(--default-font); /*??*/
+    --font-monospace: 'Fira Code Medium', /*'JetBrains Mono Medium', 'Recursive Mono Casual Static Medium', 'Menlo Bold',*/ 'Source Code Pro', monospace; /*Code block text*/
+    --font: 'Calisto MT', 'Palatino Black', 'Book Antiqua', 'Georgia', 'Suez One', serif; /*Works, but if it doesn't, needs !important*/
+    --pre-font: var(--default-font) !important;
+    --ed-font: var(--default-font) !important;
+}
+
+.workspace {
+    background-color: var(--background-secondary);
+}
+
+.theme-dark, .theme-light {
+    /*Sizes*/
+    --radius: 0px;
+    --tiny: 100px;
+    --small: 200px;
+    --small-med: 300px;
+    --med-small: 400px;
+    --medium: 500px;
+    --med-tall: 600px;
+    --tall: 700px;
+    
+    /*Colors*/
+    --slide-shadow: rgba(0, 28, 74, 0.15);
+    --text-dl: #e5ebee;
+    
+    /*Sizes*/
+    --scroll-size: 7px;
+    --lh: 1.5em;
+    --f-s-pre: 1rem;
+    --f-s-text: 1rem;
+    --f-s-h: 34px;
+    --f-w-h: 600;
+    --h-line: 100%;
+    --head-h: 15px;
+    
+    /*Other*/
+    --hr-sym: "⚡";
+    --tag-o: 1px;
+    --bullet: "⬥";
+    --b-line: 2px;
+
+    /*--Specific--*/
+    /*Fonts*/
+    --sphd-pre-ff-1: 'Calisto MT', 'Palatino Black', 'Suez One', serif;
+    --sphd-pre-ff-2: 'Calisto MT', 'Palatino Black', 'Suez One', serif;
+    --sphd-pre-ff-3: 'Calisto MT', 'Palatino Black', 'Suez One', serif;
+    --sphd-pre-ff-4: 'Calisto MT', 'Palatino Black', 'Suez One', serif;
+    --sphd-pre-ff-5: 'Calisto MT', 'Palatino Black', 'Suez One', serif;
+    --sphd-pre-ff-6: 'Calisto MT', 'Palatino Black', 'Suez One', serif;
+    --sphd-ed-ff-1: 'Calisto MT', 'Palatino Black', 'Suez One', serif;
+    --sphd-ed-ff-2: 'Calisto MT', 'Palatino Black', 'Suez One', serif;
+    --sphd-ed-ff-3: 'Calisto MT', 'Palatino Black', 'Suez One', serif;
+    --sphd-ed-ff-4: 'Calisto MT', 'Palatino Black', 'Suez One', serif;
+    --sphd-ed-ff-5: 'Calisto MT', 'Palatino Black', 'Suez One', serif;
+    --sphd-ed-ff-6: 'Calisto MT', 'Palatino Black', 'Suez One', serif;
+
+    /*Size*/
+    --sphd-pre-fs-1: 34px;
+    --sphd-pre-fs-2: 30px;
+    --sphd-pre-fs-3: 26px;
+    --sphd-pre-fs-4: 24px;
+    --sphd-pre-fs-5: 20px;
+    --sphd-pre-fs-6: 18px;
+    --sphd-ed-fs-1: 34px;
+    --sphd-ed-fs-2: 28px;
+    --sphd-ed-fs-3: 24px;
+    --sphd-ed-fs-4: 22px;
+    --sphd-ed-fs-5: 20px;
+    --sphd-ed-fs-6: 18px;
+
+    /**/
+    --em-pre-f: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --em-ed-f: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --b-pre-f: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --b-ed-f: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --del-pre-f: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --del-ed-f: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+.theme-dark {
+    --background-primary: var(--note); /*Note background*/
+    --background-primary-alt: var(--deep-dark-accent); /*Note Title background active*/
+    --background-secondary: var(--side-bar); /*Sidebar background*/
+    --background-secondary-alt: var(--outer-bar); /*Sidebar Title background*/
+    
+    --background-modifier-border: var(--table); /*Border outline of quotes, tables, line breaks*/
+    
+    --background-modifier-form-field: rgba(0, 0, 0, 0.3); /*Search Field Bg Color*/
+    --background-modifier-form-field-highlighted: rgba(52, 123, 237, 0.22); /*Searched Highlight Color*/
+    --background-modifier-box-shadow: rgba(0, 0, 0, 0.3); /*Outershadow*/
+    --background-modifier-success: #197300; /*Publish Upload Success Background*/
+    --background-modifier-error: #3d0000; /*Delete Screen Button*/
+    --background-modifier-error-rgb: 61, 0, 0; /*??*/
+    --background-modifier-error-hover: #470000; /*??*/
+    --background-modifier-cover: black; /*Obsidian Title Bar Bg*/
+    
+    --text-on-accent: #dcddde; /*Program Title bar Text*/
+    --text-muted: var(--soft-text); /*Text darker for sidebar, toggles, inactive, tags, etc*/
+    --text-normal: var(--text); /*Text body of note*/
+    --text-accent: var(--accent2-lite); /*Links*/
+    --text-accent-hover: var(--accent); /*Links hover*/
+    --text-faint: #4e5b6f; /*Link brackets color & Gutter Numbers*/
+    --text-error: #ff3333; /*??*/
+    --text-error-hover: #990000; /*??*/
+    
+    --text-highlight-bg: rgba(168, 60, 60, 0.4); /*Text highlights*/
+    --text-highlight-bg-active: rgba(253, 115, 115, 0.4); /*Searched Result Highlight*/
+    --text-selection: rgba(122, 20, 20, 0.4); /*Cursor dragged highlights*/
+    
+    --interactive-normal: var(--dark-accent); /*Button Color*/
+    --interactive-hover: var(--embed-bg);/*Button Color*/
+    --interactive-accent: var(--accent); /*Workspace Note Title Underline*/
+    --interactive-accent-rgb: 52, 123, 237; /*Publish item select*/
+    --interactive-accent-hover: var(--accent); /*Menu Button Hover*/
+    --interactive-success: #599049; /*??*/
+    
+    --scrollbar-bg: rgba(255, 255, 255, 0.05);
+    --scrollbar-thumb-bg: rgba(255, 255, 255, 0.1);
+    --highlight-mix-blend-mode: lighten;
+
+    /*--DEFAULT VARIABLES--*/
+
+    /*Compatibility Color Recoloring*/    
+    --deep-dark-accent: #270f0f /*#2f1010*/;
+    --dark-accent: #571a1a /*#652121, #53201F*/;
+    --lite-accent: #e06c75;
+    --accent: #883737/*#c14343*/;
+    --accent2: var(--hr)/*#4c78cc*/;
+    --accent2-lite: #61afef;
+    --bg: #252c36;
+    --fg: #cfd7dd;
+    --side-bar: var(--note);
+    --outer-bar: #0b0f13 /*#0e0f15*/;
+    --dark-sidebar: #0d1014;
+    --inactive: #586477;
+    --outline: var(--outer-bar);
+
+    --folder: #e05858;
+    --file: #aab3ca;
+    --f-icon: var(--inactive);
+    --f-hover: var(--accent);
+    --lines: var(--hr)/*#465164*/;
+        
+    --note: #1a1e24 /*#0d131c*/;
+    --text: #bccad8 /*#dcddde*/;
+    --headers: #c14343;
+    --soft-text: #aab3ca/*#d04e4e*/;
+    --code-text: #fa4545;
+    --footnote: #6e7e89;
+
+    --code-bg: #232831;
+    --embed-bg: var(--dark-sidebar) /*#111417*/;
+    --aside-bg: #11151d;
+
+    --th: var(--dark-accent);
+    --td: #06080c60;
+    
+    --hvr: var(--text-highlight-bg);
+    --hvr2: var(--text-selection);
+    
+    --tag: var(--dark-accent);
+    --table: #283846;
+    --hr: #3c5274;
+    --i-at: #bf5e5e;
+    
+    --graph-bg: var(--outer-bar);
+    --graph-lines: var(--dark-accent);
+    --graph-node: var(--fg);
+    --graph-fill: var(--headers);
+    --graph-404: #727e93;
+    --graph-img: #4c78cc /*#ff86be*/;
+    --graph-tag: var(--headers);
+
+
+    /*CSS Specifics*/
+    --b-l-1: #683732;
+    --b-l-2: #a13531;
+    --b-l-3: #fc4435;
+    --b-l-4: #ff6a79;
+    --b-l-5: #ac7782;
+    --b-l-6: #d6b6bc;
+
+    --sphd-pre-1: #683732;
+    --sphd-pre-2: #a13531;
+    --sphd-pre-3: #fc4435;
+    --sphd-pre-4: #ff6a79;
+    --sphd-pre-5: #ac7782;
+    --sphd-pre-6: #d6b6bc;
+    --sphd-ed-1: #683732;
+    --sphd-ed-2: #a13531;
+    --sphd-ed-3: #fc4435;
+    --sphd-ed-4: #ff6a79;
+    --sphd-ed-5: #ac7782;
+    --sphd-ed-6: #d6b6bc;
+
+    --em-pre-c: var(--text);
+    --em-ed-c: var(--text);
+    --b-pre-c: var(--text);
+    --b-ed-c: var(--text);
+    --del-pre-c: var(--text);
+    --del-ed-c: var(--text);
+}
+
+.theme-light {
+    --background-primary: var(--note); /*Note background*/
+    --background-primary-alt: var(--dark-accent); /*Note Title background active*/
+    --background-secondary: var(--side-bar); /*Sidebar background*/
+    --background-secondary-alt: var(--outer-bar); /*Sidebar Title background*/
+    
+    --background-modifier-border: var(--table); /*Border outline of quotes, tables, line breaks*/
+    
+    --background-modifier-form-field: rgba(0, 0, 0, 0.3); /*??*/
+    --background-modifier-form-field-highlighted: rgba(240, 131, 131, 0.22); /*Search Bar Active Highlight*/
+    --background-modifier-box-shadow: rgba(0, 0, 0, 0.3); /*??*/
+    --background-modifier-success: #deedd9; /*Publish Upload Success Background*/
+    --background-modifier-error: var(--accent); /*Delete Screen Button*/
+    --background-modifier-error-rgb: 240, 131, 131; /*Ctrl F Search Background*/
+    --background-modifier-error-hover: #470000; /*??*/
+    --background-modifier-cover: var(--deep-dark-accent); /*Obsidian Title Bar*/
+    
+    --text-on-accent: #dcddde; /*Program Title bar text*/
+    --text-muted: var(--soft-text); /*Text darker for sidebar, toggles, inactive, tags, etc*/
+    --text-normal: var(--text); /*Text body of note*/
+    --text-accent: var(--accent2-lite); /*Links*/
+    --text-accent-hover: var(--accent); /*Links hover*/
+    --text-faint: #4e5b6f; /*Link brackets color*/
+    --text-error: #ff3333; /*??*/
+    --text-error-hover: #990000; /*??*/
+    
+    --text-highlight-bg: rgba(255, 185, 185, 0.4); /*Text highlights*/
+    --text-highlight-bg-active: rgba(253, 115, 115, 0.4); /*Search Highlight*/
+    --text-selection: rgba(229, 149, 149, 0.37); /*Cursor dragged highlights*/
+    
+    --interactive-normal: var(--outer-bar); /*Button background Color*/
+    --interactive-hover: var(--embed-bg)/*#5d2b2b*/; /*Button hover text*/
+    --interactive-accent: var(--headers); /*Workspace Note Title Underline*/
+    --interactive-accent-rgb: 52, 123, 237; /*Publish item select, Resize Handle*/
+    --interactive-accent-hover: var(--lite-accent); /*Menu Button Hover*/
+    --interactive-success: #197300; /*??*/
+    
+    --scrollbar-bg: rgba(255, 255, 255, 0.05);
+    --scrollbar-thumb-bg: rgba(255, 255, 255, 0.1);
+    --highlight-mix-blend-mode: darken; /*Search Highlight Mode*/
+
+    /*--DEFAULT VARIABLES--*/    
+    
+    /*Compatibility Color Recoloring*/    
+    --deep-dark-accent: #2f1010;
+    --dark-accent: #ffeded;
+    --lite-accent: #a35158;
+    --accent: #912e2e;
+    --accent2: var(--hr)/*#4c78cc*/;
+    --accent2-lite: #5599d0;
+    --bg: #dde4ef;
+    --fg: var(--accent) /*#9f0202*/;
+    --side-bar: var(--note);
+    --outer-bar: #eef3fd;
+    --dark-sidebar: #f1f5ff;
+    --inactive: #a6bbde /*#91a3c1*/;
+    --outline: var(--bg);
+    
+    --folder: #ce6d6d;
+    --file: #7e8ea3;
+    --f-icon: var(--inactive);
+    --f-hover: var(--accent);
+    --lines: #b5c2d8;
+    
+    --headers: #c14343;
+    --note: #f8fbff;
+    --text: #697580;
+    --soft-text: #d04e4e;
+    --code-text: #ea4262;
+    --footnote: #8996a0;
+
+    --code-bg: var(--embed-bg) /*#eef6ff*/;
+    --embed-bg: var(--dark-sidebar) /*#ebf1f8*/;
+    --aside-bg: var(--outer-bar);
+    
+    --th: var(--headers);
+    --td: #d0ddef62;
+    
+    --highlight-md: rgba(199, 129, 129, 0.4);
+    --highlight-s: rgba(253, 115, 115, 0.4);
+    --highlight-c: rgba(229, 149, 149, 0.37);
+    
+    --hvr: var(--text-highlight-bg);
+    --hvr2: var(--text-selection);
+
+    --tag: #c65656;
+    --table: #ccd6eb;
+    --hr: #d6deea;
+    --i-at: var(--headers)/*#804848*/;
+    
+    --graph-bg: var(--note);
+    --graph-lines: #e4e7f8;
+    --graph-node: var(--headers);
+    --graph-fill: #2e5db2;
+    --graph-404: #727e93;
+    --graph-img: #4c78cc /*#5469de*/;
+    --graph-tag: #000000; 
+    
+    
+    /*CSS Specifics*/
+    --b-l-1: #683732;
+    --b-l-2: #ff1702;
+    --b-l-3: #e27777;
+    --b-l-4: #ff7482;
+    --b-l-5: #ad8f8f;
+    --b-l-6: #d6b6bc;
+
+    --sphd-pre-1: #683732;
+    --sphd-pre-2: #ff1702;
+    --sphd-pre-3: #e27777;
+    --sphd-pre-4: #ff7482;
+    --sphd-pre-5: #ad8f8f;
+    --sphd-pre-6: #d6b6bc;
+    --sphd-ed-1: #683732;
+    --sphd-ed-2: #ff1702;
+    --sphd-ed-3: #e27777;
+    --sphd-ed-4: #ff7482;
+    --sphd-ed-5: #ad8f8f;
+    --sphd-ed-6: #d6b6bc;
+
+    --em-pre-c: var(--text);
+    --em-ed-c: var(--text);
+    --b-pre-c: var(--text);
+    --b-ed-c: var(--text);
+    --del-pre-c: var(--text);
+    --del-ed-c: var(--text);
+}
+
+
+/*--WORKSPACE--*/
+/*Obsidian Title Bar Cover*/
+.titlebar { background-color: var(--background-modifier-cover); }
+.titlebar-text{ color: var(--text-dl) !important; }
+
+/*Exit Button*/
+.titlebar-button:hover {
+    color: var(--text-dl);
+}
+
+/*Drop Menu*/
+.menu {
+    border-radius: var(--radius) !important;
+}
+.menu-item:hover {
+    background-color: var(--outer-bar);
+}
+
+/*Ribbon Icons*/
+.side-dock-ribbon-tab, .side-dock-ribbon-action, .workspace-tab-header-inner-icon {
+    color: var(--soft-text);
+    text-align: center;
+    cursor: pointer;
+    stroke-width: 2px;
+}
+.side-dock-settings {
+    margin-bottom: 1em;
+}
+.workspace-ribbon.is-collapsed {
+    border: none;
+    background-color: var(--outer-bar);
+}
+
+.workspace-split.mod-left-split .workspace-tabs .workspace-leaf,
+.workspace-split.mod-right-split .workspace-tabs .workspace-leaf {
+    border-radius: var(--radius);
+}
+
+
+/*Buttons*/
+.nav-action-button.is-active {
+    background-color: var(--th);
+    color: var(--text-dl);
+}
+/*Button Hover Color*/
+.modal button:not(.mod-cta):not(.mod-warning):hover, button:hover, button.mod-cta:hover {
+    background-color: var(--interactive-accent-hover) !important;
+    color: var(--text-dl);
+}
+
+button, button.mod-cta {
+    border-radius: var(--radius);
+}
+
+/*Pinned Pane Button Color*/
+.view-action:hover, .view-action.is-active {
+    color: var(--accent);
+}
+
+/*Sidebar Resize Handle*/
+.workspace-leaf-resize-handle {
+    background-color: var(--dark-sidebar);
+    transition: background-color 200ms ease-in-out;
+}
+.workspace-leaf-resize-handle:hover {
+    background-color: var(--accent);
+}
+
+
+/*Square Tabs*/
+/*Left*/
+.workspace-tab-container-before.is-before-active .workspace-tab-header-inner, .workspace-tab-header.is-before-active .workspace-tab-header-inner {
+    border-bottom-right-radius: 0px;
+}
+/*Right*/
+.workspace-tab-container-after.is-after-active .workspace-tab-header-inner, .workspace-tab-header.is-after-active .workspace-tab-header-inner {
+    border-bottom-left-radius: 0px;
+}
+/*Top*/
+.workspace-tab-header.is-active {
+    border-radius: var(--radius) var(--radius) 0px 0px;
+}
+
+
+
+/*-File Navbar-*/
+/*Adjusting Padding of Navbar Icons*/
+.nav-header {
+    padding: 3% 0px 5px;
+}
+/*Adjusting Button Padding*/
+.nav-action-button {
+    padding: 5px 8px 0 8px;
+    margin: 0 3px 0px 3px;
+    border-radius: var(--radius);
+}
+
+/*Remove Bottom Scrollbar*/
+.nav-files-container {
+    overflow-x: hidden;
+    /*padding-top: 2.5em;*/
+}
+
+/*Vault Name*/
+.nav-folder.mod-root > .nav-file-title, .nav-folder.mod-root > .nav-folder-title {
+    color: var(--headers);
+    font-family: var(--font);
+    font-size: 24px;
+    /*border-bottom: 3px solid var(--accent);*/
+    padding-left: .2em !important;
+    /*position: fixed;
+    top: 1.5em;
+    background-color: var(--side-bar);
+    padding-top: .7em;*/
+    display: block;
+}
+
+/*Nav Folder/File Icons*/
+.nav-folder-children .nav-folder-title-content::before {
+    content: '📁'/*\1F5BF*/;
+    color: transparent;
+    text-shadow: 0 0 0 var(--folder);
+    margin-right: 4px;
+    font-size: .9em;
+}
+.nav-folder-children .nav-file-title-content::before {
+    content: "📄"/*\1F5D0*/;
+    color: transparent;
+    text-shadow: 0 0 0 var(--file);
+    margin-right: 5px;
+    font-size: .85em;
+}
+
+/*Inactive Folder Color*/
+.is-collapsed .nav-folder-title-content:before {
+    text-shadow: 0 0 0 var(--headers);
+}
+
+/*Nav Folder Lines*/
+.nav-folder, .nav-file {
+    margin: 0 -2px;
+    margin-right: 0px;
+    border-left: 2px solid var(--table);
+}
+/*Align Folder Line*/
+.nav-folder-children {
+    padding-left: 18px;
+}
+/*Nav Hover Line Colors*/
+.nav-folder:hover,
+.nav-file:hover {
+    border-color: var(--accent);
+}
+
+/*Text wrap*/
+.nav-file-title, .nav-folder-title {
+    white-space: normal;
+    width: auto;
+    border-radius: var(--radius);
+    border: 0;
+}
+
+/*Folder Bold*/
+.nav-folder-title-content {
+    font-weight: 600;
+}
+
+/*Folder Push Left*/
+.nav-folder-title {
+    padding-left: 4px;
+}
+.nav-folder-title:hover {
+    color: var(--f-hover) !important;
+}
+
+/*File Colors|File Under Folder*/
+.nav-file-title {
+    padding-left: 1.8%;
+    color: var(--file);
+}
+.nav-file-title:hover {
+    color: var(--f-hover) !important;
+    font-weight: 600; 
+}
+.nav-folder-children .nav-file-title-content::before{
+    text-shadow: 0 0 0 var(--f-icon);
+}
+
+
+/*File selected*/
+.nav-file-title.is-active {
+    background-color: var(--dark-accent);
+    color: var(--fg);
+}
+
+/*Dragged*/
+.nav-folder-title.is-being-dragged-over {
+    border:none;
+    border-radius: var(--radius);
+}
+
+/*Arrows*/
+.nav-folder .collapse-icon {
+    display: none;
+}
+
+
+/*-Core Plugin Panes-*/
+/*Word Wrap Pane*/
+.tree-item-inner {
+    word-wrap: break-word;
+    width: 100%;
+}
+
+
+
+/*--Tag Pane--*/
+/*Text*/
+.tree-item-self {
+    color: var(--soft-text);
+    border-radius: var(--radius);
+}
+.tag-container .tree-item-self:hover {
+    color: var(--code-text);
+}
+
+/*Count Squared*/
+.tree-item-flair {
+    border-radius: var(--radius);
+}
+
+
+/*Tag Pane Lines*/
+.tag-container .tree-item-children {
+    margin-left: .7em;
+    border-left: 1px solid var(--lines);
+    border-bottom: 1px solid var(--note);  /*Removes Dot!!*/
+    transition: all 0.5s ease-in-out;
+    padding: 0;
+}
+
+.tag-container .tree-item-children:hover {
+    border-left: 1px solid var(--accent);
+}
+
+/*Add # For Tag Pane*/
+/*From California Coast.*/
+.tag-pane-tag-text:before {
+    content: "#";
+    padding-right: 1.3em;
+    position: relative;
+    margin: -1em;
+    color: var(--headers);
+}
+.collapse-icon + .tree-item-inner > .tag-pane-tag-text:before {
+    content: none;
+}
+
+
+/*Outline*/
+/*Set Outline Padding*/
+.outline {
+    margin: .2em .5em;
+    user-select: text;
+}
+/*Outline Pane Lines*/
+.outline .tree-item-children {
+    margin-left: .7em;
+    border-left: 1px solid var(--lines);
+    transition: all 0.3s ease-in-out;
+    padding: 0;
+}
+.outline .tree-item-children:hover {
+    border-color: var(--headers);
+    border-radius: var(--radius);
+}
+/*
+.outline .tree-item-self .collapse-icon:before {
+    content: "H";
+    color: var(--table);
+}
+.outline .tree-item-self:hover .collapse-icon:before {
+    content: none;
+    color: var(--accent);
+}
+
+.outline .tree-item-self {
+    padding-left: .3em;
+}
+.outline .tree-item-self:before {
+    content: "H";
+    color: var(--table);
+    padding-right: .3em;
+}
+*/
+
+/*--Search--*/
+/*Highlight Search Result*/
+.search-result-file-matched-text {
+    color: var(--text);
+    background-color: var(--background-modifier-form-field-highlighted);
+    padding: 2px;
+}
+
+/*Text Input Field*/
+input[type='text'],
+input[type='search'],
+input[type='email'],
+input[type='password'],
+input[type='number'] {
+    background-color: var(--note);
+    border-radius: var(--radius);
+    border: 1px solid var(--table);
+    color: var(--soft-text);
+}
+
+input[type='text']:hover,
+input[type='search']:hover,
+input[type='email']:hover,
+input[type='password']:hover,
+input[type='number']:hover {
+    background-color: var(--bg);
+    z-index: 0;
+}
+.document-search-container {
+    background-color: var(--dark-sidebar);
+}
+.document-search-button {
+    color: var(--text-normal);
+}
+
+.document-search-button:hover {
+    background-color: var(--interactive-accent);
+    color: var(--text-dl);
+}
+/*Search Downdown*/
+.suggestion { 
+    overflow-x: none;
+}
+.suggestion-item{ overflow-wrap: anywhere; }
+.suggestion-container.mod-search-suggestion {
+    border-radius: var(--radius);
+    padding: 0;
+}
+.search-suggest-item.is-selected {
+    border-radius: var(--radius);
+}
+
+/*-Graph Settings-*/
+.graph-controls.is-close {
+    /* background-color: var(--background-primary); */
+}
+/*Opened Settings*/
+.graph-controls {
+    background-color: var(--side-bar);
+    border: 1px solid var(--background-modifier-border);
+    border-radius: var(--radius);
+    padding: .5em;
+    padding-left: .2em;
+}
+.graph-control-section:not(.is-collapsed) .graph-control-section-header {
+    font-weight: bold;
+    border-bottom: 2px solid var(--accent);
+}
+.graph-controls .setting-item:not(.setting-item-heading) {
+    padding: .5em .8em;
+}
+.graph-controls .setting-item-name {
+    color: var(--text);
+}
+.graph-controls .setting-item:hover {
+    color: var(--accent);
+}
+
+/*Arrows*/
+.collapse-icon svg {
+    transition: transform 100ms ease-in-out;
+    color: var(--lines);
+}
+.collapse-icon {
+    margin-top: -.1em;
+}
+
+
+/*Slider Colors*/
+input[type='range'] {
+    background-color: var(--bg);
+    border-radius: var(--radius);
+}
+input[type='range']::-webkit-slider-thumb {
+    border-radius: var(--radius);
+}
+
+/*Settings Toggle*/
+.checkbox-container {
+    cursor: pointer;
+    background-color: var(--bg);
+    border-radius: var(--radius);
+    width: 22px;
+}
+/*Checkbox*/
+.checkbox-container:after {
+    display: none;
+    border-radius: var(--radius);
+}
+
+.suggestion-item.is-selected {
+    background-color: var(--dark-accent);
+}
+
+
+
+/*--Settings Menu--*/
+/*Square Settings Background*/
+.modal {
+    border-radius: var(--radius);
+}
+
+/*Setting Header Underline*/
+.setting-item-heading {
+    border-bottom: 2px solid var(--headers);
+}
+/*Setting Item Title*/
+.setting-item-name {
+    font-weight: 900;
+    font-size: 1.1em;
+}
+.setting-item-description {
+    color: var(--footnote);
+}
+
+/*Setting Items*/
+.setting-item:not(.setting-item-heading) { 
+    padding: .5em 1.5em; 
+    border: 0;
+}
+.setting-item:not(.setting-item-heading):nth-child(even) {
+    background-color: var(--aside-bg);
+    border: 0;
+}
+/*Settings Item Hover*/
+.modal.mod-settings .setting-item:not(.setting-item-heading):hover .setting-item-name { 
+    color: var(--headers);
+    padding-left: 1em;
+    transition-duration: .2s;
+}
+.modal.mod-settings .setting-item:not(.setting-item-heading):hover .setting-item-description {
+    padding-left: 1.2em;
+    transition-duration: .2s;
+}
+
+
+/*Undo b quote formatting
+.setting-item-description b,
+b.u-pop {
+    font-weight: 900;
+    color: var(--headers) !important;
+    display: inline-block;
+    margin: 0;
+    border: 0;
+    padding: 0;
+    background: transparent;
+}*/
+
+.setting-item ul li::before {
+    position: relative;
+    margin-right: .5em;
+}
+
+
+
+/*Settings Right*/
+.modal.mod-settings .vertical-tab-content-container {
+    padding: 35px 40px 20px 0;
+    height: 70vh;
+    background-color: var(--side-bar);
+}
+.horizontal-tab-content, .vertical-tab-content {
+    background-color: var(--side-bar);
+    padding: 5px 30px;
+}
+
+/*Settings Left*/
+.vertical-tab-header {
+    background-color: var(--dark-sidebar);
+}
+.horizontal-tab-nav-item, .vertical-tab-nav-item {
+    background-color: var(--dark-sidebar);
+    padding: 10px 6px 10px 24px;
+    cursor: default;
+    font-size: 1em;
+}
+/*Selected Item*/
+.horizontal-tab-nav-item.is-active, .vertical-tab-nav-item.is-active {
+    background-color: var(--dark-accent);
+}
+
+
+/*Dropdown Arrow*/
+.dropdown {
+    background-color: var(--embed-bg);
+    background-image: url(data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23FFF%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E);
+    border-radius: var(--radius);
+    border: 1px solid var(--table);
+}
+
+/*Account Header 2*/
+.vertical-tab-content h2 {
+    font-size: 30px;
+    font-weight: 900;
+    text-align: left;
+    font-family: var(--font) !important;
+}
+
+/*Hotkey*/
+.setting-hotkey {
+    background-color: var(--code-bg);
+    color: var(--soft-text);
+}
+
+/*Sync Image Fit*/
+.sync-history-content-container {
+    overflow: auto;
+}
+
+/*--Publish Settings--*/
+.modal-bg {
+    background-color: var(--background-modifier-form-field-highlighted);
+}
+.list-item-part mod-extended publish-upload-item-title {
+    color: var(--text-dl);
+}
+
+/*Published flair*/
+.flair {
+    background-color: var(--interactive-normal);
+    color: var(--accent);
+    border-radius: var(--radius);
+}
+
+/*Publish item select*/
+.file-tree-item-header.is-selected {
+    background-color: rgba(var(--interactive-accent-rgb), 0.2);
+}
+
+/*--Graph View--*/
+/*  background of graph view pane*/
+.workspace-leaf-content[data-type = "graph"] .view-content{
+    background-color: var(--graph-bg); 
+}
+
+.graph-view.color-fill {
+    color: var(--graph-node); /*Created notes color*/
+}
+
+.graph-view.color-line {
+    color: var(--graph-lines);
+}
+.graph-view.color-text {
+    color: var(--soft-text);
+}
+/*Hover Node*/
+.graph-view.color-fill-highlight {
+    color: var(--graph-fill); /*Circle color*/
+}
+.graph-view.color-circle {
+    color: var(--text-dl); /*Outline color*/
+}
+
+.graph-view.color-line-highlight {
+    color: var(--accent);
+}
+
+.graph-view.color-arrow {
+    color: var(--soft-text);
+}
+
+.graph-view.color-fill-tag {
+    color: var(--graph-tag) !important;
+}
+
+.graph-view.color-fill-attachment {
+    color: var(--graph-img) !important;
+}
+
+.graph-view.color-fill-unresolved {
+    color: var(--graph-404) !important; 
+}
+
+
+/*--Starred Pane--*/
+.item-list .nav-file {
+    padding-left: 20px;
+}
+.item-list {
+    overflow-x: hidden;
+}
+
+/*File: Move Further In*/
+.nav-file-icon {
+    top: 5px;
+}
+
+/*--Bottom Bar--*/
+.app-container .status-bar {
+    position: absolute;
+    background-color: var(--outer-bar);
+    color: var(--text-muted);
+    bottom: 0;
+    right: 0;
+    padding: 0 .1em;
+    border-left: 1px solid var(--th);
+    border-top: 1px solid var(--th);
+}
+
+
+/*--Scrollbars--*/
+/*Scrollbar*/
+::-webkit-scrollbar-thumb {
+    background-color: var(--accent);
+    -webkit-border-radius: var(--radius); /*Remove Rounding*/
+}
+::-webkit-scrollbar-thumb:active {
+    background-color: var(--lite-accent);
+    -webkit-border-radius: var(--radius); /*Remove Rounding*/
+}
+::-webkit-scrollbar {
+    background-color: var(--bg);
+    -webkit-border-radius: var(--radius); /*Remove Rounding*/
+    width: var(--scroll-size);
+    height: var(--scroll-size);
+}
+
+
+/*--NOTE TITLEBAR--*/
+/*Inactive Note Titlebar*/
+.view-header-title {
+    color: var(--inactive);    
+}
+
+.view-header-icon {
+    color: var(--soft-text);
+}
+
+/*Active Note Titlebar*/
+.workspace-leaf.mod-active .view-header-title {
+    color: var(--soft-text);
+}
+
+/*Center Note Icons*/
+.view-header-icon, .view-actions {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+
+
+
+/*--NOTES--*/
+/*Editor Resize*/
+.markdown-source-view.mod-cm5 {
+    padding-left: 0;
+    padding-right: .5em;
+}
+/*Editor Line Numbers*/
+.CodeMirror-gutter, .CodeMirror-gutters, .CodeMirror-linenumber{
+    box-sizing: content-box;
+    font-family: var(--font-monospace);
+    text-align: right;
+}
+
+
+/*Note Text Adjustments*/
+.cm-s-obsidian .CodeMirror-line,
+.markdown-preview-section {
+    text-rendering: optimizeLegibility;
+    font-variant-ligatures: none;
+    font-family: var(--default-font);
+    line-height: var(--lh);
+    color: var(--text-normal);
+    z-index: 0;
+}
+.cm-comment {
+    font-family: var(--font-monospace);
+}
+
+/*Fix Cursor Highlight*/
+.CodeMirror-selected {
+    z-index: 3;
+}
+.CodeMirror .CodeMirror-line,
+.CodeMirror .CodeMirror-line-like {
+    z-index: 0;
+}
+/*?*/
+p, li, table {
+    font-size: var(--f-s-pre);
+}
+p > .modal.mod-settings .modal-content, .setting-item-description p {
+    font-size: 16px !important;
+}
+
+
+/*--Headings--*/
+h1, h2, h3, h4, h5, h6, .cm-s-obsidian .cm-header {
+    font-weight: var(--f-w-h);
+    font-family: var(--font);
+    color: var(--headers);
+}
+
+.cm-header-1,
+.cm-header-2,
+.cm-header-3,
+.cm-header-4,
+.cm-header-5,
+.cm-header-6 {
+    margin-bottom: calc(var(--head-h) - 1.5em) !important;
+}
+
+
+.markdown-preview-view h1,
+.markdown-preview-view h2,
+.markdown-preview-view h3,
+.markdown-preview-view h4,
+.markdown-preview-view h5,
+.markdown-preview-view h6 {
+    margin: var(--head-h) 0 !important;
+    line-height: calc(var(--lh) - .3em) !important;
+}
+
+/*Font Sizes*/
+.markdown-preview-view h1,
+.cm-s-obsidian .cm-header-1 { font-size: var(--f-s-h); }
+.markdown-preview-view h2 { font-size: calc(var(--f-s-h) - 4px); }
+.cm-s-obsidian .cm-header-2 { font-size: calc(var(--f-s-h) - 6px); }
+.markdown-preview-view h3 { font-size: calc(var(--f-s-h) - 8px); }
+.cm-s-obsidian .cm-header-3 { font-size: calc(var(--f-s-h) - 10px); }
+.markdown-preview-view h4 { font-size: calc(var(--f-s-h) - 10px); }
+.cm-s-obsidian .cm-header-4 { font-size: calc(var(--f-s-h) - 12px); }
+.markdown-preview-view h5,
+.cm-s-obsidian .cm-header-5 { font-size: calc(var(--f-s-h) - 14px); }
+.markdown-preview-view h6,
+.cm-s-obsidian .cm-header-6 { font-size: calc(var(--f-s-h) - 16px); }
+
+
+/*Editor Heading Re-size*/
+/*Inspired by Red Graphite*/
+.cm-s-obsidian pre.HyperMD-header > span > span:first-child {
+    font-size: 10px;
+    color: var(--lines);
+}
+
+/*Heading Line*/
+h1:after {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 4px;
+    background: var(--table);
+    left: 0;
+}
+
+h2:after {
+    content: "";
+    display: block;
+    width: 85%;
+    height: 3px;
+    background: var(--table);
+    left: 0;
+}
+
+h3:after {
+    content: "";
+    display: block;
+    width: 65%;
+    height: 3px;
+    background: var(--table);
+    left: 0;
+}
+
+h4:after {
+    content: "";
+    display: block;
+    width: 40%;
+    height: 3px;
+    background: var(--table);
+    left: 0;
+}
+
+
+/*Editor Heading Lines*/
+.cm-s-obsidian pre.HyperMD-header:after {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 3px;
+    background: var(--table);
+    left: 0;
+}
+
+/*-Code-*/
+.markdown-preview-view code,
+.markdown-preview-view pre {
+    color: var(--code-text);
+    font-family: var(--font-monospace) !important;
+    z-index: 0;
+    background-color: var(--code-bg);
+    line-height: 1.4em;
+    border-radius: var(--radius);
+    font-size: calc(var(--f-s-text) - .15rem);
+}
+
+.markdown-preview-view pre[class*="language-"],
+.markdown-preview-view code[class*="language-"] {
+    background: var(--code-bg);
+    line-height: 1.4em;
+    display: block;
+    white-space: pre-wrap !important;
+    font-family: var(--font-monospace) !important;
+    color: var(--text);
+    border-radius: var(--radius);
+    z-index: 0;
+}
+/*Apply Dropshadow*/
+.markdown-preview-view pre,
+.markdown-preview-view pre[class*="language-"],
+.markdown-preview-view code,
+.cm-s-obsidian pre.HyperMD-codeblock,
+.cm-s-obsidian span.cm-inline-code {
+    box-shadow: 0 .2em #00000010;
+}
+
+.markdown-preview-view pre,
+.markdown-preview-view pre[class*="language-"],
+.markdown-preview-view code {
+    border: 1px solid var(--td);
+}
+
+/*Hide box shadow inside codeblock*/
+.markdown-preview-view pre > code {
+    box-shadow: none;
+}
+
+/*Editor Code*/
+.cm-s-obsidian pre.HyperMD-codeblock,
+.cm-s-obsidian span.cm-inline-code,
+.cm-s-obsidian span.cm-inline-code:not(.cm-formatting):not(.cm-hmd-indented-code):not(.obsidian-search-match-highlight) {
+    background-color: var(--code-bg);
+    color: var(--code-text);
+    font-family: var(--font-monospace);
+    font-size: calc(var(--f-s-text) - .15rem);
+    z-index: 0;
+}
+
+
+/*Hide weird Tokening BG Coloring*/
+.token.operator {
+    color: var(--headers) !important;
+    background: transparent !important;
+}
+
+
+
+/*--Latex Math--*/
+.MJX-TEX { 
+    font-size: 130%;
+    color: var(--lite-accent);
+}
+/*Math Block Margin Reduction*/
+mjx-container[jax="CHTML"][display="true"] {
+    margin: 3% 0 !important;
+}
+/*Math Editor $$ and Text*/
+.cm-s-obsidian span.cm-math,
+.cm-s-obsidian span.hmd-fold-math-placeholder {
+    color: var(--accent2-lite);
+    font-style: normal;
+}
+/*Math Editor Text*/
+.cm-s-obsidian span.cm-math:not(.cm-formatting-math-begin):not(.cm-formatting-math-end){
+    color: var(--headers);
+}
+
+/*--Links--*/
+/*Active Link*/
+a, .markdown-preview-view .internal-link {
+    text-decoration: none; /*No underline*/
+}
+a:hover {
+    color: var(--lite-accent);
+}
+
+/*Link to No Page*/
+.markdown-preview-view .internal-link.is-unresolved {
+    opacity: 1;
+    color: var(--inactive);
+}
+.markdown-preview-view .internal-link.is-unresolved:hover {
+    color: var(--headers);
+}
+
+/*-External Links-*/
+/*Hide SVG Image*/
+.external-link {
+    background-image: url();
+}
+/*Hover Color*/
+.external-link:hover {
+    color: var(--inactive);
+}
+
+/*Change External Link Symbol*/
+.external-link:after {
+    content: "⧪";
+    padding-right: 2px;
+    margin-right: -16px;
+    display: inline-block;
+    transform: rotate(-135deg);
+}
+
+/*Editor Links*/
+/*Internal Link Hover color*/
+.cm-s-obsidian span.cm-hmd-internal-link:hover {
+    text-decoration: none;
+    color: var(--inactive);
+}
+
+/*Markdown Links*/
+/*Text in Brackets
+.cm-s-obsidian span.cm-link {
+    color: var(--inactive);
+}*/
+/*Link in parentheses*/
+.cm-s-obsidian span.cm-url {
+    color: var(--headers);
+    text-decoration: none;
+}
+/*Link Hover Color*/
+.cm-s-obsidian span.cm-url:hover {
+    color: var(--inactive);
+}
+
+/*--Horizontal Linebreak, HR--*/ 
+.markdown-preview-view hr {
+    border-top: 2px solid var(--hr);
+}
+.HyperMD-hr-bg {
+    border-top: 2px solid var(--hr);
+}
+
+
+/*Stylized hr Line*/
+.markdown-preview-view hr::after, 
+div:not(.CodeMirror-activeline)>.HyperMD-hr-bg::after {
+    content: var(--hr-sym);
+    display: inline-block;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(0deg);
+    font-size: 16px;
+    transform-origin: 50% 50%;
+    color: transparent;
+    text-shadow: 0 0 0 var(--headers);
+    padding: 0 .2em; /*Symbol Padding*/
+    background-color: var(--background-primary); /*Color bg to cover line*/
+}
+
+/*Center --- Lines*/
+.cm-s-obsidian pre.HyperMD-hr {
+    text-align: center;
+    margin: 0px;
+    margin-block-start: .1%;
+    margin-block-end: .1%;
+}   
+
+/*Hide --- Lines*/
+div:not(.CodeMirror-activeline)>.CodeMirror-line span.cm-hr {
+    color: transparent;
+    margin: 0px;
+    margin-block-start: 10px;
+    margin-block-end: 10px;
+}   
+/*Hide Collapsed Header Line
+.CodeMirror-linebackground {
+    margin-bottom: 2em;
+}*/
+
+
+/*--Images--*/
+
+/* Kepano: https://forum.obsidian.md/t/image-zoom-click-hold-to-expand-images/5164
+Enlarge Image:*/
+.img-zoom .markdown-preview-view img {
+	cursor:zoom-in;
+}
+
+.img-zoom .markdown-preview-view img:active {
+	cursor:zoom-out;
+	display:block;
+	z-index:100;
+	position:fixed;
+    max-height:100%;
+    max-width:100%;
+    height:100%;
+    width:100%;
+    object-fit: contain;
+    margin:0 auto;
+    text-align:center;
+    top: 50%;
+  	transform: translateY(-50%);
+    padding:0;
+    left:0;
+    right:0;
+    bottom:0;
+    background:var(--background-primary);
+}
+
+/* Img Grid Defunct
+Kepano: https://forum.obsidian.md/t/display-side-by-side-image-grid-css-snippet/9359
+Masonry/Gallery View
+.img-grid .markdown-preview-section > div {
+    display:flex;
+}
+.img-grid .markdown-preview-section > div > .internal-embed {
+    flex:1;
+    margin-left:-0.5rem;
+    padding:0 0.5rem 0.5rem 0.5rem;
+}
+.img-grid .markdown-preview-section > div > *:not(div) {
+    margin-block-start: 0rem;
+    margin-block-end: 1rem;
+}
+.img-grid .markdown-preview-section > div hr {
+    width:100%;
+}
+/* These lines make every image the same height
+.img-grid .markdown-preview-section > div > .internal-embed img:not(:active) {
+    object-fit:cover;
+}*/
+
+
+/*--List--*/
+/*Colored List Markers*/
+li::marker{
+    color: transparent;
+}
+/*Lighten Numbered List Marker Color*/
+ol li::marker {
+    color: var(--headers);
+}
+
+/*Bullet Shape*/
+ul:nth-child(odd), ul:nth-child(even) {
+    list-style-type: "";
+}
+
+ul li::before {
+    content: var(--bullet);
+    margin-left: -22px;
+    color: var(--accent);
+    position: absolute;
+    margin-top: auto;
+    margin-bottom: auto;
+    font-size: 16px;
+}
+ul li:nth-child(even)::before {
+    color: var(--accent2);
+}
+li.task-list-item::before {
+    visibility: collapse;
+}
+ol li::before {
+    visibility: collapse;
+}
+ol ul li::before {
+    visibility: visible;
+}
+
+/*Smaller Indentation*/
+ul, ol { 
+    padding-inline-start: 25px;
+    margin-block-start: 0;
+}
+.markdown-preview-view ol > li.task-list-item {
+    padding-left: 10px;
+}
+.markdown-preview-view ul > li.task-list-item {
+    text-indent: -1.3em;
+}
+
+/*Fix breaking when Space in between Lists*/
+ul li.task-list-item > p {
+    margin-block-end: unset;
+    margin-left: -1.3em;
+}
+ul li > p {
+    margin-block-end: unset;
+}
+
+/*-Bullet Points-*/
+/*Editor Bullet Points*/
+.cm-s-obsidian span.cm-formatting-list-ul:before {
+    content: var(--bullet);
+    margin-right: -10px;
+}
+
+/*Editor Bullet Lines*/
+.markdown-preview-view .task-list-item-checkbox {
+    margin-right: 2%;
+}
+
+.cm-hmd-list-indent .cm-tab {
+    position: relative;
+}
+.cm-hmd-list-indent .cm-tab::before {
+    content:'';
+    border-left: 2px solid var(--accent);
+    position: absolute;
+    left: 6px;
+    top: -5px;
+    bottom: -4px; 
+}
+
+.cm-s-obsidian .HyperMD-list-line {
+    padding-top: 0;
+}
+
+/*Preview Bullet Lines*/
+/*Bullet Line New*/
+li {
+    padding-left: 5px;
+    border-left: var(--b-line) solid var(--accent);
+    line-height: var(--lh);
+}
+
+li:nth-child(even) {
+    border-left: var(--b-line) solid var(--accent2);
+}
+
+
+/*List Arrows*/
+.markdown-preview-view ul .list-collapse-indicator {
+    padding-left: 1em;
+    color: var(--soft-text);
+    position: relative;
+}
+.markdown-preview-view ol .list-collapse-indicator {
+    padding-left: .5em;
+    position: relative;
+}
+.markdown-preview-view .task-list-item .list-collapse-indicator {
+    padding-left: .5em;
+    position: relative;
+}
+
+/*--Checkboxes--*/
+.markdown-preview-view .task-list-item-checkbox {
+    -webkit-appearance: none;
+    box-sizing: border-box;
+    border: 1px solid var(--accent);
+    border-radius: var(--radius);
+    position: relative;
+    width: 14px;
+    height: 14px;
+    filter: none;
+    margin-left: -4px;
+    margin-right: .7em;
+    margin-top: 3px;
+    cursor: pointer;
+    vertical-align: top;
+}
+
+/*Checkbox Checked color*/
+.markdown-preview-view .task-list-item-checkbox:checked {
+    border: none;
+    background-color: var(--headers);
+}
+
+/*Checked Checkbox*/
+.markdown-preview-view ul > li.task-list-item.is-checked, 
+.markdown-preview-view ol > li.task-list-item.is-checked {
+    text-decoration: unset;
+    color: var(--lines);
+    font-weight: bold;
+}
+li.task-list-item.is-checked > a,
+li.task-list-item.is-checked > code {
+    opacity: 65%;
+}
+/*Uncheck Subchecklists*/
+/*Thanks @foreveryone*/
+li.task-list-item.is-checked li:not(.is-checked) {
+    font-weight: initial; 
+    color: var(--text)
+}
+/*Different Checked Box*/
+[data-checklist="-"] > input[type=checkbox]:checked {
+    background-color: var(--table) !important;   
+}
+[data-checklist="-"] > input[type=checkbox]:checked::before {
+    content: "-";
+    font-size: 12px;
+    color: var(--soft-text);
+    padding-left: .4em;
+}
+
+[data-checklist=">"] > input[type=checkbox]:checked {
+    background-color: var(--accent2) !important;
+}
+[data-checklist=">"] > input[type=checkbox]:checked::before {
+    content: "▶";
+    font-size: 11px;
+    color: var(--soft-text);
+    padding-left: .2em;
+    font-weight: 900;
+}
+
+
+/*Table Checkboxes*/
+input[type="checkbox" i] {
+    -webkit-appearance: none;
+    box-sizing: border-box;
+    border: 1px solid var(--accent);
+    border-radius: var(--radius);
+    position: relative;
+    width: 15px;
+    height: 15px;
+    margin: 0;
+    filter: none;
+    outline: none;
+    margin-top: auto;
+    margin-bottom: auto;
+    cursor: pointer;
+}
+
+input[type="checkbox checked"] {
+    -webkit-appearance: none;
+    box-sizing: border-box;
+    border-radius: var(--radius);
+    position: relative;
+    width: 1.3em;
+    height: 1.3em;
+    margin: 0, 0, 0, 0;
+    filter: none;
+    outline: none;
+    border: none;
+    background-color: var(--accent);
+}
+
+
+/*--Table--*/
+.markdown-preview-view td {
+    border: none;
+}
+
+.markdown-preview-view th {
+    background-color: var(--th);
+    color: #edf7ff;
+    border: 0px;
+}
+
+.markdown-preview-view th:nth-child(even) {
+    opacity: 80%;
+    border-left: 1px solid var(--note);
+    border-right: 1px solid var(--note);
+}
+
+.markdown-preview-view td:nth-child(odd) {
+    background-color: var(--td);
+    border: 0;
+    border-bottom: 1px solid var(--note);
+}
+
+.markdown-preview-view tr:nth-child(even) {
+    background-color: var(--td);
+    border: 0;
+}
+.markdown-preview-sizer {
+    min-height: auto !important;
+}
+
+
+
+/*--Tags--*/
+.tag {
+    background-color: var(--tag);
+    border: none;
+    color: var(--text-dl);
+    font-size: 12px;
+    padding: 1px 8px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    margin: 0px 0px;
+    cursor: pointer;
+    line-height: var(--lh);
+}
+
+/*Hover Underline*/
+.tag:hover {
+    color: var(--text-dl);
+    text-decoration: underline;
+}
+/*Editor Tags*/
+.cm-s-obsidian span.cm-hashtag {
+    text-decoration: none;
+    color: var(--lite-accent);
+}
+.cm-s-obsidian span.cm-hashtag:hover {
+    text-decoration: none;
+}
+
+
+
+/*--Frontmatter/Metadata--*/
+
+/*No Background Color, Smaller Padding*/
+.frontmatter-container {
+    background-color: transparent;
+    border: 0px;
+    padding: 0px 14px;
+}
+/*Horizontal line for bottom*/
+.frontmatter-container:after {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 2px;
+    background: var(--table);
+}
+
+.frontmatter-container .frontmatter-container-header {
+    border-bottom: 1px solid var(--table);
+}
+.CodeMirror-line .cm-s-obsidian .cm-hmd-frontmatter {
+    font-size: 12px;
+    line-height: 2px !important;
+}
+
+
+/*Tags*/
+.frontmatter-container .tag {
+    background-color: var(--tag);
+    border-radius: var(--radius);
+    color: var(--text-dl);
+}
+.frontmatter-container .frontmatter-alias {
+    border-radius: var(--radius);
+}
+
+
+/*Tags Hover*/
+.frontmatter-container .tag:hover {
+    background-color: var(--tag);
+    border: none;
+}
+
+
+
+/*--Embeds--*/
+/*Remove Top Padding*/
+.markdown-embed .markdown-preview-view {
+    padding: 5px 10px;
+}
+
+/* Recolor Embed Title*/
+.markdown-embed-title, .file-embed-title {
+    color: var(--lite-accent);
+    font-size: 1.5em;
+    font-family: var(--font);
+    line-height: 1em; /*Lower Height Title*/
+    width: 100%;
+    height: auto;
+    text-align: center;
+    font-weight: 900;
+    padding: 1% 8% 0% 1%;
+    white-space: normal;
+}
+
+/* Recolor Embed Headings*/
+.markdown-preview-view .markdown-embed h1,
+.markdown-embed h2,
+.markdown-embed h3,
+.markdown-embed h4,
+.markdown-embed h5,
+.markdown-embed h6 {
+    font-size: 20px;
+    line-height: 1em;
+    color: var(--accent);
+    font-family: var(--font);
+}
+
+.markdown-preview-view .markdown-embed,
+.markdown-preview-view .file-embed,
+.internal-embed.is-loaded:not(.image-embed) {
+    border: 1px solid var(--td);
+    background-color: var(--note);
+    box-shadow: -.3em .3em var(--td);
+    border-radius: var(--radius);
+}
+
+.internal-embed .markdown-embed-content > ::-webkit-scrollbar {
+    width: 5px;
+}
+
+/*Embed Note Doesn't Exist Hover*/
+.markdown-preview-view .file-embed:hover {
+    background-color: var(--dark-accent);
+}
+
+/*Embed Link Color*/
+.markdown-embed-link, .file-embed-link {
+    color: var(--lite-accent);
+    background-color: var(--note);
+    padding: 5px 5px 0px 5px;
+}
+/*Hide Embed Link*/
+.markdown-embed .markdown-embed-link, .file-embed-link { display: none; }
+/*Display Link on Hover*/
+.markdown-embed:hover .markdown-embed-link { display: unset; }
+
+
+
+/*Display Embed Path**
+/*https://forum.obsidian.md/t/meta-post-common-css-hacks/1978/264**
+.internal-embed::before{
+    content: attr(alt);
+    color: var(--headers);
+    position: absolute;
+    margin-top: -24px;
+} */
+
+
+
+/*--Popover--*/
+/*Larger Popover*/
+.popover.hover-popover {
+    width: 650px;
+    border-radius: var(--radius);
+    min-height: 100px;
+    max-height: 600px;
+    border: 2px solid var(--dark-accent);
+}
+
+/*Show More Embed in Popover*/
+/*Must fit within the Max-Height value^^*/
+.popover.hover-popover .markdown-embed {
+    height: 500px;
+}
+
+/*Fit image in popover*/
+.popover.hover-popover img {
+    max-width: 100%;
+    height: auto;
+}
+
+/*Crop Image in Popover*/
+.popover.hover-popover img {
+    object-fit: cover;
+    height: 200px;
+    width: 100%;
+    object-position: center;
+}
+
+/*Popover Link Bg Color*/
+.popover .markdown-embed-link, .file-embed-link {
+    background-color: var(--dark-accent);
+    padding: 5px 5px 0px 5px;
+}
+
+/*Popover HR, Horizontal Line BG*/
+.popover.hover-popover hr:after {
+    background-color: var(--note) !important;
+}
+
+/*Fit Text Within Popover**
+.popover {
+  font-size: 16px;
+  text-align: justify;
+}*/
+
+
+
+/*--Blockquote--*/
+.markdown-preview-view blockquote {
+    display: flow-root;
+    border: 0px solid var(--bg);
+    background-color: var(--embed-bg);
+    border-left-width: 8px;
+    border-radius: var(--radius);
+    position: relative;
+    margin: 2%;
+    padding-right: 35px; /*Don't overlap with "*/
+}
+
+/*Quotation Mark*/
+.markdown-preview-view blockquote:before {
+    content: '\201D';
+    position: absolute;
+    top: .4em;
+    right: .2em;
+    font-size: 50px;
+    font-family: var(--font);
+    color: var(--headers);
+}
+/*Remove Margin From Block embedding*/
+blockquote p { margin: 0px; }
+
+/*Fix Blockquote Mark*/
+.markdown-preview-view li blockquote:before { top: .3em; }
+
+
+
+/*--Query--*/
+/*Remove Borders and Outer Margins*/
+.markdown-preview-view .internal-query.is-embed {
+    border: none;
+    margin-bottom: 1%;
+    margin-top: 1%;
+}
+
+
+/*Query Header*/
+.markdown-preview-view .internal-query.is-embed .internal-query-header{
+    background-color: var(--code-bg);
+    padding: 0.5%;
+}
+
+/*Smaller Query Titles*/
+.markdown-preview-view .internal-query.is-embed .internal-query-header-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--soft-text);
+    line-height: 18px;
+}
+
+
+/*Reduce Query Result Margins and Remove Borders*/
+.internal-query.is-embed .search-result-file-matches {
+    border: none;
+    padding: 0;
+    margin-right: 10px;
+    margin-bottom: .5%;
+}
+/*Add border Under Query search result*/
+.internal-query.is-embed .search-result {
+    border-bottom: 1px solid var(--bg);
+    background-color: var(--note);
+    margin-bottom: 0;
+}
+/*Query No Matches Found*/
+.internal-query.is-embed .search-empty-state {
+    margin: 0;
+    color: var(--headers);
+}
+
+
+
+/*--Footnotes--*/
+/*Reduce Footnote Number size/line height*/
+.footnote-ref {
+    font-size: 10px;
+    line-height: 0px;
+}
+
+/*Hide HR, Horizontal Line*/
+.footnotes hr { display: none; }
+
+/*Resize text*/
+.footnotes { font-size: 14px; color: var(--footnote); }
+
+/*Reduce footnote paragraph/line height*/
+.footnotes p { line-height: 16px; margin: 5px; }
+
+/*Change Footnote Link Icon*/
+/*Hide & Recolor Original Icon*/
+.footnote-backref.footnote-link { visibility: hidden; color: var(--headers); }
+
+/*Recolor hover*/
+.footnote-backref.footnote-link:hover { color: var(--accent2-lite); }
+
+/*Display New Icon*/
+.footnote-backref.footnote-link:before { 
+    visibility: visible;
+    display: inline-block;
+    position: absolute;
+    content: "⧪"; 
+    font-size: 16px;
+    padding-bottom: 2px;
+    transform: rotate(180deg);
+}
+
+
+
+
+/*--Files--*/
+/*Iframe Borderless*/
+iframe {
+    border-width: var(--radius);
+    border-style: none;
+    border-color: initial;
+    border-image: initial;
+}
+/*Remove File Padding*/
+.workspace-split.mod-root .view-content {
+    padding: 2px 2px;
+    overflow: hidden;
+}
+
+
+/*----Mobile----*/
+@media (max-width: 500px) {
+    
+    .theme-dark, .theme-light {
+        /*Mobile Sizes*/
+        --radius: 0px;
+        --tiny: 100px;
+        --small: 150px;
+        --small-med: 200px;
+        --med-small: 250px;
+        --medium: 300px;
+        --med-tall: 450px;
+        --tall: 500px;
+    }
+    /*Popover Hover Fits Mobile Screen*/
+    .popover.hover-popover.is-loaded {
+        width:100%;
+        left: 0;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .aside-hide:hover {
+        width: 100%;
+    }
+}
+/*Minimize Sidebar Spacing*/
+.workspace-drawer-header-info {
+    margin: 0;
+}
+.workspace-drawer-active-tab-header {
+    margin: 1em 0 0 0;
+}
+.is-mobile .status-bar {
+    display: none;
+}
+/*Square UI*/
+.is-mobile .modal, .is-mobile .workspace {
+    border-radius: var(--radius) !important;
+}
+
+/*Fix Slider*/
+.is-mobile .setting-item.mod-slider .setting-item-control {
+    margin-top: .5em !important;
+    margin-bottom: 1em;
+}
+
+/*Wrap Nav and Search Buttons*/
+.is-mobile .workspace-drawer-actions,
+.is-mobile .nav-buttons-container {
+    flex-wrap: wrap;
+}
+
+/*Hide Vault Title*/
+.is-mobile .nav-folder.mod-root > .nav-file-title,
+.is-mobile .nav-folder.mod-root > .nav-folder-title {
+    display: none;
+}
+/*Fix Outline Spacing*/
+.is-mobile .outline {
+    margin: 0 -.2em;
+}
+.is-mobile .view-content {
+    height: calc(100% - .5em);
+}
+
+/*Mobile Fold*/
+.is-mobile .cm-foldPlaceholder {
+    background-color: var(--note);
+    border: 0;
+    color: var(--lite-accent);
+}
+
+/*Kanban Mobile*/
+.is-mobile .kanban ul, 
+.is-mobile .kanban ol {
+    padding-inline-start: 0;
+}
+
+/*Style Settings Mobile Fix*/
+.is-mobile .style-settings-heading + .style-settings-container {
+    padding-left: 0;
+    border: none;
+}
+.is-mobile .style-settings-container .setting-item-control .pcr-button {
+    width: 2em;
+}
+
+/*Rem to Em*/
+/*Fix text sizing issue on mobile caused by rem*/
+.theme-dark.is-mobile,
+.theme-light.is-mobile {
+    --f-s-text: 1em;
+    --f-s-pre: 1em;
+}
+
+
+/*----Publish----*/
+.site-header {
+    font: var(--font);
+    text-align: left;
+}
+
+.page-header {
+    font-size: 0px;
+    font-family: var(--font);
+    color: transparent;
+    line-height: 0px;
+}
+
+.site-body-left-column-site-name {
+    font: var(--font);
+    color: var(--headers);
+}
+
+
+.site-body {
+    background-color: var(--side-bar);
+}
+
+.site-body-left-column {
+    background-color: var(--outer-bar);
+}
+
+.site-body-left-column:before {
+    content: ' ';
+    position: absolute;
+    right: 100%;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--outer-bar);
+    z-index: 0;
+}
+
+
+.graph-view-container {
+    position: relative;
+    height: 300px;
+    border: 1px solid var(--table);
+    border-radius: 10px;
+    background-color: var(--graph-bg);
+    padding: 4px;
+}
+
+
+
+
+/*----Export ... I'll figure this out eventually I swear----*/
+/*Fix Poems*/
+@media print {
+    .poem p {
+        text-align: center;
+        line-height: 1.3em;
+        margin-block-end: 4%;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*----SlRvb's Custom CSS----*/
+
+/*--CSS Classes--*/
+/*CSS class, Hide Frontmatter*/
+.no-m .frontmatter-container {
+    display: none;
+}
+
+/*Justify text*/
+.justified p {
+    text-align: justify;
+}
+
+/*Readable Text Width.*/ /*Thanks @foreveryone*/
+.markdown-preview-view.readable .markdown-preview-sizer {
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/*Writing*/
+.writing h1,
+.writing h2,
+.writing h3,
+.writing h4,
+.writing h5,
+.writing h6 {
+    text-align: center;
+}
+
+.writing p {
+    text-align: justify;
+}
+.markdown-preview-view.writing .markdown-preview-sizer {
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+/*--Center Headings--*/
+.hc h1,
+.hc h2,
+.hc h3,
+.hc h4,
+.hc h5,
+.hc h6 { text-align: center; }
+
+/*With Line*/
+.hcl h1,
+.hcl h2,
+.hcl h3,
+.hcl h4,
+.hcl h5,
+.hcl h6 {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    text-align: center;
+}
+.hcl .heading-collapse-indicator{
+    position: absolute;
+}
+.hcl h1:before,
+.hcl h2:before,
+.hcl h3:before,
+.hcl h4:before,
+.hcl h5:before,
+.hcl h6:before {
+    content: '';
+    height: 0;
+    margin-right: .3em;
+    flex: 1;
+}
+.hcl h1:after,
+.hcl h2:after,
+.hcl h3:after,
+.hcl h4:after,
+.hcl h5:after,
+.hcl h6:after{
+    content: '';
+    height: 0;
+    margin-left: .3em;
+    flex: 1;
+}
+
+.hcl h1:before,
+.hcl h1:after {
+    border-top: 6px solid var(--accent);
+}
+.hcl h2:before,
+.hcl h2:after {
+    border-top: 5px solid var(--headers);
+}
+.hcl h3:before,
+.hcl h3:after {
+    border-top: 4px solid var(--i-at);
+}
+.hcl h4:before,
+.hcl h4:after {
+    border-top: 3px solid var(--accent2-lite);
+}
+.hcl h5:before,
+.hcl h5:after {
+    border-top: 3px solid var(--lines);
+}
+.hcl h6:before,
+.hcl h6:after {
+    border-top: 3px solid var(--table);
+}
+
+/*Poems*/
+.poem p {
+    text-align: center;
+    line-height: 1.3em;
+    margin-block-end: 4%;
+}
+
+/*-Table-*/
+/*Bolded Right Side Table*/
+.table td:nth-child(1) {
+    background-color: var(--outer-bar);
+    font-weight: 900;
+}
+.table th, .table td {
+    border: 0px;
+}
+/*Table Centered*/
+.t-c table {
+    margin-left: auto;
+    margin-right: auto
+}
+/*Table Widened*/
+.t-w table {
+    width: 100%;
+}
+
+/*Flush Table Embed of Blockquotes*/
+.table .markdown-embed-content > .markdown-preview-view blockquote {
+    margin: 0;
+    overflow: hidden !important;
+}
+
+
+/*-Comments/Asides-*/
+/*Hide Aside and hover to reveal it*/
+.aside-hide {
+    text-decoration: unset;
+    text-align: justify;
+    color: transparent;
+    font-weight: unset;
+    float: right;
+    position: relative;
+    margin: .5em;
+    margin-right: -1.8em;
+    width: 1.5em;
+    height: 1.5em;
+    clear: right;
+    overflow: hidden;
+    background-color: var(--bg);
+    color: transparent;
+}
+.aside-hide:before {
+    display: block;
+    border-bottom: 2px solid var(--table);
+    content: "🗨 ";
+    color: none;
+    text-shadow: 0 0 0 var(--headers);
+    font-size: 12px;
+    padding-top: .1em;
+    padding-left: .3em;
+}
+.aside-hide:hover {
+    white-space: normal;
+    text-overflow: unset;
+    color: unset;
+    width: 400px;
+    height: unset;
+    background-color: var(--aside-bg);
+    padding: 1em;
+    padding-top: .5em;
+    z-index: 3;
+    /*box-shadow: .5em .5em var(--outer-bar);*/
+    border-right: 2px solid var(--accent);
+}
+/*Show Aside*/
+.aside-show {
+    text-decoration: unset;
+    text-align: justify;
+    font-weight: unset;
+    float: right;
+    position: relative;
+    margin-right: -25.3em;
+    margin-bottom: .2em;
+    clear: right;
+    width: 400px;
+    background-color: var(--aside-bg);
+    padding: 1em;
+    box-shadow: .3em .3em var(--headers);
+}
+
+.aside-in {
+    text-decoration: none !important;
+    text-align: justify;
+    font-weight: unset;
+    float: right;
+    position: relative;
+    margin-bottom: .2em;
+    clear: right;
+    width: 18em;
+    background-color: var(--aside-bg);
+    padding: 1em;
+    box-shadow: .3em .3em var(--headers);
+    z-index: 3;
+}
+
+.aside-in .internal-embed.is-loaded:not(.image-embed),
+.aside-in .markdown-embed {
+    width:100%;
+}
+/*Shrink Scrollbar*/
+.aside > ::-webkit-scrollbar {
+    width: 5px;
+}
+
+#col {
+    display: block;
+    width: 100%;
+    padding-bottom:100%; 
+}
+
+#font {
+    display: block;
+    text-decoration: unset;
+    text-align: center;
+    font-size: 7rem;
+    line-height: 1em;
+}
+
+/*--Special Blockquote Formatting--*/
+blockquote mark strong {
+	display: block;
+	color: var(--headers) !important;
+	text-align: right;
+    background-color: transparent !important;
+    font-style: italic;
+}
+
+
+
+/*--Kanban--*/
+/*Credit: https://github.com/Braweria/Spectrum*/
+
+
+/*Widen Page*/
+.kanban .markdown-preview-view.is-readable-line-width .markdown-preview-sizer {
+    max-width: 100% !important;
+}
+/*Reduce Padding at Top of Page*/
+.kanban {
+    padding-top: 10px;
+}
+
+
+/*Remove Text Spacing from bullet/number*/
+.kanban .task-list-item-checkbox {
+    margin-left: 20px;
+    margin-top: 2px;
+}
+/*Fix List Checkbox Margins*/
+.kanban ol .task-list-item-checkbox {
+    margin-left: -3px;
+}
+.kanban ol > li.task-list-item {
+    padding-left: 0px;
+}
+
+
+/*Hide Bullet*/
+.kanban ul {
+    list-style: none;
+}
+.kanban ul li::before {
+    content: "";
+    margin-left: 0px;
+    padding: 0;
+}
+
+.kanban ul, .kanban ol {
+    display: flex;
+    flex-direction: row;
+    border-radius: 0;
+    flex-wrap: wrap;
+    padding-inline-start: 0px;
+}
+
+.kanban ul li {
+    flex: 1 1 20%;
+    margin-left: 10px;
+    margin-right: 10px;
+    border: 0;
+}
+.kanban ol li {
+    flex: 1 1 20%;
+    margin-right: 10px;
+    margin-left: 30px;
+    border: 0;
+}
+
+.kanban ul ul, .kanban ol ol {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-right: 10px;
+    margin-top: 5px;
+    background: none;
+}
+/*Kaban Lines*/
+.kanban ul ul {
+    margin-left: 5px;
+    border-left: 2px solid var(--background-modifier-border);
+}
+.kanban ol ol {
+    margin-left: -15px;
+    padding-left: 20px;
+    border-left: 2px solid var(--background-modifier-border);
+}
+/*Color & Formatting*/
+.kanban ul ul li {
+    width: 100%;
+    display: block;
+    background: var(--td);
+    border-radius: 0;
+}
+.kanban ol ol li {
+    width: 100%;
+    background: var(--td);
+    margin-left: 14px;
+}
+
+/*Alternating Colors*/
+.kanban ul ul li:nth-child(even),
+.kanban ol ol li:nth-child(even) {
+    background: var(--background-primary);
+    border: 0;
+}
+
+/*Hover Colors*/
+.kanban ul ul li:hover,
+.kanban ol ol li:hover {
+    background: var(--hvr);
+}
+
+.kanban ul li:hover,
+.kanban ol li:hover {
+    background: var(--hvr2);
+}
+/*-Arrows-*/
+.kanban .list-collapse-indicator {
+    width: 20px;
+}
+/*Bullet Arrows*/
+.kanban ul .list-collapse-indicator {
+    margin-left: -22px;
+    padding-left: 10px;
+}
+.kanban .task-list-item .list-collapse-indicator {
+    position: relative;
+}
+/*Numbered List + Numbered Checklist*/
+.kanban ol .list-collapse-indicator, 
+.kanban ol .task-list-item .list-collapse-indicator{
+    margin-left: -38px;
+    padding-left: 5px;
+}
+/*Fix Arrow When bullets Spaced*/
+.kanban ul li > p {
+    margin-block-start: 0;
+}
+
+/*--Kanban Personal Edits--*/
+/*Fix Margins/Padding*/
+.kanban .internal-embed blockquote {
+    padding: 1%;
+    padding-left: 10px;
+    font-size: 12px;
+    line-height: 15px;
+    border-left-width: 3px;
+    margin: 0;
+    overflow: hidden;
+}
+
+/*Remove Quote*/
+.kanban-o .internal-embed blockquote:before {
+    display:none;
+}
+/*Shrink margins*/
+.markdown-preview-view .markdown-embed,
+.markdown-preview-view .file-embed {
+    margin: 0;
+}
+
+
+/*Display Embed Title*/
+.kanban-o .internal-embed::before{
+    content: attr(alt);
+    line-height: 15px;
+}
+.kanban-o .image-embed::before {
+    content: none;
+}
+
+/*Hide Link but make embed clickable as a link*/
+.kanban-o .internal-embed .markdown-embed-link {
+    left: 0;
+    top: -40%;
+    background-color: transparent;
+    color: transparent;
+}
+.kanban .internal-embed .markdown-embed .markdown-preview-view {
+    margin: 0;
+    padding: 0;
+}
+/*Reduce Hr Height*/
+.kanban hr{
+    margin: 0;
+    margin-bottom: 10px;
+}
+
+
+
+
+/*Italicized Text*/
+i { /*I used for image description, em is just regular italics*/
+    display: block;
+    font-style: unset;
+    color: var(--i-at);
+    text-align: center;
+    background-color: var(--outer-bar);
+    padding: 0 1em;
+}
+
+#right {
+    display: block;
+    text-align: right;
+    background-color: var(--outer-bar);
+    padding-right: .8em;
+}
+
+
+#left {
+    display: block;
+    text-align: left;
+    background-color: var(--outer-bar);
+    padding-left: .8em;
+}
+
+#clear {
+    clear: left;
+}
+
+#nobg {
+    background-color: transparent;
+}
+
+/*----Image Positions/Adjustments----*/
+/*Fix Float Issues*/
+img[alt*="clear"] {
+    clear: both;
+}
+
+/*Center Image*/
+img[alt*="c"] {
+    display:block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/*--Simplified Version--*/
+/*Image Locations*/
+/*Left & Right*/
+img[alt*="left"] {
+    float:left;
+    margin-right: 2%;
+    margin-bottom: 0px;
+}
+
+img[alt*="right"] {
+    float:right;
+    margin-left: 2%;
+    margin-bottom: 0px;
+}
+
+/*Image Shapes*/
+/*Banners*/
+img[alt*="banner"] {
+    display: block;
+    object-fit: cover;
+    height: 150px;
+    width: 100%;
+    margin-bottom: 0px;
+}
+
+img[alt*="banner+small"] {
+    display: block;
+    object-fit: cover;
+    height: var(--tiny);
+    width: 100%;
+    margin-bottom: 0px;
+}
+
+img[alt*="banner+tall"] {
+    display: block;
+    object-fit: cover;
+    height: var(--medium);
+    width: 100%;
+    margin-bottom: 0px;
+}
+
+/*Portait*/
+img[alt*="portrait"] {
+    object-fit: cover;
+    height: 400px;
+    width: 40%;
+}
+
+img[alt*="portrait+small"] {
+    height: 200px;
+    width: 20%;
+    object-fit: cover;
+}
+
+img[alt*="portrait+tall"] {
+    height: 500px;
+    width: 50%;
+    object-fit: cover;
+}
+
+/*Profile*/
+img[alt*="profile"] {
+    object-fit: cover;
+    height: 100px;
+    width: 100px;
+}
+
+img[alt*="profile+medium"] {
+    object-fit: cover;
+    height: 250px;
+    width: 250px;
+}
+
+/*--Customizable Version--*/
+img[alt*="flex"]{
+    display: grid;
+}
+
+
+/*-Image Sizing-*/
+/*Fit image within bounds WITHOUT stretching*/
+img[alt*="cover"]{
+    object-fit: cover;
+}
+
+/*Height*/
+img[alt*="htiny"]{  height: var(--tiny); }
+img[alt*="hsmall"]{ height: var(--small); }
+img[alt*="hs-med"]{ height: var(--small-med); }
+img[alt*="hm-sm"]{  height: var(--med-small); }
+img[alt*="hmed"]{   height: var(--medium); }
+img[alt*="hm-tl"]{  height: var(--med-tall); }
+img[alt*="htall"]{  height: var(--tall); }
+
+/*Width*/
+img[alt*="wtiny"]{    width: var(--tiny); }
+img[alt*="wsmall"]{   width: var(--small); }
+img[alt*="ws-med"]{   width: var(--small-med); }
+img[alt*="wm-small"]{ width: var(--med-small); }
+img[alt*="wmed"]{     width: var(--medium); }
+img[alt*="wm-tl"]{    width: var(--med-tall); }
+img[alt*="wtall"]{    width: var(--tall); }
+
+
+/*--Image Position--*/
+/*Inner Image*/
+img[alt*="pt"]{
+    object-fit: cover;
+    object-position: top;
+}
+img[alt*="pb"] {
+    object-fit: cover;
+    object-position: bottom;
+}
+img[alt*="pl"] {
+    object-fit: cover;
+    object-position: left;
+}
+img[alt*="p+cl"] {
+    object-fit: cover;
+    object-position: 25%;
+}
+img[alt*="pr"] {
+    object-fit: cover;
+    object-position: right;
+}
+img[alt*="p+cr"] {
+    object-fit: cover;
+    object-position: 75%;
+}
+img[alt*="pc"] {
+    object-fit: cover;
+    object-position: center;
+}
+img[alt*="p+tc"] {
+    object-fit: cover;
+    object-position: 50% 10%;
+}
+img[alt*="p+tcc"] {
+    object-fit: cover;
+    object-position: 50% 20%;
+}
+img[alt*="p+cct"] {
+    object-fit: cover;
+    object-position: 50% 30%;
+}
+img[alt*="p+ct"] {
+    object-fit: cover;
+    object-position: 50% 40%;
+}
+img[alt*="p+cb"] {
+    object-fit: cover;
+    object-position: 50% 60%;
+}
+img[alt*="p+ccb"] {
+    object-fit: cover;
+    object-position: 50% 70%;
+}
+img[alt*="p+bc"] {
+    object-fit: cover;
+    object-position: 50% 80%;
+}
+img[alt*="p+bcc"] {
+    object-fit: cover;
+    object-position: 50% 90%;
+}
+
+
+/*Image Locations*/
+img[alt*="locl"] {
+    float:left;
+    margin-right: 2%;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+img[alt*="locr"] {
+    float:right;
+    margin-left: 2%;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+
+/*--Image Shapes--*/
+/*Banners*/
+img[alt*="sban"], .internal-embed img[alt*="sban"] {
+    object-fit: cover;
+    width: 100%;
+}
+
+/*Profile*/
+/*Rounded Image*/
+img[alt*="sprf"]{
+    object-fit: cover;
+    border-radius: 100%;
+}
+
+/*----Embed Adjustments----*/
+.internal-embed {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.internal-embed[alt*="inline"]{
+    display: inline;
+}
+.internal-embed[alt*="block"]{
+    display: block !important;
+}
+
+/*Embed Link Hide/Move*/
+.internal-embed[alt*="nlk"] .markdown-embed-link {
+    display: none;
+}
+
+.internal-embed[alt*="lk-l"] .markdown-embed-link {
+    left: 10px;
+    right: unset;
+}
+
+.internal-embed[alt*="lk-clear"] .markdown-embed-link {
+    background-color: transparent;
+}
+
+
+
+/*Title Hide/Show*/
+.internal-embed[alt*="no-title"] .markdown-embed-title, .file-embed-title{
+    display: none;
+}
+
+.internal-embed[alt*="ttl"] .markdown-embed-title, .file-embed-title{
+    display: block;
+}
+
+.internal-embed[alt*="right"] {
+    float: right;
+    margin-left: .5em;
+}
+.internal-embed[alt*="left"] {
+    float: left;
+    margin-right: .5em;
+}
+.internal-embed[alt*="center"] {
+    margin: auto;
+}
+
+.internal-embed[alt*="nob"] li {
+    list-style: none;
+    margin: 0;
+}
+.internal-embed[alt*="nob"] ul{
+    padding-inline-start: 0;
+}
+.internal-embed[alt*="em+"] .markdown-embed .markdown-preview-view,
+.markdown-preview-view .internal-embed[alt*="em+"]:not(.image-embed) {
+    padding: 20px 10px;
+    display: block !important;
+    width: 100%;
+    background-color: var(--embed-bg);
+}
+.internal-embed[alt*="em+"] .markdown-embed-link{
+    color: var(--accent);
+}
+
+
+.internal-embed[alt*="nmg"] .markdown-embed .markdown-preview-view {
+    margin: 0;
+    padding: 0;
+}
+
+/*Hide Headings*/
+.internal-embed[alt*="no-h"] .markdown-embed h1,
+.internal-embed[alt*="no-h"] .markdown-embed h2,
+.internal-embed[alt*="no-h"] .markdown-embed h3,
+.internal-embed[alt*="no-h"] .markdown-embed h4,
+.internal-embed[alt*="no-h"] .markdown-embed h5,
+.internal-embed[alt*="no-h"] .markdown-embed h6 {
+    display: none;
+}
+/*Hide Specific Headings*/
+.internal-embed[alt*="n-h1"] .markdown-embed h1,
+.internal-embed[alt*="n-h2"] .markdown-embed h2,
+.internal-embed[alt*="n-h3"] .markdown-embed h3,
+.internal-embed[alt*="n-h4"] .markdown-embed h4,
+.internal-embed[alt*="n-h5"] .markdown-embed h5,
+.internal-embed[alt*="n-h6"] .markdown-embed h6 {
+    display: none;
+}
+
+
+
+/*Height Adjustment*/
+.internal-embed[alt*="htiny"] .markdown-embed-content {
+    height: var(--tiny);
+}
+.internal-embed[alt*="hsmall"] .markdown-embed-content {
+    height: var(--small);
+}
+.internal-embed[alt*="hs-med"] .markdown-embed-content{
+    height: var(--small-med);
+}
+.internal-embed[alt*="hm-sm"] .markdown-embed-content{
+    height: var(--med-small);
+}
+.internal-embed[alt*="hmed"] .markdown-embed-content{
+    height: var(--medium);
+}
+.internal-embed[alt*="htall"] .markdown-embed-content{
+    height: var(--tall);
+}
+
+/*Width Adjustment*/
+.internal-embed[alt*="wtiny"]{
+    width: 20%;
+}
+.internal-embed[alt*="wsmall"]{
+    width: 30%;
+}
+.internal-embed[alt*="ws-med"]{
+    width: 40%;
+}
+.internal-embed[alt*="wm-small"]{
+    width: 50%;
+}
+.internal-embed[alt*="wmed"]{
+    width: 60%;
+}
+.internal-embed[alt*="wm-tl"]{
+    width: 80%;
+}
+.internal-embed[alt*="wtall"]{
+    width: 95%;
+}
+
+/*--Blockquote Adjustments--*/
+/*Turn b into a blockquote without the quotations*/
+.markdown-preview-view b {
+    display: flow-root;
+    border: 0px solid var(--lines);
+    background-color: var(--outer-bar);
+    border-left-width: 8px;
+    border-radius: var(--radius);
+    position: relative;
+    font-weight: unset;
+    padding: 10px 20px;
+    margin-left: 2%;
+}
+
+/*--Recall--*/
+.recall { 
+    text-decoration: unset;
+    color: transparent;
+    text-shadow: 0 0 10px var(--text-normal);
+}
+.recall:hover {
+    color: var(--text-normal);
+    text-shadow: 0 0 0px var(--text-normal);
+}
+
+
+
+
+
+
+/*----Plugins----*/
+
+/*--Sliding Panes--*/
+/*Hide the gradient of the Title Pane*/
+body.plugin-sliding-panes-rotate-header .workspace > .mod-root > .workspace-leaf.mod-active > .workspace-leaf-content > .view-header > .view-header-title-container:after,
+body.plugin-sliding-panes-rotate-header .workspace > .mod-root > .workspace-leaf.mod-active > .workspace-leaf-content > .view-header > .view-header-title-container:before,
+body.plugin-sliding-panes-rotate-header .workspace > .mod-root > .workspace-leaf > .workspace-leaf-content > .view-header > .view-header-title-container:before,
+body.plugin-sliding-panes-rotate-header .workspace > .mod-root > .workspace-leaf > .workspace-leaf-content > .view-header > .view-header-title-container:after {
+    background: none !important;
+}
+/*Recolored and Eased Dropshadow*/
+body.plugin-sliding-panes-stacking .workspace > .mod-root > .workspace-leaf {
+    box-shadow: 0px 0px 20px 20px var(--slide-shadow) !important;
+}
+
+/*Note Title Bar*/
+body.plugin-sliding-panes-rotate-header .workspace > .mod-root > .workspace-leaf.mod-active > .workspace-leaf-content > .view-header {
+    border-right: 2px solid var(--headers);
+    border-bottom: none;
+    padding-right: 2px;
+}
+
+/*Hide Black Border When Header is Rotated*/
+body.plugin-sliding-panes-rotate-header .workspace > .mod-root > .workspace-leaf > .workspace-leaf-content > .view-content {
+    border: 0;
+}
+
+/*Display Border When Header Rotation is Off*/
+body.plugin-sliding-panes .workspace-split.mod-root .view-content {
+    border-left: 3px solid var(--bg);
+}
+.title-wrap.plugin-sliding-panes-rotate-header .workspace > .mod-root > .workspace-leaf > .workspace-leaf-content > .view-header  {
+    width: auto !important;
+    writing-mode: vertical-rl;
+}
+
+
+
+/*--Obsidian Tabs Plugin--*/
+.mod-root.workspace-split.mod-vertical .workspace-split.mod-vertical > div.workspace-leaf,
+.mod-root.workspace-split.mod-vertical > div.workspace-leaf {
+    border-radius: var(--radius) !important;
+    border: 0 !important;
+    max-width: unset !important;
+}
+/*Tab Numbers*/
+.view-header .view-header-title::before {
+    background-color: var(--embed-bg) !important;
+    color: var(--soft-text);
+}
+.plugin-tabs .view-header-icon, 
+.plugin-tabs .mod-active .view-header-title::before {
+    background-color: transparent !important;
+}
+.plugin-tabs .view-actions {
+    margin-top: -.05em;
+}
+
+/*--Dataview Table--*/
+.table-view-table > thead > tr > th {
+    font-weight: 900 !important;
+    font-family: var(--font);
+    color: var(--headers);
+    border-bottom: solid var(--accent) !important;
+    background-color: var(--embed-bg);
+}
+.kanban .dataview-ul {
+    display: block !important;
+    padding-inline-start: 1em !important;
+}
+
+/*--Checklist Plugin Edit--*/
+/*Square Checklist*/
+.checklist-plugin-main li,
+.checklist-plugin-main .checkbox,
+.checklist-plugin-main .count {
+    border-radius: var(--radius) !important;
+}
+.checklist-plugin-main li { 
+    border-left: 4px solid var(--accent) !important;
+    background-color: var(--code-bg) !important;
+}
+.checklist-plugin-main li:nth-child(even) {
+    border-left: 4px solid var(--accent2) !important;
+}
+.checklist-plugin-main li:hover,
+.checklist-plugin-main li:nth-child(even):hover { 
+    background-color: var(--outer-bar) !important;
+}
+
+/*Reduce Padding*/
+.checklist-plugin-main { 
+    margin-top: -.8em !important;
+    padding: .4em !important; 
+}
+.checklist-plugin-main .content { padding: 0 !important; }
+.checklist-plugin-main li.compact {
+    padding: .1em;
+    margin-bottom: .4em !important;
+}
+
+/*Hide Bullet*/
+.checklist-plugin-main li.compact:before,
+.checklist-plugin-main li.classic:before { 
+    display: none !important; 
+}
+/*Resize Checkbox*/
+.checklist-plugin-main .compact .toggle { padding: 0 .4em !important; }
+.checklist-plugin-main .checkbox {
+    border-width: 2px !important;
+    min-width: .5em !important;
+    min-height: .5em !important;
+    border-color: var(--accent) !important;
+}
+.checklist-plugin-main .toggle:hover { 
+    background-color: transparent !important; 
+}
+.checklist-plugin-main .compact .checkbox { 
+    width: 1.2em !important;
+    height: 1.2em !important;
+}
+.checklist-plugin-main .classic .checkbox { 
+    width: 1.5em !important;
+    height: 1.5em !important;
+}
+/*Fix Checked Item*/
+.checklist-plugin-main .compact .checked {
+    border-radius: var(--radius) !important;
+    position: relative !important;
+    top: -2px !important;
+    left: -2px !important;
+    background-color: var(--accent) !important;
+}
+.checklist-plugin-main .classic .checked {
+    border-radius: var(--radius) !important;
+    position: absolute !important;
+    background-color: var(--accent) !important;
+}
+
+/*Button Plugin*/
+.button-default {
+    border-radius: var(--radius) !important;
+    box-shadow: none !important;
+    background-color: var(--th) !important;
+    border: 0 !important;
+    display: block;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    color: var(--text-dl) !important;
+}
+.button-default:hover {
+    box-shadow: 0 .5em var(--embed-bg) !important;
+    color: var(--text-dl) !important;
+}
+
+
+
+/*ABC JS*/
+.abcjs-container svg {    
+    fill: white !important;
+}
+
+.abcjs-container svg path {    
+    fill: white !important;
+}
+
+
+
+/*--Mermaid--*/
+/*Mermaid Class*/
+g.classGroup rect {
+        fill: var(--embed-bg) !important;
+        stroke: var(--inactive)  !important;
+        stroke-width: 1spx;
+}
+.classLabel .label {
+    fill: var(--inactive) !important;
+}
+g.classGroup line {
+    stroke: var(--table) !important;
+}
+
+/*Gantt*/
+.active0{
+    fill: var(--accent2) !important;
+}
+.done0 {
+    fill: var(--accent2-lite) !important;
+    stroke: var(--inactive) !important;
+}
+.doneText, .taskTextOutside0{
+    fill: var(--text) !important;
+}
+.section {
+    fill: var(--outer-bar) !important;
+}
+/*Sequence Diagram*/
+.noteText > tspan {
+    fill: var(--footnote) !important;
+}
+
+/*Mermaid ERD*/
+.entityBox {
+    fill: var(--bg) !important;
+    stroke: var(--table) !important;
+}
+.attributeBoxEven {
+    fill: var(--note) !important;
+}
+.attributeBoxOdd {
+    fill: var(--dark-accent) !important;
+}
+
+.node-label{
+    stroke: white !important;
+}
+/*Journey Graph*/
+.section-type-0, .task-type-0 {
+    fill: var(--accent2) !important;
+}
+#m98906ab94e740deb .label {
+    fill: white !important;
+}
+
+
+
+/*--Timeline Plugin--*/
+.timeline-card {
+    background-color: var(--embed-bg) !important;
+    border-radius: var(--radius) !important;
+}
+.timeline-content {
+    padding: 0px !important;
+}
+.timeline-card .thumb {
+    border-radius: var(--radius) !important;
+}
+
+.timeline-container {
+    padding: 5px 15px !important;
+}
+
+/*Line*/
+.timeline::after {
+    background-color: var(--outer-bar) !important;
+}
+
+/*Circle*/
+.timeline-container::after {
+    width: 10px !important;
+    height: 10px !important;
+    right: -11px !important;
+    border: 4px solid var(--accent) !important;
+}
+.timeline-right::after{
+    left: -7px !important;
+}
+
+/*Arrows*/
+.timeline-left::before, .timeline-right::before {
+    top: 16px !important;
+}
+.timeline-left::before {
+    border-color: transparent transparent transparent var(--background-secondary-alt) !important;
+}
+.timeline-right::before {
+    border-color: transparent var(--background-secondary-alt) transparent transparent !important;
+}
+
+
+
+/*--Gallery Plugin--*/
+.workspace-leaf-content[data-type="ob-gallery-info"] .markdown-preview-view { padding: .5em; }
+.ob-gallery-display > ul { padding-inline-start: 0; }
+
+/*Info Block*/
+.gallery-info-container {
+    background-color: transparent !important;
+    border-radius: var(--radius) !important;
+    border: 1px solid var(--outline) !important;
+    box-shadow: -.3em .3em var(--outline);
+}
+/*Tags*/
+.gallery-info-section-tags > .tag {
+    border-radius: var(--radius) !important;
+    color: var(--text-dl) !important;
+    background-color: var(--tag) !important;
+    margin-right: .2em !important;
+}
+.gallery-info-section-tags > .tag:hover { text-decoration: underline !important; }
+
+
+/*Text*/
+.gallery-info-section-label { 
+    color: var(--headers) !important; 
+    font-weight: 900;
+}
+.gallery-info-section-value { color: var(--text) !important; }
+
+
+/*--Kanban Plugin--*/
+/*Show Scrollbar*/
+.workspace-leaf-content[data-type="kanban"] .view-content {
+    overflow: auto;
+}
+/*Board Background*/
+.kanban-plugin {
+    background-color: var(--note) !important;
+}
+.kanban-plugin__lane-header-wrapper {
+    margin: 0 !important;
+}
+
+/*Outer box*/
+.kanban-plugin__lane { 
+    background-color: var(--note) !important;
+    border-radius: var(--border-radius) !important;
+    border: 3px solid var(--outline) !important;
+    box-shadow: -.2em .2em var(--outline) !important;
+}
+
+
+/*Items*/
+.kanban-plugin__item {
+    border: 0 !important;
+    border-left: 3px solid var(--th) !important;
+    border-radius: var(--border-radius) !important;
+}
+.kanban-plugin__item-content-wrapper {
+    background-color: var(--outer-bar) !important;
+    border-radius: var(--border-radius) !important; 
+}
+.kanban-plugin__item-content-wrapper:hover { 
+    background-color: var(--hvr2) !important;
+    border-radius: var(--border-radius) !important;
+
+}
+.kanban-plugin__item-title .markdown-preview-view {
+    font-size: 1em !important; /*calc(var(--f-s-text) -.*/
+}
+
+.kanban-plugin__lane-input,
+.kanban-plugin__item-input { 
+    border-radius: var(--border-radius) !important;
+}
+.kanban-plugin__lane-items {
+    border-radius: var(--radius) !important;
+}
+
+/*Buttons*/
+.kanban-plugin__item-button-wrapper {
+    border: 0 !important;
+    background-color: var(--code-bg) !important;
+    padding: 0 !important;
+}
+.kanban-plugin__new-item-button {
+    background-color: transparent !important;
+    padding: 1em !important;
+}
+.kanban-plugin__new-lane-button-wrapper {
+    position: fixed;
+    width: auto !important;
+    bottom: 2em;
+    right: 50%;
+}
+
+.kanban-plugin__new-lane-button { 
+    background-color: var(--outer-bar) !important;
+    padding: 0 .3em;
+    color: var(--fg);
+    text-align: center !important;
+    border: 1px solid var(--bg);
+    box-shadow: -.1em .1em var(--bg) !important;
+}
+.kanban-plugin__item button.kanban-plugin__item-edit-button:hover,
+.kanban-plugin__lane button.kanban-plugin__lane-settings-button:hover {
+    color: var(--text-dl) !important;
+}
+
+.kanban-plugin .task-list-item-checkbox {
+    -webkit-appearance: checkbox;
+} 
+
+
+
+
+
+/*Copy Codeblock Plugin*/
+.copy-code-button { 
+    display: none !important;
+    color: var(--note) !important;
+    font-family: var(--font-monospace);
+    background-color: var(--inactive) !important;
+    text-transform: uppercase;
+}
+.copy-code-button:hover { color: var(--text-dl) !important; }
+
+.has-copy-button:hover .copy-code-button {
+    display: unset !important;
+}
+
+/*--Style Settings Plugin--*/
+/*--Style Settings Menu--*/
+.style-settings-container {
+    padding-bottom: 0 !important;
+}
+.style-settings-container:hover { 
+    border-color: var(--accent); 
+}
+
+/*Indentation*/
+.style-settings-heading + .style-settings-container {
+    padding-left: 30px;
+    border-left: 2px solid var(--table);
+}
+
+/*Text Adjustments*/
+/*Headings*/
+.style-settings-heading {
+    padding-bottom: 1px !important;
+    border-bottom: 2px solid var(--accent) !important;
+}
+
+.style-settings-heading[data-level="2"] {
+    padding-bottom: 1px !important;
+    border-bottom: 2px solid var(--accent) !important;
+}
+
+.style-settings-heading[data-level="3"]  {
+    border-bottom: 2px solid var(--accent2) !important;
+}
+
+.style-settings-heading .setting-item-name { 
+    color: var(--headers);
+    font-weight: 900;
+    font-size: 1.1em !important;
+}
+.style-settings-container .setting-item-name {
+    font-weight: 900;
+    font-size: 1em !important;
+}
+.style-settings-container .setting-item-description {
+    line-height: 1.2em;
+}
+.style-settings-container .setting-item-description small {
+    color: var(--footnote);
+}
+
+.themed-color-wrapper > div {
+    padding: .1em !important;
+    padding-left: .3em !important;
+    padding-right: .3em !important;
+    border-radius: var(--radius) !important;
+}
+
+
+
+/*--CSS Class Toggles--*/
+/*Hide Vault Title*/
+.v-non .nav-folder.mod-root > .nav-folder-title {
+    display: none;
+}
+.hr-tog .markdown-preview-view hr::after, .hr-tog div:not(.CodeMirror-activeline)>.HyperMD-hr-bg::after {
+    display: none;
+}
+/*--Settings Specific--*/
+.ed-pre .markdown-preview-view, .ed-pre li {
+    font-family: var(--pre-font);
+}
+.ed-pre .cm-s-obsidian  {
+    font-family: var(--ed-font);
+}
+
+/*Tags*/
+.tag-notion a.tag {
+    border-radius: 5px;
+}
+.tag-bubble a.tag {
+    border-radius: 25px;
+}
+.tag-outline a.tag {
+    background-color: transparent;
+    border: var(--tag-o) solid var(--tag);
+    color: var(--tag);
+    line-height: 1.3em;
+}
+
+
+/*-Lists CSS-*/
+/*Bullet Shapes*/
+.no-bull .cm-s-obsidian span.cm-formatting-list-ul {
+    visibility: hidden;
+}
+.no-bull .cm-s-obsidian span.cm-formatting-list-ul:before {
+    content: var(--bullet);
+    margin-right: -10px;
+    visibility: visible;
+}
+/*Default Bullets*/
+.def-bull .cm-s-obsidian span.cm-formatting-list-ul:before,
+.def-bull .kanban li:before {
+    visibility: hidden;
+}
+.def-bull ul li:before {
+    content: "•";
+    padding-left: 4px;
+    font-size: 20px;
+}
+.def-bull ul li:nth-child(even):before {
+    color: var(--accent);
+}
+
+/*Bullet Line Original*/
+.bul-li-o li {
+    padding-left: 4px;
+    border-left: 2px solid var(--accent);
+}
+.bul-li-o li:nth-child(even) {
+    border-left: 2px solid var(--accent2);
+}
+.bul-li-o .markdown-preview-view ul > .bul-li-o li.task-list-item {
+    text-indent: -1.5em !important;
+}
+.b-li-o li {
+    border: 0;
+    padding: 0;
+}
+.b-li-o li::before {
+    color: var(--fg);
+}
+.b-li-o ul ul,
+.b-li-o ol {
+    position: relative;
+}
+.b-li-o ul ul::before,
+.b-li-o ol ol::before {
+    content:'';
+    border-left: 2px solid var(--accent);
+    position: absolute;
+}
+.b-li-o ul ul::before,
+.b-li-o ol ol::before {
+    left: -1em;
+    top: 0;
+    bottom: 0; 
+}
+.b-li-o  li.task-list-item > ol {
+    left: -.5em;
+}
+
+
+.b-li-o .markdown-preview-view ul > .b-li-o li.task-list-item {
+    text-indent: 0em;
+}
+
+/*Colored Bullet Lines*/
+.bul-li-col ul > li,
+.bul-li-col ul ul::before
+{ border-color: var(--b-l-1); }
+.bul-li-col ul ul > li, 
+.bul-li-col ul ul ul::before
+{ border-color: var(--b-l-2); }
+.bul-li-col ul ul ul > li, 
+.bul-li-col ul ul ul ul::before
+{ border-color: var(--b-l-3); }
+.bul-li-col ul ul ul ul > li, 
+.bul-li-col ul ul ul ul ul::before
+{ border-color: var(--b-l-4); }
+.bul-li-col ul ul ul ul ul > li, 
+.bul-li-col ul ul ul ul ul ul::before
+{ border-color: var(--b-l-5); }
+.bul-li-col ul ul ul ul ul ul > li, 
+.bul-li-col ul ul ul ul ul ul ul::before
+{ border-color: var(--b-l-6); }
+
+.bul-li-col ol > li, 
+.bul-li-col ol ol::before
+{ border-color: var(--b-l-1); }
+.bul-li-col ol ol > li, 
+.bul-li-col ol ol::before
+{ border-color: var(--b-l-2); }
+.bul-li-col ol ol ol > li, 
+.bul-li-col ol ol ol::before
+{ border-color: var(--b-l-3); }
+.bul-li-col ol ol ol ol > li, 
+.bul-li-col ol ol ol ol::before
+{ border-color: var(--b-l-4); }
+.bul-li-col ol ol ol ol ol > li, 
+.bul-li-col ol ol ol ol ol::before
+{ border-color: var(--b-l-5); }
+.bul-li-col ol ol ol ol ol ol > li,
+.bul-li-col ol ol ol ol ol ol::before
+{ border-color: var(--b-l-6); }
+
+
+
+
+/*Note Title Wrap*/
+.title-wrap .view-header-title {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    white-space: pre-wrap;
+    line-height: 22px;
+}
+.title-wrap .view-header {
+    height: auto;
+}
+.plugin-tabs.title-wrap .view-header {
+    height: auto !important;
+}
+
+/*Naked Embeds*/
+.naked-em .markdown-preview-view .markdown-embed,
+.naked-em .markdown-preview-view .file-embed,
+.naked-em .internal-embed,
+.naked-em .markdown-embed .markdown-preview-view,
+.naked-em .markdown-embed li,
+.naked-em .markdown-embed p {
+    margin: 0;
+    border: 0;
+    padding: 0;
+    background-color: transparent;
+    box-shadow: none !important;
+    border: var(--radius) !important;
+}
+.naked-em .internal-embed-link{
+    background-color: var(--background-secondary);
+    color: transparent;
+    padding: 10px 10px 5px 10px;
+}
+.naked-em .internal-embed:hover {
+    color: var(--accent2-lite);
+}
+.naked-em .internal-embed .markdown-embed-content > ::-webkit-scrollbar {
+    width: 0px;
+}
+.naked-em .internal-embed:not(.image-embed) {
+	display: inline-flex;
+}
+
+
+/*-Original Embeds-*/
+/*Embed Window*/
+.org-em .markdown-preview-view .markdown-embed,
+.org-em .markdown-preview-view .file-embed,
+.org-em .internal-embed.is-loaded:not(.image-embed) {
+    border: none;
+    background-color: var(--embed-bg);
+    border-radius: var(--radius);
+    box-shadow: unset !important;
+}
+/*Recolor Embedded Blockquote BG*/
+.org-em .markdown-embed blockquote {
+    background: linear-gradient(to right, var(--note), transparent);
+}
+/*Embed HR, Horiztonal Bg Color*/
+.org-em .markdown-embed .markdown-preview-view hr::after {
+    background-color: var(--embed-bg);
+}
+
+
+/*Hide Header Line*/
+.h-line h1:after,
+.h-line h2:after,
+.h-line h3:after,
+.h-line h4:after,
+.h-line h5:after,
+.h-line h6:after,
+.h-line .cm-s-obsidian pre.HyperMD-header:after {
+    display: none;
+}
+
+/*Heading/Header Hash Above Text*/
+.hash-top .cm-s-obsidian pre.HyperMD-header > span > span:first-child {
+    display: block;
+    margin-bottom: -8px;
+}
+
+/*Specific Heading Adjustments*/
+.head-spec h1 { 
+    color: var(--sphd-pre-1);
+    font-family: var(--sphd-pre-ff-1);
+    font-size: var(--sphd-pre-fs-1);
+}
+.head-spec h2 { 
+    color: var(--sphd-pre-2);
+    font-family: var(--sphd-pre-ff-2);
+    font-size: var(--sphd-pre-fs-2);
+}
+.head-spec h3 { 
+    color: var(--sphd-pre-3);
+    font-family: var(--sphd-pre-ff-2);
+    font-size: var(--sphd-pre-fs-3);
+}
+.head-spec h4 { 
+    color: var(--sphd-pre-4);
+    font-family: var(--sphd-pre-ff-4);
+    font-size: var(--sphd-pre-fs-4);
+}
+.head-spec h5 { 
+    color: var(--sphd-pre-5);
+    font-family: var(--sphd-pre-ff-5);
+    font-size: var(--sphd-pre-fs-5);
+}
+.head-spec h6 { 
+    color: var(--sphd-pre-6);
+    font-family: var(--sphd-pre-ff-6);
+    font-size: var(--sphd-pre-fs-6);
+}
+.head-spec .cm-header-1 { 
+    color: var(--sphd-ed-1);
+    font-family: var(--sphd-ed-ff-1);
+    font-size: var(--sphd-ed-fs-1);
+}
+.head-spec .cm-header-2 { 
+    color: var(--sphd-ed-2);
+    font-family: var(--sphd-ed-ff-2);
+    font-size: var(--sphd-ed-fs-2);
+}
+.head-spec .cm-header-3 { 
+    color: var(--sphd-ed-3);
+    font-family: var(--sphd-ed-ff-3);
+    font-size: var(--sphd-ed-fs-3);
+}
+.head-spec .cm-header-4 { 
+    color: var(--sphd-ed-4);
+    font-family: var(--sphd-ed-ff-4);
+    font-size: var(--sphd-ed-fs-4);
+}
+.head-spec .cm-header-5 { 
+    color: var(--sphd-ed-5);
+    font-family: var(--sphd-ed-ff-5);
+    font-size: var(--sphd-ed-fs-5);
+}
+.head-spec .cm-header-6 { 
+    color: var(--sphd-ed-6);
+    font-family: var(--sphd-ed-ff-6);
+    font-size: var(--sphd-ed-fs-6);
+}
+
+.text-spec .markdown-preview-view em {
+    font-family: var(--em-pre-f);
+    color: var(--em-pre-c);
+}
+.text-spec .cm-em {
+    font-family: var(--em-ed-f);
+    color: var(--em-ed-c);
+}
+.text-spec .markdown-preview-view strong {
+    font-family: var(--b-pre-f);
+    color: var(--b-pre-c);
+}
+.text-spec .cm-strong {
+    font-family: var(--b-ed-f);
+    color: var(--b-ed-c);
+}
+.text-spec .markdown-preview-view del {
+    font-family: var(--del-pre-f);
+    color: var(--del-pre-c);
+}
+.text-spec .cm-strikethrough {
+    font-family: var(--del-ed-f);
+    color: var(--del-ed-c);
+}
+
+.lig .markdown-preview-section {
+    font-variant-ligatures: unset !important;
+}
+.lig .cm-s-obsidian .HyperMD-list-line, 
+.lig .cm-s-obsidian .CodeMirror-line  {
+    font-variant-ligatures: normal;
+}
+
+
+
+
+
+/*-Plugin Toggles-*/
+/*Text Expander: Hide Code in Preview Mode*/
+.h-exp .markdown-preview-view pre[class*="language-expander"],
+.h-exp .markdown-preview-view code[class*="language-expander"] {
+    display: none;
+}
+/*Dataview: Compact and Hide Bullets*/
+.dv .dataview-ul li::before {
+    display: none;
+}
+.dv .dataview-ul {
+    margin-block-end: 0 !important;
+}
+
+/*Dim First Column Link*/
+.dv .dataview td:nth-child(1) {
+    color: var(--headers) !important;
+}
+.dv .dataview td:nth-child(1) .internal-link {
+    color: var(--lines) !important;
+}
+.dv .dataview td:nth-child(1) .internal-link:hover {
+    color: var(--accent2) !important;
+}
+
+

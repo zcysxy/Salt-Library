@@ -1,0 +1,85 @@
+/* Clutter Free */
+/* external links */
+div:not(.CodeMirror-activeline) > .CodeMirror-line .cm-string.cm-url:not(.cm-formatting) {
+    font-size: 0;
+}
+div:not(.CodeMirror-activeline) > .CodeMirror-line .cm-string.cm-url:not(.cm-formatting)::after {
+    content: '🔗';
+    font-size: 1rem;
+}
+
+/* hide all html tags */
+/* div:not(.CodeMirror-activeline) > .CodeMirror-line span.cm-tag { display: none; }
+
+/* except list markers */ span.cm-formatting-list,
+/*code block backticks */ span.cm-formatting-code-block.cm-hmd-codeblock,
+/* optionally header hashes */ span.cm-formatting-header
+{ display: inline !important; }
+
+/* and task checkboxes */
+span.cm-formatting-task { display: inline !important; font-family: monospace; }
+
+/* full-length hr line */
+div:not(.CodeMirror-activeline)>.CodeMirror-line span.cm-hr {
+    color: transparent;
+}
+div:not(.CodeMirror-activeline)>.CodeMirror-line span.cm-hr:after {
+    content: "";
+    position: absolute;
+    height: 1.5px;
+    width: 100%;
+    //border-style: dotted;
+    background: grey;
+    left: 0;
+    top: 50%;
+}
+
+/* blockquote */
+div:not(.CodeMirror-activeline)>.CodeMirror-line span.cm-formatting-quote {
+    color: transparent;
+}
+div:not(.CodeMirror-activeline)>.HyperMD-quote {
+    border-left: 4px solid grey;
+    padding-left: 8.5px !important;
+    margin-left: 5px;
+}
+
+/* list bullets */
+div:not(.CodeMirror-activeline)>.CodeMirror-line span.cm-formatting-list-ul {
+    color: transparent;
+    position: relative;
+}
+div:not(.CodeMirror-activeline)>.CodeMirror-line span.cm-formatting-list-ul:after {
+    content: "•";
+    position: absolute;
+    top: -5px;
+    left: 0px;
+    color: var(--text-normal);
+    font-family: sans-serif;
+    font-size: 20px;
+}
+
+
+/* tickbox */
+div:not(.CodeMirror-activeline)>.CodeMirror-line span.cm-formatting-task.cm-meta,
+div:not(.CodeMirror-activeline)>.CodeMirror-line span.cm-formatting-task.cm-property {
+    color: transparent;
+    position: relative;
+}
+
+div:not(.CodeMirror-activeline)>.CodeMirror-line span.cm-formatting-task.cm-meta:after,
+div:not(.CodeMirror-activeline)>.CodeMirror-line span.cm-formatting-task.cm-property:after {
+    content: "☐";
+    color: white !important;
+    position: absolute;
+    top: 2px;
+    left: 4px;
+    color: var(--text-normal);
+    font-size: 24px;
+}
+
+div:not(.CodeMirror-activeline)>.CodeMirror-line span.cm-formatting-task.cm-property:after {
+    content: "☑";
+    color: var(--text-normal);
+}
+ 

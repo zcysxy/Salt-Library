@@ -24,7 +24,7 @@
     </section>
 
     {% for book in books %}
-        <a href="#">
+        <a href="/{{ book['isbn']}}">
             <h2>《{{ book['title'] }}》</h2>
         </a>
         <span class='badge badge-primary'>ISBN: {{ book['isbn']}}</span>

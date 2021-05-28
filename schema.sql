@@ -9,9 +9,13 @@ CREATE TABLE books (
     price NUMERIC(6,2)
 );
 
-DROP TABLE IF EXISTS borrower;
-CREATE TABLE borrower (
-    ID CHAR(11) PRIMARY KEY,
+DROP TABLE IF EXISTS miners;
+CREATE TABLE miners (
+    ID VARCHAR(10) PRIMARY KEY,
+    password VARCHAR(200) NOT NULL, -- Using MD5 encryption, thus it's longer
     name VARCHAR(100) NOT NULL,
-    credit INT DEFAULT 5
+    mail VARCHAR(100) CHECK(mail LIKE '%@%.%'),
+    phone CHAR(11),
+    gender INT, -- 0 for male, 1 for female, 2 for non-binary
+    age INT CHECK(age>0)
 );

@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1 style="margin: 1em;">{% block title %} 《{{ content['title'] }}》 {% endblock %}</h1>
+
+<div style="margin-top: 2em; margin-bottom: 2em;">
+<ul class="list-group">
+    <li class="list-group-item">ISBN: {{ content['isbn'] }}</li>
+    <li class="list-group-item">Author: {{ content['author'] }}</li>
+    <li class="list-group-item">Publisher: {{ content['publisher'] }}</li>
+    <li class="list-group-item">Publish Date: {{ content['publish_year'] }}-{{ content['publish_month'] }}</li>
+    <li class="list-group-item">Price: {{ content['price'] }}</li>
+</ul>
+</div>
+
+<button type="submit" class="btn btn-primary">BUY</button>
+
+<a href="/{{ content['isbn'] }}/edit">
+    <button type="submit" class="btn btn-primary">EDIT</button>
+</a>
+
+<form style="display: inline;"><button
+    type="submit"
+    class="btn btn-primary btn-danger"
+    formaction="{{ url_for('book.deletebook', isbn=content['isbn']) }}"
+    formmethod="POST"
+    onclick="return confirm('Are you sure you want to delete this book?')">
+    DELETE
+</button></form>
+
+{% endblock %}

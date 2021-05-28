@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+
+{% block content %}
+<main class="form-signin">
+<form method="POST">
+    <h1 class="mb-2 mt-3">Please sign up</h1>
+
+    <div class="form-floating mb-2">
+        <label for="id">Account ID</label>
+        <input
+            type="text"
+            class="form-control"
+            name="id"
+            placeholder="Your login ID, must match regex: [a-z0-9_]{1,10}"
+            value="{{ request.form['id'] }}">
+        </input>
+    </div>
+
+    <div class="form-floating mb-2">
+        <label for="password">Password</label>
+        <input
+            type="password"
+            class="form-control"
+            name="password"
+            placeholder="Your login password, must match regex: [a-zA-Z0-9]{1,16}"
+            value="{{ request.form['password'] }}">
+        </input>
+    </div>
+
+    <div class="form-floating mb-2">
+        <label for="c_password">Confirm Password</label>
+        <input
+            type="password"
+            class="form-control"
+            name="c_password"
+            placeholder="Please confirm your password"
+            value="{{ request.form['c_password'] }}">
+        </input>
+    </div>
+
+    <div class="form-floating mb-2">
+        <label for="name">User Name</label>
+        <input
+            type="text"
+            class="form-control"
+            name="name"
+            placeholder="Your display user name, must less than 100 characters"
+            value="{{ request.form['name'] }}">
+        </input>
+    </div>
+
+    <div class="form-floating mb-2">
+        <label for="mail">Email Address</label>
+        <input
+            type="email"
+            class="form-control"
+            name="mail"
+            placeholder="salt@library.com"
+            value="{{ request.form['mail'] }}">
+        </input>
+    </div>
+
+    <div class="form-floating mb-2">
+        <label for="phone">Mobile Phone</label>
+        <input
+            type="tel"
+            class="form-control"
+            name="phone"
+            placeholder="Valid 11-digit phone number"
+            value="{{ request.form['phone'] }}">
+        </input>
+    </div>
+
+    <div class="form-select mb-2">
+        <label for="gender">Gender</label>
+        <select name="gender" class="form-control selectpicker">
+            {% for o in options %}
+            <option value="{{ o.gender[1] }}">{{ o.gender[0] }}</option>
+            {% endfor %}
+        </select>
+    </div>
+
+    <div class="form-floating mb-2">
+        <label for="age">Age</label>
+        <input
+            type="number"
+            class="form-control"
+            name="age"
+            placeholder="Valid postive integer age"
+            value="{{ request.form['age'] }}">
+        </input>
+    </div>
+    
+    <div class="form-floating">
+    <button class="w-100 btn btn-lg btn-primary" type="submit">Sign up</button>
+    </div>
+</form>
+</main>
+{% endblock %}

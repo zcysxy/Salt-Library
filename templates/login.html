@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+<main class="form-signin">
+<form method="POST">
+    <h1 class="mb-2 mt-3">Please log in</h1>
+
+    <div class="form-floating mb-2">
+        <label for="id">Account ID</label>
+        <input
+            type="text"
+            class="form-control"
+            name="id"
+            placeholder="Your login ID"
+            value="{{ request.form['id'] }}">
+        </input>
+    </div>
+
+    <div class="form-floating mb-2">
+        <label for="password">Password</label>
+        <input
+            type="password"
+            class="form-control"
+            name="password"
+            placeholder="Your password"
+            value="{{ request.form['password']}}">
+        </input>
+    </div>
+
+    <div class="form-floating">
+        <button class="w-100 btn btn-lg btn-primary" type="submit">Log in</button>
+    </div>
+</form>
+</main>
+{% endblock %}

@@ -9,7 +9,7 @@
             <input
                 type="text"
                 name="title"
-                placeholder="What book are you looking for?"
+                placeholder="{{ request.args.get('title') }}"
                 class="form-control me-2"
                 value="{{ request.form['title'] }}">&ensp;</input>
             <button type="submit" class="btn btn-secondary">Search</button>
@@ -19,7 +19,7 @@
     </section>
 
     {% for book in result %}
-        <a href="#">
+        <a href="/{{ book['isbn'] }}">
             <h2>《{{ book['title'] }}》</h2>
         </a>
         <span class='badge badge-primary'>ISBN: {{ book['isbn']}}</span>
