@@ -1,29 +1,52 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <section class="py-5 text-center container">
-        <div class="row py-lg-5">
-        <div class="col-lg-6 col-md-8 mx-auto">
-            <h1 class="fw-bold">{% block title %}Salt Library {% endblock %}</h1>
-            <p class="lead text-muted"> Welcome to a library whose books taste salty.</p>
+<section class="py-5 text-center container">
+    <div class="row py-lg-5">
+        <div class="col-md-8 mx-auto">
+            <h1 class="fw-bold">{% block title %}Salt Library {{test}} {% endblock %}</h1>
+            <p class="lead text-muted"> Welcome to a library where books taste salty.</p>
+            {% if not current_user.is_authenticated %}
             <p>
-            <a href="/newbook/" class="btn btn-primary">Add a New Book</a>
+                <a href="/signup" class="w-25 mt-3 btn btn-lg btn-primary">Sign Up</a>
+                <a href="/login" class="w-25 mt-3 btn btn-lg btn-secondary">Log In</a>
             </p>
-            <form method="post" class="d-flex">
-            <input
-                type="text"
-                name="title"
-                placeholder="What book are you looking for?"
-                class="form-control"
-                value="{{ request.form['title'] }}">&ensp;
-            </input>
-            <button type="submit" class="btn btn-secondary">Search</button>
-            </form>
+            {% endif %}
         </div>
-        </div>
-    </section>
+    </div>
+</section>
 
-    {% for book in books %}
+<section class="py-5" style="margin-top: -4em;">
+    <form method="post" class="d-flex">
+        <input type="text" name="title" placeholder="What book are you looking for?" class="form-control"
+            value="{{ request.form['title'] }}">&ensp;
+        </input>
+        <button type="submit" class="btn btn-primary">Search</button>&ensp;
+        <a href="/ad_search">
+            <button type="button" class="btn btn-secondary" style="white-space: nowrap;">Advanced Search</button>
+        </a>
+    </form>
+</section>
+
+<!-- <hr class="md-5 mt-5"> -->
+
+<ul class="nav nav-tabs">
+    <li class="nav-item">
+        <a class="nav-link active" href="#best" data-toggle="tab">
+            <h4 class="fw-bold">Best Sellers</h4>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="#all" data-toggle="tab">
+            <h4 class="fw-bold">All Books</h4>
+        </a>
+    </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade show active" id="best">
+
+        {% for book in books %}
         <a href="/{{ book['isbn']}}">
             <h2>《{{ book['title'] }}》</h2>
         </a>
@@ -31,6 +54,15 @@
         <span class='badge badge-primary'>Author: {{ book['author']}}</span>
         <span class='badge badge-primary'>Publisher: {{ book['publisher']}}</span>
         <span class='badge badge-primary'>Publish Date: {{ book['publish_year'] }}-{{ book['publish_month']}}</span>
+        <span class='badge badge-primary bg-warning'>{{ book['sold'] }} <b>SOLD</b></span>
         <hr>
-    {% endfor %}
-{% endblock %}
+        {% endfor %}
+    </div>
+
+    <div class="tab-pane fade" id="all">
+        {% for book in all_books %}
+            
+        {% endfor %}
+    </div>
+</div>
+    {% endblock %}

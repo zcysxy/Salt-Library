@@ -10,14 +10,15 @@
                 type="text"
                 name="title"
                 placeholder="{{ request.args.get('title') }}"
-                class="form-control me-2"
+                class="form-control"
                 value="{{ request.form['title'] }}">&ensp;</input>
-            <button type="submit" class="btn btn-secondary">Search</button>
-            </form>
+            <button type="submit" class="btn btn-primary">Search</button>&ensp;
+            <a href="{{ url_for("book.ad_search") }}"><button type="button" class="btn btn-secondary" style="white-space: nowrap;">Advanced Search</button></a>
+        </form>
         </div>
         </div>
     </section>
-
+    
     {% for book in result %}
         <a href="/{{ book['isbn'] }}">
             <h2>《{{ book['title'] }}》</h2>

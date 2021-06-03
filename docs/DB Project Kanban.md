@@ -19,31 +19,21 @@ kanban-plugin: basic
 - [ ] Roles management #hard
 - [ ] Return value without redirect
 - [ ] Python separate script for database operations
-- [ ] Best sellers
 - [ ] Extensibility: a real enjoyable personal database #later
 - [ ] Deployment? Standalone app and independent database? #question
-- [ ] Book Chapter Application #imp
+- [ ] Textbook chapter Application #imp
 - [ ] [[E-R Diagram]] drawing #later
+- [ ] Textbook dynamic & embedded SQL
 
 
 ## In Progress
 
 - [ ] Diff sites' state for diff users #hard
-- [ ] Advanced search: a link to a specific page
 
 
 ## Done
 
 **Complete**
-- [x] Going through Requirements and Samples
-- [x] Python Psql connection & basic operations
-- [x] Web app development setup
-- [x] Finish the Flask tutorial
-- [x] Web app login #hard
-- [x] Sites structure design
-- [x] [[E-R Diagram]] draft @{today}
-- [x] Fuzzy search: Insert %s
-- [x] Make a blueprint & plan
 
 
 ## Maybe
@@ -52,5 +42,22 @@ kanban-plugin: basic
 - [ ] friends
 - [ ] custom statistic table
 - [ ] Different ordering
+- [ ] Skip to result (not the start of the page)
+- [ ] Remove part of the books in cart
 
 
+***
+
+## Archive
+
+- [x] 2021-05-29 03:56 Going through Requirements and Samples
+- [x] 2021-05-29 03:56 Python Psql connection & basic operations
+- [x] 2021-05-29 03:56 Web app development setup
+- [x] 2021-05-29 03:56 Finish the Flask tutorial
+- [x] 2021-05-29 03:56 Web app login #hard
+- [x] 2021-05-29 03:56 Sites structure design
+- [x] 2021-05-29 03:56 [[E-R Diagram]] draft @{today}
+- [x] 2021-05-29 03:56 Advanced search: a link to a specific page
+- [x] 2021-05-29 03:56 Fuzzy search: Insert %s
+- [x] 2021-05-29 03:56 Make a blueprint & plan
+- [x] 2021-05-29 03:56 Best sellers

@@ -5,4 +5,26 @@
     Welcome, {{ profile['name'] }}!
 </h1>
 
+<a href="{{url_for('miner.cart')}}">
+    <button type="button" class="btn btn-warning">Your Cart</button>
+</a>
+
+<a href="{{url_for('miner.editprofile')}}">
+    <button type="button" class="btn btn-primary">Edit Profile</button>
+</a>
+
+<a href="{{url_for('auth.logout')}}">
+    <button class="btn btn-danger">Log out</button>
+</a>
+
+<a href="{{url_for('miner.mylibrary')}}">
+    <button class="btn btn-success">My Library</button>
+</a>
+
+<a href="{{url_for('book.requestbook')}}">
+    <button type="button" class="btn btn-info">Request a book</button>
+</a>
+
+<hr>
+
 {% endblock %}

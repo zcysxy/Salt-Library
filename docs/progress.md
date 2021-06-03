@@ -1,8 +1,20 @@
-# Project Process
+# Project Progress
 
 > In this file I record the process of me building the **Salt Library** LMS
 
 ## Python
+
+### Virtual Environment
+
+对于一个项目, 最好为其建立一个独立的虚拟环境, 以保证此环境中的 Python 配置, 依赖等不会影响其他环境的.
+
+First I use package `virturalenv` to set up an virtural env **`myenv`** for this pj.
+
+* Pj folder path: `D:\OneDrive1\Desktop\Database\pj\Salt-Library`
+* Activate the v-env: `.\myenv\Scripts\activate`
+* Deactivate: `deactivate`
+
+同时在 VS Code 中, 注意也要选择虚拟环境中的 `python.exe` 为 interpreter.
 
 ## Postgresql
 
@@ -73,14 +85,6 @@ See Salt-Box for notes.
 2021-05-21
 
 I'm ready to use flask to build a **web app** for this pj.
-
-### Virtural Environment
-
-First I use package `virturalenv` to set up an virtural env **`myenv`** for this pj.
-
-* Pj folder path: `D:\OneDrive1\Desktop\Database\pj\Salt-Library`
-* Activate the v-env: `.\myenv\Scripts\activate`
-* Deactivate: `deactivate`
 
 ### Build the App
 

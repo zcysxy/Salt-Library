@@ -1,12 +1,7 @@
 #!venv/bin/python3
-import re
-from flask import Flask, render_template, request, url_for, flash, redirect, Blueprint
-from flask.blueprints import Blueprint
-from flask_login import LoginManager, UserMixin
-from werkzeug.exceptions import abort
-import connect as con
-from auth import User
-import psycopg2
+from flask import Flask
+from flask_login import LoginManager
+from models import User
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'SaltLibrary'
@@ -30,5 +25,8 @@ login_manager.login_message_category = "danger"
 login_manager.init_app(app)
 
 @login_manager.user_loader
-def load_user(id):
-    return User(id)
+def load_user(ID):
+    return User(ID)
+
+if __name__ == '__main__':
+    app.run(use_debugger=False, use_reloader=False, passthrough_errors=True)

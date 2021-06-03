@@ -22,6 +22,7 @@ This pages show different lists of books and corresponding info about these book
     * A list of books the miner bought
 * Requested
     * A list of books the miner requested
+    * For requested books whose state is not "pending", there is a button to delete that request
 
 ## Connections
 

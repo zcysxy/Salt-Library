@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>{% block title %} Edit Your Profile {% endblock %}</h1>
+
+<form method="post">
+    <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" name="name"
+            placeholder="Your display name" class="form-control"
+            value="{{ request.form['name'] or content['name'] }}"></input>
+    </div>
+
+    <div class="form-group">
+        <label for="mail">Email</label>
+        <input
+            type="text"
+            name="mail"
+            placeholder="Your valid email"
+            class="form-control"
+            value="{{ request.form['mail'] or (content['mail'] if content['mail']) }}">
+        </input>
+    </div>
+
+    <div class="form-group">
+        <label for="phone">Phone</label>
+        <input
+            type="text"
+            name="phone"
+            placeholder="Your valid phone"
+            class="form-control"
+            value="{{ request.form['phone'] or (content['phone'] if (content['phone'] != '           ')) }}">
+        </input>
+    </div>
+
+    <div class="form-select mb-2">
+        <label for="gender">Gender</label>
+        <select name="gender" class="form-control selectpicker">
+            {% for o in options %}
+            <option value="{{ o.gender[1] }}" {{"selected" if ((content['gender'] == o.gender[1]) and (not request.form['gender']))}}>{{ o.gender[0] }}</option>
+            {% endfor %}
+        </select>
+    </div>
+
+    <div class="form-group" style="clear: both;">
+        <label for="age">Age</label>
+        <input
+            type="number"
+            name="age"
+            placeholder="Your age"
+            class="form-control"
+            value="{{ request.form['age'] or content['age'] }}">
+        </input>
+    </div>
+
+    <h2>Change your password</h2>
+
+    <div class="form-group">
+        <label for="old_password">Old password</label>
+        <input
+            type="text"
+            name="old_password"
+            placeholder="Your old password"
+            class="form-control"
+            value="{{ request.form['old_password'] }}">
+        </input>
+    </div>
+    <div class="form-group">
+        <label for="new_password">New password</label>
+        <input
+            type="text"
+            name="new_password"
+            placeholder="Your new password"
+            class="form-control"
+            value="{{ request.form['new_password'] }}">
+        </input>
+    </div>
+    <div class="form-group">
+        <label for="c_password">Confirm password</label>
+        <input
+            type="text"
+            name="c_password"
+            placeholder="Confirm your new password"
+            class="form-control"
+            value="{{ request.form['c_password'] }}">
+        </input>
+    </div>
+    
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+</form>
+{% endblock %}

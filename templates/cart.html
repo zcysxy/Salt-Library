@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="py-5 container">
+    <div class="row">
+        <div class="col-md-8">
+            <h1 class="fw-bold">{% block title %} Your Cart {% endblock %}</h1>
+        </div>
+    </div>
+</section>
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th scope="col">Book Title</th>
+            <th scope="col">Price</th>
+            <th scope="col">Amount</th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for book in content %}
+        <tr>
+            <th scope="row">
+                <a href="/{{ book['isbn'] }}"><h4>《{{ book['title'] }}》</h4></a>
+            </th>
+            <td>{{book['price']}}</td>
+            <td>{{book['cart_num']}}</td>
+            <td><form><button
+                type="submit"
+                class="btn btn-danger"
+                formaction="{{ url_for('miner.remove4cart', isbn=book['isbn']) }}"
+                formmethod="POST"
+                onclick="return confirm('Are you sure you want to remove this book from your cart?')">
+                Remove
+            </button></form></td>
+        </tr>
+        {% endfor %}
+        <th><h3>Total Price</h3></th>
+        <th>{{total_price}}</th>
+        <th></th>
+        <th></th>
+    </tbody>
+</table>
+
+<form><button
+    type="submit"
+    class="btn btn-primary btn-lg"
+    formaction="{{ url_for('miner.buy') }}"
+    formmethod="POST"
+    onclick="return confirm('Have you paid?')">
+    Buy
+</button></form>
+
+{% endblock %}

@@ -1,0 +1,154 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1 class="title">
+    Your library!
+</h1>
+
+<section>    
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+            <a class="nav-link active" href="#activities" data-toggle="tab">Activities</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#owned" data-toggle="tab">Owned Books</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#toread" data-toggle="tab">To Read</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#reading" data-toggle="tab">Reading</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#read" data-toggle="tab">Read</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#rating" data-toggle="tab">My Ratings</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#request" data-toggle="tab">Request</a>
+        </li>
+    </ul>
+    
+    <div class="tab-content">
+        <div class="tab-pane fade show active" id="activities">
+            <p>ACTIVITIES</p>
+        </div>
+    
+        <div class="tab-pane fade" id="owned">
+            <h3>Your Owned Books</h3>
+            {% if owned %}
+            {% for book in owned %}
+            <a href="/{{ book['isbn'] }}">
+                <h2>《{{ book['title'] }}》</h2>
+            </a>
+            <span class='badge badge-primary'>ISBN: {{ book['isbn']}}</span>
+            <span class='badge badge-primary'>Author: {{ book['author']}}</span>
+            <span class='badge badge-primary'>Publisher: {{ book['publisher']}}</span>
+            <span class='badge badge-primary'>Publish Date: {{ book['publish_year'] }}-{{ book['publish_month']}}</span>
+            <hr>
+            {% endfor %}
+            {% else %}
+            <blockquote>You don't have any book. Go buy some!</blockquote>
+            {% endif %}
+        </div>
+
+        <div class="tab-pane fade" id="toread">
+            <h3>Books You Want to Read</h3>
+            {% if toread %}
+            {% for book in toread %}
+            <a href="/{{ book['isbn'] }}">
+                <h2>《{{ book['title'] }}》</h2>
+            </a>
+            <span class='badge badge-primary'>ISBN: {{ book['isbn']}}</span>
+            <span class='badge badge-primary'>Author: {{ book['author']}}</span>
+            <span class='badge badge-primary'>Publisher: {{ book['publisher']}}</span>
+            <span class='badge badge-primary'>Publish Date: {{ book['publish_year'] }}-{{ book['publish_month']}}</span>
+            <hr>
+            {% endfor %}
+            {% else %}
+            <blockquote>There is no book you want to read. Go find some!</blockquote>
+            {% endif %}
+        </div>
+
+        <div class="tab-pane fade" id="reading">
+            <h3>Books You are Reading</h3>
+            {% if reading %}
+            {% for book in reading%}
+            <a href="/{{ book['isbn'] }}">
+                <h2>《{{ book['title'] }}》</h2>
+            </a>
+            <span class='badge badge-primary'>ISBN: {{ book['isbn']}}</span>
+            <span class='badge badge-primary'>Author: {{ book['author']}}</span>
+            <span class='badge badge-primary'>Publisher: {{ book['publisher']}}</span>
+            <span class='badge badge-primary'>Publish Date: {{ book['publish_year'] }}-{{ book['publish_month']}}</span>
+            <hr>
+            {% endfor %}
+            {% else %}
+            <blockquote>You are not reading any book. Go read some!</blockquote>
+            {% endif %}
+        </div>
+
+        <div class="tab-pane fade" id="read">
+            <h3>Books You Have Read</h3>
+            {% if read %}
+            {% for book in read %}
+            <a href="/{{ book['isbn'] }}">
+                <h2>《{{ book['title'] }}》</h2>
+            </a>
+            <span class='badge badge-primary'>ISBN: {{ book['isbn']}}</span>
+            <span class='badge badge-primary'>Author: {{ book['author']}}</span>
+            <span class='badge badge-primary'>Publisher: {{ book['publisher']}}</span>
+            <span class='badge badge-primary'>Publish Date: {{ book['publish_year'] }}-{{ book['publish_month']}}</span>
+            <hr>
+            {% endfor %}
+            {% else %}
+            <blockquote>You have not read any book. Go read some!</blockquote>
+            {% endif %}
+        </div>
+
+        <div class="tab-pane fade" id="rating">
+            <h3>Your Favorite to Least Favorite</h3>
+            {% if rating %}
+            {% for book in rating %}
+            <a href="/{{ book['isbn'] }}">
+                <h2>《{{ book['title'] }}》</h2>
+            </a>
+            <span class='badge badge-warning'>Your Rating: {{ book['rating'] }}</span>
+            <span class='badge badge-primary'>ISBN: {{ book['isbn']}}</span>
+            <span class='badge badge-primary'>Author: {{ book['author']}}</span>
+            <span class='badge badge-primary'>Publisher: {{ book['publisher']}}</span>
+            <span class='badge badge-primary'>Publish Date: {{ book['publish_year'] }}-{{ book['publish_month']}}</span>
+            <hr>
+            {% endfor %}
+            {% else %}
+            <blockquote>You have not rated any book. Go rate some!</blockquote>
+            {% endif %}
+        </div>
+        <div class="tab-pane fade" id="request">
+            <h3>Your Requested Books</h3>
+            {% if request %}
+            {% for book in request %}
+            <a href="/{{ book['isbn'] }}">
+                <h2>《{{ book['title'] }}》</h2>
+            </a>
+            <span class='badge badge-{{('warning' if book['request_state']==1) or ('success' if book['request_state']==2) or ('danger' if book['request_state']==3)}}'>
+                State: {{('pending' if book['request_state']==1) or ('added' if book['request_state']==2) or ('turned down' if book['request_state']==3)}}
+            </span>
+            <span class='badge badge-info'>requested time: {{ book['request_date']}}</span>
+            <span class='badge badge-primary'>ISBN: {{ book['isbn']}}</span>
+            <span class='badge badge-primary'>Author: {{ book['author']}}</span>
+            <span class='badge badge-primary'>Publisher: {{ book['publisher']}}</span>
+            <span class='badge badge-primary'>Publish Date: {{ book['publish_year'] }}-{{ book['publish_month']}}</span>
+            <hr>
+            {% endfor %}
+            {% else %}
+            <blockquote>You have not requested any book.</blockquote>
+            {% endif %}
+        </div>
+    </div>
+    
+    </section>
+    
+
+{% endblock %}

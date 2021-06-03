@@ -11,6 +11,7 @@
 		"debug.console.fontFamily": "Fira Code Medium",
 		"markdownlint.config": {
 			"MD007": { "indent": 4 } 
-		}
+		},
+		"liveServer.settings.port": 5501
 	}
 }
