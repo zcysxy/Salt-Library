@@ -14,7 +14,7 @@
     <div class="form-group">
         <label for="mail">Email</label>
         <input
-            type="text"
+            type="email"
             name="mail"
             placeholder="Your valid email"
             class="form-control"
@@ -25,11 +25,11 @@
     <div class="form-group">
         <label for="phone">Phone</label>
         <input
-            type="text"
+            type="number"
             name="phone"
             placeholder="Your valid phone"
             class="form-control"
-            value="{{ request.form['phone'] or (content['phone'] if (content['phone'] != '           ')) }}">
+            value="{{ request.form['phone'] or content['phone'] }}">
         </input>
     </div>
 
@@ -47,6 +47,8 @@
         <input
             type="number"
             name="age"
+            step="1"
+            min="1"
             placeholder="Your age"
             class="form-control"
             value="{{ request.form['age'] or content['age'] }}">
@@ -68,7 +70,7 @@
     <div class="form-group">
         <label for="new_password">New password</label>
         <input
-            type="text"
+            type="password"
             name="new_password"
             placeholder="Your new password"
             class="form-control"
@@ -78,7 +80,7 @@
     <div class="form-group">
         <label for="c_password">Confirm password</label>
         <input
-            type="text"
+            type="password"
             name="c_password"
             placeholder="Confirm your new password"
             class="form-control"

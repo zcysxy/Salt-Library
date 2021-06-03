@@ -87,3 +87,100 @@ BEGIN
     RETURN msg;
 END;
 $msg$ LANGUAGE plpgsql;
+
+/* Function to check the validation of the sign up information,
+   and insert it into table miners if it is valid */
+CREATE OR REPLACE FUNCTION insert_miners(
+    id_in VARCHAR,
+    pw_in VARCHAR,
+    name_in VARCHAR,
+    mail_in VARCHAR,
+    phone_in VARCHAR,
+    gender_in INT, /* gender and age are always valid thanks to HTML form constraints */
+    age_in INT
+)
+/* Return the error message */
+RETURNS VARCHAR AS $msg$
+DECLARE msg VARCHAR;
+BEGIN
+    /* ID */
+    IF id_in IS NULL THEN
+        msg = 'ID must not be empty!';
+    ELSIF id_in IN (SELECT id FROM miners) THEN
+        msg = 'The input ID already exists!';
+    ELSIF id_in NOT SIMILAR TO '[a-zA-Z0-9_]{1,10}' THEN
+        msg = 'The input ID doesn''t match the valid pattern!';
+    /* password */
+    /* notice that we don't enforce the same constraint to the table,
+       so this is the only chance we check the validation of the password */
+    ELSIF pw_in NOT SIMILAR TO '[a-zA-Z0-9_]{4,16}' THEN
+        msg = 'The input password doesn''t match the valid pattern!';
+    /* name */
+    ELSIF name_in IS NULL THEN
+        msg = 'Name must not be empty!';
+
+    ELSIF CHAR_LENGTH(name_in) > 100 THEN
+        msg = 'The input name is too long!';
+    /* mail */
+    ELSIF (mail_in IS NOT NULL) AND (mail_in NOT LIKE '%@%.%') THEN
+        msg = 'The input email adress is not valid!';
+    /* phone */
+    ELSIF (phone_in IS NOT NULL) AND (phone_in NOT SIMILAR TO '[0-9]{11}') THEN
+        msg = 'The input mobile phone number is not valid!';
+    ELSE
+        INSERT INTO miners VALUES (id_in, MD5(pw_in), name_in, mail_in, phone_in, gender_in, age_in);
+        msg = '';
+    END IF;
+    RETURN msg;
+END;
+$msg$ LANGUAGE plpgsql;
+
+/* Function to check the validation of the profile update information,
+   and update it valid */
+CREATE OR REPLACE FUNCTION update_miners(
+    id_in VARCHAR,
+    old_pw_in VARCHAR,
+    new_pw_in VARCHAR,
+    name_in VARCHAR,
+    mail_in VARCHAR,
+    phone_in VARCHAR,
+    gender_in INT,
+    age_in INT
+)
+/* Return the error message */
+RETURNS VARCHAR AS $msg$
+DECLARE msg VARCHAR;
+BEGIN
+    /* password */
+    IF new_pw_in IS NOT NULL AND old_pw_in IS NULL THEN
+        msg = 'The old password is needed!';
+    ELSIF ((new_pw_in IS NOT NULL) AND (MD5(old_pw_in) <> (SELECT password FROM miners WHERE id=id_in))) THEN
+        msg = 'The old password is not correct!';
+    ELSIF (new_pw_in IS NOT NULL) AND (new_pw_in NOT SIMILAR TO '[a-zA-Z0-9_]{1,16}') THEN
+        msg = 'The new password doesn''t match the valid pattern!';
+    /* name */
+    ELSIF (name_in IS NOT NULL) AND (name_in NOT SIMILAR TO '[a-zA-Z0-9_]{1,10}') THEN
+    ELSIF CHAR_LENGTH(name_in) > 100 THEN
+        msg = 'The input name is too long!';
+    /* mail */
+    ELSIF (mail_in IS NOT NULL) AND (mail_in NOT LIKE '%@%.%') THEN
+        msg = 'The input email adress is not valid!';
+    /* phone */
+    ELSIF (phone_in IS NOT NULL) AND (phone_in NOT SIMILAR TO '[0-9]{11}') THEN
+        msg = 'The input mobile phone number is not valid!';
+    ELSE
+        UPDATE miners
+        SET
+            /* COALESCE returns the first argument that is not null */
+            password = COALESCE(MD5(new_pw_in), password),
+            name = COALESCE(name_in, name),
+            mail = mail_in,
+            phone = phone_in,
+            gender = gender_in,
+            age = age_in
+        WHERE id = id_in;
+        msg = '';
+    END IF;
+    RETURN msg;
+END;
+$msg$ LANGUAGE plpgsql;

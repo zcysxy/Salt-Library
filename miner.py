@@ -25,7 +25,7 @@ def editprofile():
     content = con.query('SELECT * FROM miners where ID = %s', [current_user.__dict__['id']],1)
 
     if request.method == 'POST':
-        name = request.form['name']
+        name = request.form['name'] or None
         mail = request.form['mail'] or None
         phone = request.form['phone'] or None
         gender = request.form['gender']
@@ -35,25 +35,17 @@ def editprofile():
         c_password = request.form['c_password']
 
         newtf = (new_password is not None)
-
-        query = (
-            'UPDATE miners\n' +
-            'SET name=%s, mail=%s, phone=%s, gender=%s, age=%s' +
-            (', password=MD5(%s)' * newtf) +
-            '\nWHERE id = %s;'
-        )
-        values = [name, mail, phone, gender, age, content['id']] + ([new_password] * newtf)
-
         if newtf and (new_password != c_password):
-            flash("Two new passwords don't match!", 'danger')
-
-
-        con = Connect(session['role'], session['db_pw'])
-        con.modify(query, values)
-        # A check function needed here!
+            msg = "Two new passwords don't match!"
+        else:
+            con = Connect(session['role'], session['db_pw'])
+            msg = con.query('SELECT update_miners(%s,%s,%s,%s,%s,%s,%s,%s)',[current_user.id,old_password,new_password,name,mail,phone,gender,age],1)[0]
         
-        flash("Your infomation is updated", "success")
-        return redirect(url_for('miner.editprofile'))
+        if msg:
+            flash(msg,'danger')
+        else:
+            flash("Your infomation is updated", "success")
+            return redirect(url_for('miner.editprofile'))
     
     return render_template('editprofile.html', content=content, options=gender_dicts)
 

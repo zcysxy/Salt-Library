@@ -8,18 +8,19 @@ CREATE TABLE books (
     publish_year INT CHECK(publish_year BETWEEN 0 AND EXTRACT('year' FROM CURRENT_DATE)),
     publish_month INT CHECK(publish_month BETWEEN 1 AND 12),
     price NUMERIC(6,2),
-    rating NUMERIC(4,2) CHECK(0 <= rating AND rating <= 10),
+    u_rating NUMERIC(4,2) CHECK(0 <= u_rating AND u_rating <= 5),
+    u_num INT CHECK(u_num >= 0) DEFAULT 0,
     sold INT CHECK(sold >= 0) DEFAULT 0
 );
 
 /* Users */
 DROP TABLE IF EXISTS miners CASCADE;
 CREATE TABLE miners (
-    ID VARCHAR(10) PRIMARY KEY,
+    ID VARCHAR(10) PRIMARY KEY CHECK(ID SIMILAR TO '[a-zA-Z0-9_]{1,10}'),
     password VARCHAR(200) NOT NULL, -- Using MD5 encryption, thus it's longer
     name VARCHAR(100) NOT NULL,
     mail VARCHAR(100) CHECK((mail IS NULL) OR (mail LIKE '%@%.%')),
-    phone CHAR(11),
+    phone CHAR(11) CHECK((phone IS NULL) OR (phone SIMILAR TO '[0-9]{11}')),
     gender INT CHECK(gender IN (0,1,2)), -- 0 for male, 1 for female, 2 for non-binary
     age INT CHECK(age>0)
 );
@@ -88,5 +89,5 @@ CREATE TABLE review (
 DROP TABLE IF EXISTS rate;
 CREATE TABLE rate (
     mark_id INT PRIMARY KEY REFERENCES marks(mark_id),
-    rating INT CHECK(rating BETWEEN 0 AND 10)
+    rating INT CHECK(rating BETWEEN 0 AND 5)
 );

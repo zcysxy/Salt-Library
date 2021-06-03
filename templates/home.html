@@ -30,23 +30,29 @@
 
 <!-- <hr class="md-5 mt-5"> -->
 
+<div class="m-16">
 <ul class="nav nav-tabs">
     <li class="nav-item">
-        <a class="nav-link active" href="#best" data-toggle="tab">
+        <a class="nav-link active" href="#bs" data-toggle="tab">
             <h4 class="fw-bold">Best Sellers</h4>
         </a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="#all" data-toggle="tab">
+        <a class="nav-link" href="#br" data-toggle="tab">
+            <h4 class="fw-bold">Best Rated</h4>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="#ab" data-toggle="tab">
             <h4 class="fw-bold">All Books</h4>
         </a>
     </li>
 </ul>
+</div>
 
-<div class="tab-content">
-    <div class="tab-pane fade show active" id="best">
-
-        {% for book in books %}
+<div class="tab-content m-16">
+    <div class="tab-pane fade show active" id="bs">
+        {% for book in bs %}
         <a href="/{{ book['isbn']}}">
             <h2>《{{ book['title'] }}》</h2>
         </a>
@@ -59,9 +65,31 @@
         {% endfor %}
     </div>
 
-    <div class="tab-pane fade" id="all">
-        {% for book in all_books %}
-            
+    <div class="tab-pane fade show active" id="br">
+        {% for book in br %}
+        <a href="/{{ book['isbn']}}">
+            <h2>《{{ book['title'] }}》</h2>
+        </a>
+        <span class='badge badge-primary'>ISBN: {{ book['isbn']}}</span>
+        <span class='badge badge-primary'>Author: {{ book['author']}}</span>
+        <span class='badge badge-primary'>Publisher: {{ book['publisher']}}</span>
+        <span class='badge badge-primary'>Publish Date: {{ book['publish_year'] }}-{{ book['publish_month']}}</span>
+        <span class='badge badge-primary bg-warning'>{{ book['sold'] }} <b>SOLD</b></span>
+        <hr>
+        {% endfor %}
+    </div>
+
+    <div class="tab-pane fade show active" id="ab">
+        {% for book in ab %}
+        <a href="/{{ book['isbn']}}">
+            <h2>《{{ book['title'] }}》</h2>
+        </a>
+        <span class='badge badge-primary'>ISBN: {{ book['isbn']}}</span>
+        <span class='badge badge-primary'>Author: {{ book['author']}}</span>
+        <span class='badge badge-primary'>Publisher: {{ book['publisher']}}</span>
+        <span class='badge badge-primary'>Publish Date: {{ book['publish_year'] }}-{{ book['publish_month']}}</span>
+        <span class='badge badge-primary bg-warning'>{{ book['sold'] }} <b>SOLD</b></span>
+        <hr>
         {% endfor %}
     </div>
 </div>

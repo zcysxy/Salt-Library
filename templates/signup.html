@@ -11,7 +11,7 @@
             type="text"
             class="form-control"
             name="id"
-            placeholder="Your login ID, must match regex: [a-z0-9_]{1,10}"
+            placeholder="Your login ID, must match regex: [a-zA-Z0-9_]{1,10}"
             value="{{ request.form['id'] }}">
         </input>
     </div>
@@ -22,7 +22,7 @@
             type="password"
             class="form-control"
             name="password"
-            placeholder="Your login password, must match regex: [a-zA-Z0-9]{1,16}"
+            placeholder="Your login password, must match regex: [a-zA-Z0-9_]{4,16}"
             value="{{ request.form['password'] }}">
         </input>
     </div>
@@ -84,6 +84,8 @@
         <label for="age">Age</label>
         <input
             type="number"
+            step="1"
+            min="1"
             class="form-control"
             name="age"
             placeholder="Valid postive integer age"

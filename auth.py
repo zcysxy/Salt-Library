@@ -51,26 +51,22 @@ def signup():
         ID = request.form['id']
         password = request.form['password']
         c_password = request.form['c_password']
-        name = request.form['name']
-        mail = request.form['mail'] if request.form['mail'] else None
-        phone = request.form['phone']
+        name = request.form['name'] or None
+        mail = request.form['mail'] or None
+        phone = request.form['phone'] or None
         gender = request.form['gender']
         # Since AGE is int type, we need to manually tranform it to None if it's missing
-        age = str(request.form['age']) if request.form['age'] else None
+        age = str(request.form['age']) or None
     
-        #! A lot of check here
-        if not True:
-            pass
+        if password != c_password:
+            msg = "Two passwords don't match!"
         else:
             con = Connect()
-            con.modify(
-                '''
-                INSERT INTO miners VALUES (%s, MD5(%s), %s, %s, %s, %s, %s);
-                ''',
-                (ID, password, name, mail, phone, gender, age)
-            )
-            # A check function needed here!
+            msg = con.query('SELECT insert_miners(%s,%s,%s,%s,%s,%s,%s)',(ID,password,name,mail,phone,gender,age),1)[0]
 
+        if msg:
+            flash(msg,'danger')
+        else:
             return redirect(url_for('auth.login'))
 
     return render_template('signup.html', options=gender_dicts)
