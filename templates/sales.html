@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="py-5 container">
+  <div class="row">
+    <div class="col-md-8">
+      <h1 class="fw-bold">{% block title %} Sales Records {% endblock %}</h1>
+    </div>
+  </div>
+</section>
+
+<section>
+  <form class="form-inline" method="POST">
+    <div class="form-group mx-sm-3 mb-2">
+      <label for="start_date" style="font-weight: bold;">Select the time period: &emsp;</label>
+      <input class="form-control" type="date" name="start_date" value="{{start_date or request.form['start_date']}}" />
+    </div>
+    <div class="form-group mx-sm-3 mb-2">
+      <label for="end_date" style="font-weight: bold;"> to&emsp;&emsp;</label>
+      <input class="form-control" type="date" name="end_date" value="{{end_date or request.form['end_date']}}" />
+    </div>
+    <button type="submit" class="btn btn-primary mb-2">Apply</button>
+    <a href="/sales"><button class="btn btn-warning ml-2 mb-2" formmethod="GET">All Time</button></a>
+  </form>
+</section>
+
+<div class="card mb-3 mt-3">
+  <div class="card-body">
+    <span style="font-weight: bold; font-size: 20pt;">
+      Total sales for this period of time is <span class="badge badge-warning">{{total_sales}}</span>
+    </span>
+  </div>
+</div>
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">Miner ID</th>
+      <th scope="col">Title</th>
+      <th scope="col">Bought Date</th>
+      <th scope="col">Bought Number</th>
+      <th scope="col">Total Price</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for record in records %}
+    <tr>
+      <th scope="row">
+        {{record['id']}}
+      </th>
+      <td><a href="/{{record['isbn']}}">《{{ record['title'] }}》</a></td>
+      <td>{{record['bought_date']}}</td>
+      <td>{{record['bought_num']}}</td>
+      <td>{{record['total_price']}}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}

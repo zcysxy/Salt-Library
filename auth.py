@@ -8,6 +8,7 @@ auth = Blueprint('auth', __name__)
 
 #! To move
 miner_config = {'db_pw': 'miner'}
+curator_config = {'db_pw': 'SaltLibrary'}
 
 @auth.route('/login', methods=['POST', 'GET'])
 def login():
@@ -17,11 +18,16 @@ def login():
         role = request.form.get('role')
 
         if role == 'curator':
-            user = User(ID,  role)
-            login_user(user)
-            session['role'] = role
-            session['db_pw'] = password
-            return redirect('/curator')
+            con = Connect()
+            result = con.query("SELECT password AS pw1, MD5(%s) AS pw2 FROM miners WHERE id = 'curator'", [password], 1)
+            if ID == 'curator' and result['pw1'] == result['pw2']:
+                user = User(ID)
+                login_user(user)
+                session['role'] = role
+                session['db_pw'] = password
+                return redirect('/curator')
+            else:
+                flash("You are not the curator!", "danger")
         else:
             con = Connect()
             result = con.query("SELECT password AS pw1, MD5(%s) AS pw2 FROM miners WHERE id = %s", [password, ID], 1)
@@ -33,7 +39,7 @@ def login():
             else:
                 flash("Successfully login!", "success")
 
-                user = User(ID, role)
+                user = User(ID)
                 login_user(user)
                 session['role'] = 'miner'
                 session['db_pw'] = miner_config['db_pw']

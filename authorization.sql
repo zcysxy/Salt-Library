@@ -4,7 +4,7 @@ CREATE ROLE miner LOGIN PASSWORD 'miner';
 /* Authorization */
 /* Tourist/public privileges */
 GRANT SELECT
-ON books, tag, rate, review
+ON books, tag, rate, review, tag_view, rate_view, review_view
 TO public;
 
 GRANT SELECT
@@ -29,7 +29,7 @@ ON cart
 TO miner;
 
 GRANT SELECT
-ON marks, buy, tag, request, requested_books
+ON marks, buy, tag, request, requested_books, mark_book_view, buy_view
 TO miner;
 
 GRANT USAGE, SELECT
@@ -42,4 +42,8 @@ TO miner;
 
 GRANT DELETE
 ON tag, rate, review
+TO miner;
+
+GRANT UPDATE (u_rating, u_num)
+ON books
 TO miner;

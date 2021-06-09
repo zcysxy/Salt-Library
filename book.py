@@ -58,7 +58,7 @@ def book_info(isbn):
     content = get_book(isbn)
     
     # Tag state
-    if current_user.is_authenticated:
+    if current_user.is_authenticated and session['role'] == 'miner':
         con = Connect(session['role'], session['db_pw'])
         tag_state = con.query(
             '''
@@ -79,11 +79,7 @@ def book_info(isbn):
     tag_stat = np.array(con.query(
         '''
         SELECT tag_state, COUNT(*)
-        FROM tag NATURAL JOIN (
-            SELECT mark_id
-            FROM marks
-            WHERE isbn = %s AND operation = 2
-        ) AS r
+        FROM (SELECT tag_state FROM tag_view WHERE isbn=%s) AS r
         GROUP BY tag_state
         ''',
         [str(isbn)]
@@ -91,7 +87,7 @@ def book_info(isbn):
     tag_stat = dict((int(tag_stat[i,0]), tag_stat[i,1]) for i in range(tag_stat.shape[0]))
 
     # Your rating
-    if current_user.is_authenticated:
+    if current_user.is_authenticated and session['role'] == 'miner':
         con = Connect(session['role'], session['db_pw'])
         rating = con.query(
             '''
@@ -105,35 +101,16 @@ def book_info(isbn):
             [str(isbn),current_user.id], 1
         )
     else:
-        tag_state = None
-
-    # User rating
-    con = Connect()
-    u_rating = con.query(
-        '''
-        SELECT AVG(rating) AS avg_u_rating, COUNT(*) AS u_num
-        FROM rate NATURAL JOIN (
-            SELECT mark_id
-            FROM marks
-            WHERE isbn = %s AND operation = 4
-        ) AS r
-        ''',
-        [str(isbn)], 1
-    )
-    if u_rating['u_num'] == 0:
-        u_rating = None
+        rating = None
 
     # Your review
-    if current_user.is_authenticated:
+    if current_user.is_authenticated and session['role'] == 'miner':
         con = Connect(session['role'], session['db_pw'])
         review = con.query(
             '''
-            SELECT content, DATE(mark_time) AS review_date
-            FROM review NATURAL JOIN marks
-            WHERE
-                operation = 3 AND
-                isbn = %s AND
-                id = %s
+            SELECT content, review_date
+            FROM review_view
+            WHERE isbn = %s AND id = %s
             ''',
             [str(isbn),current_user.id], 1
         )
@@ -144,12 +121,9 @@ def book_info(isbn):
     con = Connect()
     u_reviews = con.query(
         '''
-        SELECT content, id, DATE(mark_time) AS review_date
-        FROM review NATURAL JOIN (
-            SELECT mark_id, id, mark_time
-            FROM marks
-            WHERE isbn = %s AND operation = 3
-        ) AS r
+        SELECT content, id, review_date
+        FROM review_view
+        WHERE isbn = %s
         ORDER BY review_date DESC
         ''',
         [str(isbn)]
@@ -161,7 +135,6 @@ def book_info(isbn):
         tag_state = tag_state,
         tag_stat = tag_stat,
         rating = rating,
-        u_rating = u_rating,
         review = review,
         u_reviews = u_reviews
     )
@@ -250,6 +223,10 @@ def ad_search():
             author = '%' + '%'.join(request.form['author']) + '%'
             query = query + ' author LIKE %s AND'
             value_list.append(author)
+        if request.form['publisher']:
+            publisher = '%' + '%'.join(request.form['publisher']) + '%'
+            query = query + ' publisher LIKE %s AND'
+            value_list.append(publisher)
         if request.form['publish_year']:
             publish_year = request.form['publish_year']
             query = query + ' publish_year = %s AND'
@@ -267,7 +244,7 @@ def ad_search():
             query = query + ' price <= %s AND'
             value_list.append(price_max)
 
-        query = query + ' 1 = 1'
+        query = query + ' 1 = 1' # To close the predicate
 
         con = Connect()
         rows = con.query(query, value_list)
@@ -277,7 +254,16 @@ def ad_search():
     return render_template('ad_search.html', result=[])
 
 @book.route('/newbook/', methods=('GET','POST'))
-def newbook():
+@book.route('/newbook/<int:isbn>', methods=('GET','POST'))
+@login_required
+@role_required('curator')
+def newbook(isbn=None):
+    if isbn:
+        con = Connect(session['role'], session['db_pw'])
+        content = con.query('SELECT * FROM requested_books WHERE isbn = %s', [str(isbn)],1)
+    else:
+        content = {}
+
     if request.method == 'POST':
         isbn = request.form['isbn']
         title = request.form['title']
@@ -292,7 +278,7 @@ def newbook():
         elif not title:
             flash('Title is required!', category="danger")
         else:
-            con = Connect()
+            con = Connect(session['role'], session['db_pw'])
             con.modify(
                 '''
                 INSERT INTO books VALUES (%s, %s, %s, %s, %s, %s, %s);
@@ -301,11 +287,13 @@ def newbook():
             )
             # A check function needed here!
         
-            return redirect(url_for('home'))
+            return redirect(url_for('book.home'))
 
-    return render_template('newbook.html')
+    return render_template('newbook.html', content=content)
 
 @book.route('/<int:isbn>/edit', methods=('GET', 'POST'))
+@login_required
+@role_required('curator')
 def editbook(isbn):
     content = get_book(isbn)
 
@@ -349,32 +337,24 @@ def requestbook():
         title = request.form['title']
         author = request.form['author']
         publisher = request.form['publisher']
-        publish_year = request.form['publish_year']
-        publish_month = request.form['publish_month']
-        price = request.form['price']
+        publish_year = request.form['publish_year'] or None
+        publish_month = request.form['publish_month'] or None
+        price = request.form['price'] or None
     
         if not isbn:
             flash('ISBN is required!', category="danger")
         elif not title:
             flash('Title is required!', category="danger")
         else:
-            con = Connect(session['role'],session['db_pw'], transaction=True)
-            con.modify(
-                '''
-                INSERT INTO requested_books VALUES (%s, %s, %s, %s, %s, %s, %s);
-                ''',
-                (isbn, title, author, publisher, publish_year, publish_month, price)
-            )
+            con = Connect(session['role'],session['db_pw'])
+            msg = con.query(
+                'SELECT insert_request(%s,%s,%s,%s,%s,%s,%s,%s)',
+                [current_user.id,isbn,title,author,publisher,publish_year,publish_month,price],
+                1
+            )[0]
 
-            con.modify(
-                '''
-                INSERT INTO request VALUES (%s, %s, CURRENT_TIMESTAMP, 1)
-                ''',
-                [isbn, current_user.id]
-            )
-            con.cc()
-            # A check function needed here!
-        
+            flash(msg, 'success')
+
             return redirect(url_for('miner.mylibrary'))
 
     return render_template('requestbook.html')
@@ -382,10 +362,12 @@ def requestbook():
 # POST only makes that navigating to the page raise an error,
 # since web browser default to GET requests
 @book.route('/<int:isbn>/delete', methods=('POST',))
+@login_required
+@role_required('curator')
 def deletebook(isbn):
     title = get_book(isbn)['title']
 
-    con = Connect()
+    con = Connect(session['role'], session['db_pw'])
     con.modify('DELETE FROM books WHERE isbn=%s', [str(isbn)])
     print('DELETE SUCCESS')
     
@@ -405,3 +387,7 @@ def add2chart(isbn):
     flash('The book is added to your chart!', 'success')
 
     return redirect('/%d' % isbn)
+
+@book.route('/test')
+def test():
+    return render_template('test.html')

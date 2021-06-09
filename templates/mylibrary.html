@@ -8,10 +8,7 @@
 <section>    
     <ul class="nav nav-tabs">
         <li class="nav-item">
-            <a class="nav-link active" href="#activities" data-toggle="tab">Activities</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#owned" data-toggle="tab">Owned Books</a>
+            <a class="nav-link active" href="#owned" data-toggle="tab">Owned Books</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="#toread" data-toggle="tab">To Read</a>
@@ -30,12 +27,8 @@
         </li>
     </ul>
     
-    <div class="tab-content">
-        <div class="tab-pane fade show active" id="activities">
-            <p>ACTIVITIES</p>
-        </div>
-    
-        <div class="tab-pane fade" id="owned">
+    <div class="tab-content">    
+        <div class="tab-pane fade show active" id="owned">
             <h3>Your Owned Books</h3>
             {% if owned %}
             {% for book in owned %}
@@ -126,20 +119,25 @@
             {% endif %}
         </div>
         <div class="tab-pane fade" id="request">
-            <h3>Your Requested Books</h3>
+            <h3>Your Requested Books (ISBN)</h3>
             {% if request %}
             {% for book in request %}
+            {% if book['request_state'] == 1 %}
+            <h3>{{ book['isbn'] }}</h3>
+            {% elif book['request_state'] == 2 %}
             <a href="/{{ book['isbn'] }}">
-                <h2>《{{ book['title'] }}》</h2>
+                <h3>{{ book['isbn'] }}</h3>
             </a>
+            {% elif book['request_state'] == 3 %}
+            <span style="color: gray;"><s><h3>{{ book['isbn'] }}</h3></s></span>
+            {% endif %}
             <span class='badge badge-{{('warning' if book['request_state']==1) or ('success' if book['request_state']==2) or ('danger' if book['request_state']==3)}}'>
                 State: {{('pending' if book['request_state']==1) or ('added' if book['request_state']==2) or ('turned down' if book['request_state']==3)}}
             </span>
             <span class='badge badge-info'>requested time: {{ book['request_date']}}</span>
-            <span class='badge badge-primary'>ISBN: {{ book['isbn']}}</span>
-            <span class='badge badge-primary'>Author: {{ book['author']}}</span>
-            <span class='badge badge-primary'>Publisher: {{ book['publisher']}}</span>
-            <span class='badge badge-primary'>Publish Date: {{ book['publish_year'] }}-{{ book['publish_month']}}</span>
+            {% if book['title'] %}
+            <span class='badge badge-primary'>Title: 《{{ book['title']}}》</span>
+            {% endif %}
             <hr>
             {% endfor %}
             {% else %}
@@ -148,7 +146,7 @@
         </div>
     </div>
     
-    </section>
+</section>
     
 
 {% endblock %}

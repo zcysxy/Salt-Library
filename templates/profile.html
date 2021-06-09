@@ -2,29 +2,90 @@
 
 {% block content %}
 <h1 class="title">
-    Welcome, {{ profile['name'] }}!
+  Welcome, {{ profile['name'] }}!
 </h1>
 
-<a href="{{url_for('miner.cart')}}">
-    <button type="button" class="btn btn-warning">Your Cart</button>
-</a>
-
-<a href="{{url_for('miner.editprofile')}}">
-    <button type="button" class="btn btn-primary">Edit Profile</button>
-</a>
-
-<a href="{{url_for('auth.logout')}}">
-    <button class="btn btn-danger">Log out</button>
-</a>
-
-<a href="{{url_for('miner.mylibrary')}}">
-    <button class="btn btn-success">My Library</button>
-</a>
-
-<a href="{{url_for('book.requestbook')}}">
-    <button type="button" class="btn btn-info">Request a book</button>
-</a>
+<!-- Buttons -->
+<section>
+  <div class="row">
+    <div class="col">
+      <a href="{{url_for('miner.cart')}}">
+        <button type="button" class="btn btn-block btn-lg btn-warning">Your Cart</button>
+      </a>
+    </div>
+    <div class="col">
+      <a href="{{url_for('miner.editprofile')}}">
+        <button type="button" class="btn btn-block btn-lg btn-primary">Edit Profile</button>
+      </a>
+    </div>
+    <div class="col">
+      <a href="{{url_for('miner.mylibrary')}}">
+        <button class="btn btn-block btn-lg btn-success">My Library</button>
+      </a>
+    </div>
+    <div class="col">
+      <a href="{{url_for('book.requestbook')}}">
+        <button type="button" class="btn btn-block btn-lg btn-info">Request a book</button>
+      </a>
+    </div>
+    <div class="col">
+      <a href="{{url_for('auth.logout')}}">
+        <button class="btn btn-block btn-lg btn-danger">Log out</button>
+      </a>
+    </div>
+  </div>
+</section>
 
 <hr>
+
+<!-- Activities -->
+<section>
+  <h2 class="title">Your Activities</h2>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">Miner ID</th>
+        <th scope="col">Name</th>
+        <th scope="col">Email</th>
+        <th scope="col">Phone</th>
+        <th scope="col">Gender</th>
+        <th scope="col">Age</th>
+        <th scope="col">Registration Date</th>
+        <th scope="col">Active Index</th>
+        <th scope="col">Consumption</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for act in acts %}
+      <tr>
+        <th scope="row">{{ miner['id'] }}</th>
+        <td>{{ miner['name'] }}</td>
+        <td>{{ miner['mail'] if miner['mail'] }}</td>
+        <td>{{ miner['phone'] if miner['phone'] }}</td>
+        <td>{{ ('Male' if miner['gender']==0) or ('Female' if miner['gender']==1) or ('Non-binary' if
+          miner['gender']==2)}}</td>
+        <td>{{ miner['age'] if miner['age'] }}</td>
+        <td>{{ miner['reg_date'] if miner['reg_date'] }}</td>
+        <td>{{ miner['active_index'] }}</td>
+        <td>{{ miner['consumption'] }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  {% for act in acts %}
+  <div class="card mb-3">
+    <div class="card-body">
+      <span style="font-size: 16pt; font-weight: bold;">You <span class="badge badge-warning">{{
+          act['operation_name'] }}</span> the book <a href="/{{act['isbn']}}"><span class="badge badge-primary">《{{
+            act['title'] }}》</span></a> on <span class="badge badge-success">{{ act['mark_date'] }}</span>.</span>
+    </div>
+  </div>
+  {% endfor %}
+  {% else %}
+  <blockquote>You haven't done anything. Go do some!</blockquote>
+  {% endif %}
+
+</section>
 
 {% endblock %}

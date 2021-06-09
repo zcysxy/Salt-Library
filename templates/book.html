@@ -4,7 +4,7 @@
 
 <h1 style="margin: 1em;">{% block title %} 《{{ content['title'] }}》 {% endblock %}</h1>
 
-<!-- Book Infor -->
+<!-- Book Info -->
 <section>
   <div style="margin-top: 2em; margin-bottom: 2em;">
     <ul class="list-group">
@@ -18,8 +18,8 @@
 </section>
 
 <!-- Curator operations -->
+{% if session['role'] == 'curator' %}
 <section>
-  {% if session['role'] == 'curator' %}
   <div style="display: inline;">
     <a href="/{{ content['isbn'] }}/edit">
       <button type="button" class="btn btn-primary">EDIT</button>
@@ -36,9 +36,10 @@
 
 <hr>
 
-<!-- Add to cart-->
+<!-- Cart-->
+{% if session['role'] != 'curator' %}
 <section>
-  <form action="{{ url_for('book.add2chart', isbn=content['isbn']) }}" class="form-inline" style="display: inline;">
+  <form action="{{ url_for('book.add2chart', isbn=content['isbn']) }}" class="form-inline" style="display: inline; float: left;">
     <div class="input-group form-inline" style="width: 12em">
       <input type="number" class="form-control ml-1" min="1" name="num" value="{{ 1 or request.form['num'] }}">
       <div class="input-group-append" style="display: inline;">
@@ -48,13 +49,22 @@
       </div>
     </div>
   </form>
+
+  <a href="{{url_for('miner.cart')}}">
+  <button class="btn btn-warning ml-2" style="display: inline;">
+    My Cart
+  </button>
+  </a>
 </section>
 
 <hr>
+{% endif %}
 
 <!-- Tag -->
 <section>
   <h2 class="mb-4 mt-4">Tag it!</h2>
+
+  {% if session['role'] != 'curator' %}
   <form style="display: inline;">
     <input type="submit" class="btn {{('btn-warning' if tag_state['tag_state']==1) or 'btn-outline-warning' }}"
       formaction="{{ url_for('book.tag', isbn=content['isbn']) }}" formmethod="POST" name="tag" value="To Read">
@@ -63,9 +73,10 @@
     <input type="submit" class="btn {{('btn-success' if tag_state['tag_state']==3) or 'btn-outline-success' }}"
       formaction="{{ url_for('book.tag', isbn=content['isbn']) }}" formmethod="POST" name="tag" value="Read">
   </form><br>
+  {% endif %}
 
   <ul class="list-group ml-4">
-    {% if current_user.is_authenticated %}
+    {% if current_user.is_authenticated and session['role'] != 'curator' %}
     {% if tag_state['tag_state']==1 %}
     <li> You have been wanted to read this book since <span class="badge badge-warning">{{tag_state['tag_date']}}</span>
     </li>
@@ -87,7 +98,7 @@
 <section>
   <h2 class="mt-4" style="width: 100%;">Rate it!</h2>
 
-  {% if not rating %}
+  {% if not rating and session['role'] != 'curator' %}
   <div class="m-4">
     <b>Your Rating:&emsp;</b>
     <form class="rating">
@@ -210,55 +221,55 @@
   </div>
   {% endif %}
 
-  {% if u_rating %}
+  {% if content['u_rating'] %}
   <div class="m-4" style="clear: both;">
     <b>User Rating:&emsp;</b>
-    {% if u_rating['avg_u_rating'] <= 0.25 %} <span class="fa fa-star"></span>
+    {% if content['u_rating'] <= 0.25 %} <span class="fa fa-star"></span>
       <span class="fa fa-star"></span>
       <span class="fa fa-star"></span>
       <span class="fa fa-star"></span>
       <span class="fa fa-star"></span>
-      {% elif u_rating['avg_u_rating'] <= 0.75 %} <span class="fa fa-star-half-o checked"></span>
+      {% elif content['u_rating'] <= 0.75 %} <span class="fa fa-star-half-o checked"></span>
         <span class="fa fa-star"></span>
         <span class="fa fa-star"></span>
         <span class="fa fa-star"></span>
         <span class="fa fa-star"></span>
-        {% elif u_rating['avg_u_rating'] <= 1.25 %} <span class="fa fa-star checked"></span>
+        {% elif content['u_rating'] <= 1.25 %} <span class="fa fa-star checked"></span>
           <span class="fa fa-star"></span>
           <span class="fa fa-star"></span>
           <span class="fa fa-star"></span>
           <span class="fa fa-star"></span>
-          {% elif u_rating['avg_u_rating'] <= 1.75 %} <span class="fa fa-star checked"></span>
+          {% elif content['u_rating'] <= 1.75 %} <span class="fa fa-star checked"></span>
             <span class="fa fa-star-half-o checked"></span>
             <span class="fa fa-star"></span>
             <span class="fa fa-star"></span>
             <span class="fa fa-star"></span>
-            {% elif u_rating['avg_u_rating'] <= 2.25 %} <span class="fa fa-star checked"></span>
+            {% elif content['u_rating'] <= 2.25 %} <span class="fa fa-star checked"></span>
               <span class="fa fa-star checked"></span>
               <span class="fa fa-star"></span>
               <span class="fa fa-star"></span>
               <span class="fa fa-star"></span>
-              {% elif u_rating['avg_u_rating'] <= 2.75 %} <span class="fa fa-star checked"></span>
+              {% elif content['u_rating'] <= 2.75 %} <span class="fa fa-star checked"></span>
                 <span class="fa fa-star checked"></span>
                 <span class="fa fa-star-half-o checked"></span>
                 <span class="fa fa-star"></span>
                 <span class="fa fa-star"></span>
-                {% elif u_rating['avg_u_rating'] <= 3.25 %} <span class="fa fa-star checked"></span>
+                {% elif content['u_rating'] <= 3.25 %} <span class="fa fa-star checked"></span>
                   <span class="fa fa-star checked"></span>
                   <span class="fa fa-star checked"></span>
                   <span class="fa fa-star"></span>
                   <span class="fa fa-star"></span>
-                  {% elif u_rating['avg_u_rating'] <= 3.75 %} <span class="fa fa-star checked"></span>
+                  {% elif content['u_rating'] <= 3.75 %} <span class="fa fa-star checked"></span>
                     <span class="fa fa-star checked"></span>
                     <span class="fa fa-star checked"></span>
                     <span class="fa fa-star-half-o checked"></span>
                     <span class="fa fa-star"></span>
-                    {% elif u_rating['avg_u_rating'] <= 4.25 %} <span class="fa fa-star checked"></span>
+                    {% elif content['u_rating'] <= 4.25 %} <span class="fa fa-star checked"></span>
                       <span class="fa fa-star checked"></span>
                       <span class="fa fa-star checked"></span>
                       <span class="fa fa-star checked"></span>
                       <span class="fa fa-star"></span>
-                      {% elif u_rating['avg_u_rating'] <= 4.75 %} <span class="fa fa-star checked"></span>
+                      {% elif content['u_rating'] <= 4.75 %} <span class="fa fa-star checked"></span>
                         <span class="fa fa-star checked"></span>
                         <span class="fa fa-star checked"></span>
                         <span class="fa fa-star checked"></span>
@@ -272,8 +283,8 @@
                         {% endif %}
   </div>
 
-  <p class="ml-4 h5"><span class="badge badge-warning"><b>{{ '%.2f'|format(u_rating['avg_u_rating']) }}</b></span>
-    average score based on <span class="badge badge-primary">{{ u_rating['u_num'] }}</span> user ratings.</p>
+  <p class="ml-4 h5"><span class="badge badge-warning"><b>{{ content['u_rating'] }}</b></span>
+    average score based on <span class="badge badge-primary">{{ content['u_num'] }}</span> user ratings.</p>
   {% else %}
   <div class="m-4" style="clear: both;">
   <b><i>No User Rating</i></b>
@@ -348,7 +359,7 @@
 <section>
   <h2 class="mb-4 mt-4">Review it!</h2>
 
-  {% if not review %}
+  {% if not review and session['role'] != 'curator' %}
   <form class="form" method="POST">
     <div class="form-group">
       <label for="review"><b> Your Review </b></label>

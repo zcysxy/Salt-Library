@@ -18,6 +18,10 @@ app.register_blueprint(book_blueprint)
 from miner import miner as miner_blueprint
 app.register_blueprint(miner_blueprint)
 
+# blueprint for curator parts of app
+from curator import curator as curator_blueprint
+app.register_blueprint(curator_blueprint)
+
 login_manager = LoginManager()
 login_manager.login_view = 'auth.login'
 login_manager.login_message = "You need to be logged in to view that page!"

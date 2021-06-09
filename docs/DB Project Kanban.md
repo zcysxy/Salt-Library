@@ -7,7 +7,6 @@ kanban-plugin: basic
 ## Time Points
 
 - [ ] DEADLINE #❗❗❗ @{2021-06-10}
-- [ ] Database Design #❗❗ @{2021-05-28}
 - [ ] Runnable App @{2021-05-31}
 - [ ] Debug @{2021-06-02}
 - [ ] Fine Tune & Better UI @{2021-06-04}
@@ -17,23 +16,30 @@ kanban-plugin: basic
 ## Todo
 
 - [ ] Roles management #hard
-- [ ] Return value without redirect
-- [ ] Python separate script for database operations
 - [ ] Extensibility: a real enjoyable personal database #later
-- [ ] Deployment? Standalone app and independent database? #question
-- [ ] Textbook chapter Application #imp
 - [ ] [[E-R Diagram]] drawing #later
 - [ ] Textbook dynamic & embedded SQL
+- [ ] revise all input forms
+- [ ] check all the can-be-null attributes (like publish_month)
+- [ ] Textbook chapter Application #imp
+- [ ] Book check function #imp
 
 
 ## In Progress
 
-- [ ] Diff sites' state for diff users #hard
+- [ ] miner activities
+- [ ] uniform book card
 
 
 ## Done
 
 **Complete**
+- [x] Database Design #❗❗ @{2021-05-28}
+- [x] Return value without redirect
+- [x] Python separate script for database operations
+- [x] Diff sites' state for diff users #hard
+- [x] curator panel
+- [x] Deployment? Standalone app and independent database? #question
 
 
 ## Maybe
@@ -44,6 +50,7 @@ kanban-plugin: basic
 - [ ] Different ordering
 - [ ] Skip to result (not the start of the page)
 - [ ] Remove part of the books in cart
+- [ ] curator manage miners activities
 
 
 ***

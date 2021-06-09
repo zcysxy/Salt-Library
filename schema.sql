@@ -22,16 +22,17 @@ CREATE TABLE miners (
     mail VARCHAR(100) CHECK((mail IS NULL) OR (mail LIKE '%@%.%')),
     phone CHAR(11) CHECK((phone IS NULL) OR (phone SIMILAR TO '[0-9]{11}')),
     gender INT CHECK(gender IN (0,1,2)), -- 0 for male, 1 for female, 2 for non-binary
-    age INT CHECK(age>0)
+    age INT CHECK(age>0),
+    reg_date DATE NOT NULL DEFAULT CURRENT_DATE
 );
 
-/* Add initial miners - curator & tourist - to the miners table */
--- INSERT INTO miners VALUES ('00000', 'SaltLibrary', 'iodin', 'salt@library.com', 13620209723, 2, 18);
+/* Add initial miner - curator */
+INSERT INTO miners VALUES ('curator', MD5('SaltLibrary'), 'iodin', 'salt@library.com', 13620209723, 2, 18);
 
 /* Book requests */
 DROP TABLE IF EXISTS requested_books;
 CREATE TABLE requested_books (
-    ISBN CHAR(13) PRIMARY KEY,
+    ISBN CHAR(13) REFERENCES request(ISBN),
     title VARCHAR(100) NOT NULL,
     author VARCHAR(100),
     publisher VARCHAR(100),
@@ -42,7 +43,7 @@ CREATE TABLE requested_books (
 
 DROP TABLE IF EXISTS request;
 CREATE TABLE request (
-    ISBN CHAR(13) REFERENCES requested_books(ISBN),
+    ISBN CHAR(13) NOT NULL UNIQUE,
     ID VARCHAR(10) REFERENCES miners(ID),
     request_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     request_state INT CHECK(request_state IN (1,2,3)), /* 1 for pending, 2 for added, 3 for turned down */

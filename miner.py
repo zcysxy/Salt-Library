@@ -13,7 +13,14 @@ miner = Blueprint('miner', __name__)
 @login_required
 @role_required('miner')
 def profile():
-    return render_template('profile.html', profile=current_user, session_infor=session)
+    con = Connect(session['role'], session['db_pw'], transaction=True)
+    acts = con.query('SELECT * FROM mark_book_view WHERE id = %s;', [current_user.id])
+    
+    return render_template(
+        'profile.html', 
+        profile = current_user,
+        acts=acts
+    )
 
 @miner.route('/editprofile/', methods=('GET', 'POST'))
 @login_required
@@ -59,7 +66,7 @@ def cart():
         SELECT isbn, title, price, cart_num
         FROM books NATURAL JOIN (SELECT isbn, cart_num FROM cart WHERE id = %s) AS mycart
         ''',
-        [current_user.__dict__['id']]
+        [current_user.id]
     )
     
     if content:
@@ -146,8 +153,8 @@ def mylibrary():
     # Request
     request = con.query(
         '''
-        SELECT requested_books.*, DATE(request_time) AS request_date, request_time
-        FROM request NATURAL JOIN requested_books
+        SELECT request_state, DATE(request_time) AS request_date, isbn, title, request_time
+        FROM request NATURAL LEFT OUTER JOIN requested_books
         WHERE id=%s
         ORDER BY request_time DESC
         ''',

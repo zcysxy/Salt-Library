@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="py-5 container">
+  <div class="row">
+    <div class="col-md-8">
+      <h1 class="fw-bold">{% block title %} Requests {% endblock %}</h1>
+    </div>
+  </div>
+</section>
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">Title</th>
+      <th scope="col">ISBN</th>
+      <th scope="col">Author</th>
+      <th scope="col">Publisher</th>
+      <th scope="col">Publish Date</th>
+      <th scope="col">Price</th>
+      <th scope="col">Operation</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for book in requests %}
+    <tr>
+      <th scope="row">
+        《{{ book['title'] }}》
+      </th>
+      <td>{{book['isbn']}}</td>
+      <td>{{book['author']}}</td>
+      <td>{{book['publisher']}}</td>
+      <td>{{book['publish_year']}}-{{book['publish_month']}}</td>
+      <td>{{book['price']}}</td>
+      <td>
+        <form style="display: inline;">
+          <button type="submit" class="btn btn-success" formaction="{{url_for('curator.add_request',isbn=book['isbn'])}}"
+            formmethod="POST" onclick="return confirm('Are you sure you want to add this book to the library?')">
+            Add
+          </button>
+        </form>
+        <a href="/newbook/{{book['isbn']}}"><button class="btn btn-primary">
+            Edit
+          </button></a>
+        <form style="display: inline;">
+          <button type="submit" class="btn btn-danger"
+            formaction="{{ url_for('curator.turndown', isbn=book['isbn']) }}" formmethod="POST"
+            onclick="return confirm('Are you sure you want to turn down this request?')">
+            Delete
+          </button>
+        </form>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}

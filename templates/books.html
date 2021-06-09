@@ -1,0 +1,133 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="py-5 container">
+  <div class="row">
+    <div class="col-md-8">
+      <h1 class="fw-bold">{% block title %} Manage Books {% endblock %}</h1>
+    </div>
+  </div>
+</section>
+
+<input class="ml-3 my-3 btn btn-primary" type="button" value="Advanced Filters" onclick="showDiv()" />
+
+<div id="hiddenDiv" style="display: none;">
+  <form method="post">
+    <div class="form-group">
+      <label for="title">Title</label>
+      <input type="text" name="title" placeholder="Book title" class="form-control"
+        value="{{ request.form['title'] }}"></input>
+    </div>
+
+    <div class="form-group">
+      <label for="isbn">ISBN</label>
+      <input type="text" name="isbn" placeholder="13 digit ISBN" class="form-control"
+        value="{{ request.form['isbn'] }}">
+      </input>
+    </div>
+
+    <div class="form-group">
+      <label for="author">Author</label>
+      <input type="text" name="author" placeholder="The author of the book" class="form-control"
+        value="{{ request.form['author'] }}">
+      </input>
+    </div>
+
+    <div class="form-group">
+      <label for="publisher">Publisher</label>
+      <input type="text" name="publisher" placeholder="The publisher of the book" class="form-control"
+        value="{{ request.form['publisher'] }}">
+      </input>
+    </div>
+
+    <div class="form-group" style="float: left;">
+      <label for="publsh_date">Publish Date</label>
+      <input type="text" name="publish_year" placeholder="Publish year" class="form-control"
+        value="{{ request.form['publish_year'] }}">
+      </input>
+    </div>
+    <div class="form-group" style="float: left;padding-left: 5px;">
+      <label>&nbsp;</label>
+      <input type="text" name="publish_month" placeholder="Publish month" class="form-control"
+        value="{{ request.form['publish_month'] }}">
+      </input>
+    </div>
+
+    <div style="clear: both;"></div>
+
+    <div class="form-group" style="float: left;">
+      <label for="publsh_date">Price Range</label>
+      <input type="number" name="price_min" placeholder="Price lower bound" class="form-control"
+        value="{{ request.form['price_min'] }}">
+      </input>
+    </div>
+    <div class="form-group" style="float: left;padding-left: 5px;">
+      <label>&nbsp;</label>
+      <input type="number" name="price_max" placeholder="Price upper bound" class="form-control"
+        value="{{ request.form['price_max'] }}">
+      </input>
+    </div>
+
+    <div style="clear: both;"></div>
+
+    <div class="form-group">
+      <button type="submit" class="btn btn-primary">Apply</button>
+    </div>
+  </form>
+</div>
+
+<div class="card mb-3 mt-3">
+  <div class="card-body">
+    <span style="font-weight: bold; font-size: 20pt;">
+      {% if request.form %}
+        There are <span class="badge badge-warning">{{book_num}}</span> books in the library satisfying such filter.
+      {% else %}
+        There are <span class="badge badge-warning">{{book_num}}</span> books in the library! 
+      {% endif %}
+    </span>
+  </div>
+</div>
+
+<table class="table table-hover" style="font-size: 10pt;">
+  <thead>
+    <tr>
+      <th scope="col">Title</th>
+      <th scope="col">ISBN</th>
+      <th scope="col">Author</th>
+      <th scope="col">Publisher</th>
+      <th scope="col">Publish Date</th>
+      <th scope="col">Price</th>
+      <th scope="col">Number Sold</th>
+      <th scope="col">User Rating</th>
+      <th scope="col">Operation</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for book in rows %}
+    <tr>
+      <th scope="row"><a href="/{{book['isbn']}}">《{{ book['title'] }}》</a></th>
+      <td>{{ book['isbn'] }}</td>
+      <td>{{ book['author'] if book['author'] }}</td>
+      <td>{{ book['publisher'] if book['publisher'] }}</td>
+      <td>{{ book['publish_year'] if book['publish_year'] }}{{("-" + book['publish_month']|string) if book['publish_month']}}
+      </td>
+      <td>{{ book['price'] if book['price'] }}</td>
+      <td>{{ book['sold'] }}</td>
+      <td>{{ book['u_rating'] if book['u_rating'] }}</td>
+      <td>
+        <form method="POST" class="form-inline">
+        <a href="/{{book['isbn']}}/edit"><button class="btn btn-primary" style="display: inline;">
+            Edit
+          </button></a>
+        <button type="submit" class="btn btn-danger ml-1" formaction="{{ url_for('book.deletebook', isbn=book['isbn']) }}"
+          formmethod="POST" onclick="return confirm('Are you sure you want to delete this book?')">
+          Delete
+        </button>
+        </form>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}

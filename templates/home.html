@@ -65,7 +65,7 @@
         {% endfor %}
     </div>
 
-    <div class="tab-pane fade show active" id="br">
+    <div class="tab-pane fade" id="br">
         {% for book in br %}
         <a href="/{{ book['isbn']}}">
             <h2>《{{ book['title'] }}》</h2>
@@ -74,12 +74,12 @@
         <span class='badge badge-primary'>Author: {{ book['author']}}</span>
         <span class='badge badge-primary'>Publisher: {{ book['publisher']}}</span>
         <span class='badge badge-primary'>Publish Date: {{ book['publish_year'] }}-{{ book['publish_month']}}</span>
-        <span class='badge badge-primary bg-warning'>{{ book['sold'] }} <b>SOLD</b></span>
+        <span class='badge badge-primary bg-warning'><b>USER RATING:</b> {{ book['u_rating'] }}</span>
         <hr>
         {% endfor %}
     </div>
 
-    <div class="tab-pane fade show active" id="ab">
+    <div class="tab-pane fade" id="ab">
         {% for book in ab %}
         <a href="/{{ book['isbn']}}">
             <h2>《{{ book['title'] }}》</h2>
@@ -88,7 +88,7 @@
         <span class='badge badge-primary'>Author: {{ book['author']}}</span>
         <span class='badge badge-primary'>Publisher: {{ book['publisher']}}</span>
         <span class='badge badge-primary'>Publish Date: {{ book['publish_year'] }}-{{ book['publish_month']}}</span>
-        <span class='badge badge-primary bg-warning'>{{ book['sold'] }} <b>SOLD</b></span>
+        <!-- <span class='badge badge-primary bg-warning'>{{ book['sold'] }} <b>SOLD</b></span> -->
         <hr>
         {% endfor %}
     </div>

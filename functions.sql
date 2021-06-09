@@ -1,6 +1,8 @@
-/* Function to change the tag,
-   and check if the miner has bought the book
-   before they tag it reading or read */
+/**
+ * Function to change the tag,
+ * and check if the miner has bought the book
+ * before they tag it reading or read
+ */
 CREATE OR REPLACE FUNCTION change_tag(
     isbn_in CHAR(13),
     id_in VARCHAR,
@@ -34,8 +36,10 @@ BEGIN
 END;
 $msg$ LANGUAGE plpgsql;
 
-/* Function to change the rating,
-   and check if the miner has read the book */
+/**
+ * Function to change the rating,
+ * and check if the miner has read the book
+ */
 CREATE OR REPLACE FUNCTION change_rating(
     isbn_in CHAR(13),
     id_in VARCHAR,
@@ -61,8 +65,10 @@ BEGIN
 END;
 $msg$ LANGUAGE plpgsql;
 
-/* Function to change the review,
-   and check if the miner has read the book */
+/**
+ * Function to change the review,
+ * and check if the miner has read the book
+ */
 CREATE OR REPLACE FUNCTION change_review(
     isbn_in CHAR(13),
     id_in VARCHAR,
@@ -88,8 +94,10 @@ BEGIN
 END;
 $msg$ LANGUAGE plpgsql;
 
-/* Function to check the validation of the sign up information,
-   and insert it into table miners if it is valid */
+/**
+ * Function to check the validation of the sign up information,
+ * and insert it into table miners if it is valid
+ */
 CREATE OR REPLACE FUNCTION insert_miners(
     id_in VARCHAR,
     pw_in VARCHAR,
@@ -135,8 +143,10 @@ BEGIN
 END;
 $msg$ LANGUAGE plpgsql;
 
-/* Function to check the validation of the profile update information,
-   and update it valid */
+/**
+ * Function to check the validation of the profile update information,
+ * and update it valid
+ */
 CREATE OR REPLACE FUNCTION update_miners(
     id_in VARCHAR,
     old_pw_in VARCHAR,
@@ -180,6 +190,38 @@ BEGIN
             age = age_in
         WHERE id = id_in;
         msg = '';
+    END IF;
+    RETURN msg;
+END;
+$msg$ LANGUAGE plpgsql;
+
+/**
+ * Function to requeset a book,
+ * and check if the book is already existed or requested
+ */
+CREATE OR REPLACE FUNCTION insert_request(
+    id_in VARCHAR,
+    isbn_in CHAR(13),
+    title_in VARCHAR,
+    author_in VARCHAR,
+    publisher_in VARCHAR,
+    publish_year_in INT,
+    publish_month_in INT,
+    price_in NUMERIC
+)
+/* Return the message */
+RETURNS VARCHAR AS $msg$
+DECLARE msg VARCHAR;
+BEGIN
+    /* check before the miner rate the book */
+    IF isbn_in IN (SELECT isbn FROM books) THEN
+        msg = 'This book already exists!';
+    ELSIF isbn_in IN (SELECT isbn FROM request) THEN
+        msg = 'This book has already been requested! Please wait for the request result :)';
+    ELSE
+        INSERT INTO request VALUES (isbn_in, id_in, CURRENT_TIMESTAMP, 1);
+        INSERT INTO requested_books VALUES (isbn_in, title_in, author_in, publisher_in, publish_year_in, publish_month_in, price_in);
+        msg = 'Your request is submitted! Please wait for the request result :)';
     END IF;
     RETURN msg;
 END;
