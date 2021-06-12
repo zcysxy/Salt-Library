@@ -1,9 +1,8 @@
 {% extends "base.html" %}
-
+{% block title %}Curator Panel{% endblock %}
 {% block content %}
-<h1 class="title">
-  Hi, Mr. Curator !
-</h1>
+
+{{ center_head('Hi, Mr. Curator!') }}
 
 <!-- Buttons -->
 <section>
@@ -39,7 +38,7 @@
     </div>
     <div class="col">
 
-      <a href="{{url_for('book.home')}}">
+      <a href="{{url_for('curator.sql')}}">
         <button type="button" class="btn btn-block btn-lg btn-secondary">SQL Query</button>
       </a>
     </div>
@@ -49,22 +48,47 @@
 <hr>
 
 <!-- Activities -->
+<!-- Statisitcs -->
 <section>
-  <!-- <h2 class="title">Your Activities</h2>
-    {% if acts %}
-    {% for act in acts %}
-    <div class="card mb-3">
-        <div class="card-body">
-            <span style="font-size: 16pt; font-weight: bold;">You <span class="badge badge-warning">{{
-                    act['operation_name'] }}</span> the book <a href="/{{act['isbn']}}"><span
-                        class="badge badge-primary">《{{ act['title'] }}》</span></a> on <span
-                    class="badge badge-success">{{ act['mark_date'] }}</span>.</span>
-        </div>
-    </div>
-    {% endfor %}
-    {% else %}
-    <blockquote>You haven't done anything. Go do some!</blockquote>
-    {% endif %} -->
+  {{ left_head('Users Activities') }}
+  {% call info_card() %}
+    Here are most recent 100 records. For more detailed statistics, please go to different sub-pages.
+  {% endcall %}
+</section>
+
+<!-- Activity table -->
+<section>
+  <table class="table table-hover" style="font-size: 16pt;">
+    <thead>
+      <tr>
+        <th scope="col">Operation</th>
+        <th scope="col">Miner ID</th>
+        <th scope="col">Book</th>
+        <th scope="col">Time</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for act in acts %}
+      <tr>
+        <th scope="row">
+          <span class="badge badge-lg badge-{{
+            ('warning' if act['operation_name'] == 'bought') or
+            ('danger' if act['operation_name'] == 'rated') or
+            ('info' if act['operation_name'] == 'tagged') or
+            ('success' if act['operation_name'] == 'reviewed')
+          }}">{{
+            act['operation_name'] }}</span>
+        </th>
+        <td>{{ act['id'] }}</td>
+        <td>
+          <a href="/{{act['isbn']}}">《{{
+            act['title'] }}》</a>
+        </td>
+        <td>{{ act['mark_time'] }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
 
 </section>
 

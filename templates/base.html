@@ -11,6 +11,9 @@
     <!-- Add icon library -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     
+    <!-- Fav icon -->
+    <link rel="shortcut icon" href="{{ url_for('static', filename='sl_logo.ico') }}">
+
     <!-- Google font -->
     <!-- <link href="http://fonts.googleapis.com/css?family=Merriweather&" rel="stylesheet" type="text/css"> -->
 
@@ -31,9 +34,16 @@
     <script type="text/javascript" src="{{url_for('static', filename='scripts.js')}}"></script>
     <title>{% block title %} {% endblock %}</title>
   </head>
+
+  <!-- Import macros -->
+  {% from 'macros.html' import center_head, left_head, info_card, warning_card, danger_card, book_card, rate_display, rate_form %}
+
   <body>
     <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-        <a class="navbar-brand" href="{{ url_for('book.home')}}">SALT LIBRARY</a>
+        <a class="navbar-brand" href="{{ url_for('book.home')}}">
+          <img src="/static/sl_logo.PNG" alt="sl_logo" width="20px" style="padding-bottom: 3.5px;">
+          SALT LIBRARY
+        </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>

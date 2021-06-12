@@ -4,42 +4,31 @@ kanban-plugin: basic
 
 ---
 
-## Time Points
+## Report
 
-- [ ] DEADLINE #❗❗❗ @{2021-06-10}
-- [ ] Runnable App @{2021-05-31}
-- [ ] Debug @{2021-06-02}
-- [ ] Fine Tune & Better UI @{2021-06-04}
-- [ ] Document @{2021-06-07}
+- [ ] 请求系统与退货付款系统的等价性
 
 
 ## Todo
 
-- [ ] Roles management #hard
-- [ ] Extensibility: a real enjoyable personal database #later
-- [ ] [[E-R Diagram]] drawing #later
 - [ ] Textbook dynamic & embedded SQL
-- [ ] revise all input forms
-- [ ] check all the can-be-null attributes (like publish_month)
 - [ ] Textbook chapter Application #imp
-- [ ] Book check function #imp
 
 
 ## In Progress
 
-- [ ] miner activities
-- [ ] uniform book card
+- [ ] Document @{2021-06-07}
+- [ ] check all the can-be-null attributes (like publish_month)
+- [ ] revise all input forms
+- [ ] Extensibility: a real enjoyable personal database #later
+- [ ] [[E-R Diagram]] drawing #later
 
 
 ## Done
 
 **Complete**
-- [x] Database Design #❗❗ @{2021-05-28}
-- [x] Return value without redirect
-- [x] Python separate script for database operations
-- [x] Diff sites' state for diff users #hard
-- [x] curator panel
-- [x] Deployment? Standalone app and independent database? #question
+- [x] Roles management #hard
+- [x] DEADLINE #❗❗❗ @{2021-06-10}
 
 
 ## Maybe
@@ -47,10 +36,11 @@ kanban-plugin: basic
 - [ ] forget password
 - [ ] friends
 - [ ] custom statistic table
-- [ ] Different ordering
-- [ ] Skip to result (not the start of the page)
 - [ ] Remove part of the books in cart
 - [ ] curator manage miners activities
+- [ ] other index type
+- [ ] better date filter for ad_search
+- [ ] Previous ratings
 
 
 ***
@@ -68,3 +58,18 @@ kanban-plugin: basic
 - [x] 2021-05-29 03:56 Fuzzy search: Insert %s
 - [x] 2021-05-29 03:56 Make a blueprint & plan
 - [x] 2021-05-29 03:56 Best sellers
+- [x] 2021-06-11 23:06 Debug @{2021-06-02}
+- [x] 2021-06-11 23:06 Database Design #❗❗ @{2021-05-28}
+- [x] 2021-06-11 23:06 Book check function #imp
+- [x] 2021-06-11 23:06 Return value without redirect
+- [x] 2021-06-11 23:06 Python separate script for database operations
+- [x] 2021-06-11 23:06 Diff sites' state for diff users #hard
+- [x] 2021-06-11 23:06 curator panel
+- [x] 2021-06-11 23:06 Deployment? Standalone app and independent database? #question
+- [x] 2021-06-11 23:06 Runnable App @{2021-05-31}
+- [x] 2021-06-11 23:06 miner activities
+- [x] 2021-06-11 23:06 uniform book card
+- [x] 2021-06-11 23:06 Skip to result (not the start of the page)
+- [x] 2021-06-11 23:06 Throw sql error to the page
+- [x] 2021-06-11 23:06 Different ordering
+- [x] 2021-06-11 23:06 Fine Tune & Better UI @{2021-06-04}

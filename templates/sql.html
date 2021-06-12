@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% block title %} SQL {% endblock %}
+{% block content %}
+
+{{ center_head('Raw SQL Query') }}
+
+<form method="POST" class="form m-3">
+    <div class="form-group">
+      <label for="query" class="h3">SQL Query</label>
+      <textarea name="query" class="form-control" placeholder="Please write a valid SQL query"
+        rows="5">{{ request.form['query'] }}</textarea>
+    </div>
+    <div class="form-group">
+      <button type="submit" class="btn btn-primary" style="width: 100%;" formaction="{{url_for('curator.sql')}}" formmethod="POST">
+        Query
+      </button>
+    </div>
+</form>
+
+<hr>
+
+<div id="result">{{ left_head('Result') }}</div>
+{% if scroll %}
+<script>
+  // document.getElementById('{{ scroll }}').scrollIntoView();
+  document.location.hash = '#' + '{{ scroll }}';
+</script>
+{% endif %}
+
+{% if err %}
+  {% call danger_card() %}
+    {{err}}
+  {% endcall %}
+{% endif %}
+
+{% if result %}
+<table class="table table-hover">
+  <thead>
+    <tr>
+      {% for key in result[0].keys() %}
+        <th scope="col">{{ key }}</th>
+      {% endfor %}
+    </tr>
+  </thead>
+  <tbody>
+    {% for tuple in result %}
+    <tr>
+      {% for value in tuple %}
+        <td>{{ value }}</td>
+      {% endfor %}
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endif %}
+{% endblock %}

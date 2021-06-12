@@ -6,31 +6,38 @@ from models import User
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'SaltLibrary'
 
-# blueprint for auth routes in our app
-from auth import auth as auth_blueprint
-app.register_blueprint(auth_blueprint)
+# Register blueprints
+# 4 parts: auth, book, miner, curator
+from auth import auth
 
-# blueprint for book parts of app
-from book import book as book_blueprint
-app.register_blueprint(book_blueprint)
+app.register_blueprint(auth)
+from book import book
 
-# blueprint for user parts of app
-from miner import miner as miner_blueprint
-app.register_blueprint(miner_blueprint)
+app.register_blueprint(book)
+from miner import miner
 
-# blueprint for curator parts of app
-from curator import curator as curator_blueprint
-app.register_blueprint(curator_blueprint)
+app.register_blueprint(miner)
+from curator import curator
 
+app.register_blueprint(curator)
+
+# Set up login manager
 login_manager = LoginManager()
 login_manager.login_view = 'auth.login'
 login_manager.login_message = "You need to be logged in to view that page!"
 login_manager.login_message_category = "danger"
 login_manager.init_app(app)
 
+
 @login_manager.user_loader
 def load_user(ID):
     return User(ID)
 
+
 if __name__ == '__main__':
-    app.run(use_debugger=False, use_reloader=False, passthrough_errors=True)
+    # For VS Code debug mode
+    # app.run(use_debugger=False, use_reloader=False, passthrough_errors=True)
+
+    # For waitress deployment mode
+    from waitress import serve
+    serve(app, host="0.0.0.0", port=8080)

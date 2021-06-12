@@ -1,14 +1,15 @@
 {% extends 'base.html' %}
-
+{% block title %} Edit Book {% endblock %}
 {% block content %}
-<h1>{% block title %} Edit This Book {% endblock %}</h1>
+
+{{ center_head('Edit This Book') }}
 
 <form method="post">
     <div class="form-group">
         <label for="title">Title</label>
         <input type="text" name="title"
             placeholder="Book title" class="form-control"
-            value="{{ request.form['title'] or content['title'] }}"></input>
+            value="{{ request.form['title'] or (content['title'] if content['title']) }}"></input>
     </div>
 
     <div class="form-group">
@@ -18,7 +19,7 @@
             name="isbn"
             placeholder="13 digit ISBN"
             class="form-control"
-            value="{{ request.form['isbn'] or content['isbn'] }}">
+            value="{{ request.form['isbn'] or (content['isbn'] if content['isbn']) }}">
         </input>
     </div>
 
@@ -29,7 +30,7 @@
             name="author"
             placeholder="The author of the book"
             class="form-control"
-            value="{{ request.form['author'] or content['author'] }}">
+            value="{{ request.form['author'] or (content['author'] if content['author']) }}">
         </input>
     </div>
 
@@ -40,7 +41,7 @@
             name="publisher"
             placeholder="The publisher of the book"
             class="form-control"
-            value="{{ request.form['publisher'] or content['publisher'] }}">
+            value="{{ request.form['publisher'] or (content['publisher'] if content['publisher']) }}">
         </input>
     </div>
 
@@ -51,7 +52,7 @@
             name="publish_year"
             placeholder="Publish year"
             class="form-control"
-            value="{{ request.form['publish_year'] or content['publish_year'] }}">
+            value="{{ request.form['publish_year'] or (content['publish_year'] if content['publish_year']) }}">
         </input>
     </div>
     <div class="form-group" style="float: left;padding-left: 5px;">
@@ -61,7 +62,7 @@
             name="publish_month"
             placeholder="Publish month"
             class="form-control"
-            value="{{ request.form['publish_month'] or content['publish_month'] }}">
+            value="{{ request.form['publish_month'] or (content['publish_month'] if content['publish_month']) }}">
         </input>
     </div>
 
@@ -72,12 +73,12 @@
             name="price"
             placeholder="Price"
             class="form-control"
-            value="{{ request.form['price'] or content['price'] }}">
+            value="{{ request.form['price'] or (content['price'] if content['price']) }}">
         </input>
     </div>
     
     <div class="form-group">
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary" style="width: 100%;">Submit</button>
     </div>
 </form>
 {% endblock %}

@@ -1,84 +1,59 @@
 {% extends 'base.html' %}
-
+{% block title %} New Book {% endblock %}
 {% block content %}
-<h1>{% block title %} Add a New Book {% endblock %}</h1>
+
+{{ center_head('Add a New Book') }}
 
 <form method="post">
-    <div class="form-group">
-        <label for="title">Title</label>
-        <input type="text" name="title"
-            placeholder="Book title" class="form-control"
-            value="{{ content.get('title', None) or request.form['title'] }}"></input>
-    </div>
+  <div class="form-group">
+    <label for="title">Title</label>
+    <input type="text" name="title" placeholder="Book title" class="form-control"
+      value="{{ content.get('title', None) or request.form['title'] }}"></input>
+  </div>
 
-    <div class="form-group">
-        <label for="isbn">ISBN</label>
-        <input
-            type="text"
-            name="isbn"
-            placeholder="13 digit ISBN"
-            class="form-control"
-            value="{{ content.get('isbn',None) or request.form['isbn'] }}">
-        </input>
-    </div>
+  <div class="form-group">
+    <label for="isbn">ISBN</label>
+    <input type="text" name="isbn" placeholder="13 digit ISBN" class="form-control"
+      value="{{ content.get('isbn',None) or request.form['isbn'] }}">
+    </input>
+  </div>
 
-    <div class="form-group">
-        <label for="author">Author</label>
-        <input
-            type="text"
-            name="author"
-            placeholder="The author of the book"
-            class="form-control"
-            value="{{ content.get('author',None) or request.form['author'] }}">
-        </input>
-    </div>
+  <div class="form-group">
+    <label for="author">Author</label>
+    <input type="text" name="author" placeholder="The author of the book" class="form-control"
+      value="{{ content.get('author',None) or request.form['author'] }}">
+    </input>
+  </div>
 
-    <div class="form-group">
-        <label for="publisher">Publisher</label>
-        <input
-            type="text"
-            name="publisher"
-            placeholder="The publisher of the book"
-            class="form-control"
-            value="{{ content.get('publisher',None) or request.form['publisher'] }}">
-        </input>
-    </div>
+  <div class="form-group">
+    <label for="publisher">Publisher</label>
+    <input type="text" name="publisher" placeholder="The publisher of the book" class="form-control"
+      value="{{ content.get('publisher',None) or request.form['publisher'] }}">
+    </input>
+  </div>
 
-    <div class="form-group" style="float: left;">
-        <label for="publsh_date">Publish Date</label>
-        <input
-            type="number"
-            name="publish_year"
-            placeholder="Publish year"
-            class="form-control"
-            value="{{ content.get('publish_year',None) or request.form['publish_year'] }}">
-        </input>
-    </div>
-    <div class="form-group" style="float: left;padding-left: 5px;">
-        <label>&nbsp;</label>
-        <input
-            type="number"
-            name="publish_month"
-            placeholder="Publish month"
-            class="form-control"
-            value="{{ content.get('publish_month',None) or request.form['publish_month'] }}">
-        </input>
-    </div>
+  <div class="form-group" style="float: left;">
+    <label for="publsh_date">Publish Date</label>
+    <input type="number" name="publish_year" placeholder="Publish year" class="form-control"
+      value="{{ content.get('publish_year',None) or request.form['publish_year'] }}">
+    </input>
+  </div>
+  <div class="form-group" style="float: left;padding-left: 5px;">
+    <label>&nbsp;</label>
+    <input type="number" name="publish_month" placeholder="Publish month" class="form-control"
+      value="{{ content.get('publish_month',None) or request.form['publish_month'] }}">
+    </input>
+  </div>
 
-    <div class="form-group" style="clear: both;">
-        <label for="price">Price</label>
-        <input
-            type="number"
-            step="0.01"
-            name="price"
-            placeholder="Price"
-            class="form-control"
-            value="{{ content.get('price',None) or request.form['price'] }}">
-        </input>
-    </div>
-    
-    <div class="form-group">
-        <button type="submit" class="btn btn-primary">Submit</button>
-    </div>
+  <div class="form-group" style="clear: both;">
+    <label for="price">Price</label>
+    <input type="number" step="0.01" name="price" placeholder="Price" class="form-control"
+      value="{{ content.get('price',None) or request.form['price'] }}">
+    </input>
+  </div>
+
+  <div class="form-group">
+    <button type="submit" class="btn btn-primary" style="width: 100%;">Submit</button>
+  </div>
 </form>
 {% endblock %}

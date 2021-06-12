@@ -1,0 +1,164 @@
+{% macro book_card(book) %}
+<div class="card m-3">
+  <div class="card-body">
+    <a href="/{{ book['isbn']}}">
+      <h2>《{{ book['title'] }}》</h2>
+    </a>
+    <span class='badge badge-primary'>ISBN: {{ book['isbn']}}</span>
+    <span class='badge badge-primary'>Author: {{ book['author']}}</span>
+    <span class='badge badge-primary'>Publisher: {{ book['publisher']}}</span>
+    <span class='badge badge-primary'>Publish Date: {{ book['publish_year'] }}-{{ book['publish_month']}}</span>
+    <span class='badge badge-warning'>{{ book['sold'] }} <b>SOLD</b></span>
+    {% if book.get('u_rating') %}
+    <span class='badge badge-danger'><b>USER RATING</b>: {{ book['u_rating'] }}</span>
+    {% endif %}
+  </div>
+</div>
+{% endmacro %}
+
+{% macro info_card() %}
+<div class="card border-info m-3 mb-5">
+  <div class="card-body text-info" style="font-weight: bold;">
+    {{ caller() }}
+  </div>
+</div>
+{% endmacro %}
+
+{% macro warning_card() %}
+<div class="card border-warning m-3 mb-5">
+  <div class="card-body text-warning" style="font-weight: bold;">
+    {{ caller() }}
+  </div>
+</div>
+{% endmacro %}
+
+{% macro danger_card() %}
+<div class="card border-danger m-3 mb-5">
+  <div class="card-body text-danger" style="font-weight: bold;">
+    {{ caller() }}
+  </div>
+</div>
+{% endmacro %}
+
+{% macro center_head(title) %}
+<section class="py-5 text-center container">
+  <div class="row">
+    <div class="col-lg-6 col-md-8 mx-auto">
+      <h1 class="fw-bold">{{ title }}</h1>
+    </div>
+  </div>
+</section>
+{% endmacro %}
+
+{% macro left_head(title) %}
+<section class="py-3 container">
+  <h1 class="fw-bold">{{ title }}</h1>
+</section>
+{% endmacro %}
+
+{% macro rate_form(isbn) %}
+<form class="rating">
+  <label>
+    <input type="submit" name="rating" value="1" formaction="{{ url_for('book.rate', isbn=isbn) }}" formmethod="POST" />
+    <span class="icon fa fa-star"></span>
+  </label>
+  <label>
+    <input type="submit" name="rating" value="2" formaction="{{ url_for('book.rate', isbn=isbn) }}" formmethod="POST" />
+    <span class="icon fa fa-star"></span>
+    <span class="icon fa fa-star"></span>
+  </label>
+  <label>
+    <input type="submit" name="rating" value="3" formaction="{{ url_for('book.rate', isbn=isbn) }}" formmethod="POST" />
+    <span class="icon fa fa-star"></span>
+    <span class="icon fa fa-star"></span>
+    <span class="icon fa fa-star"></span>
+  </label>
+  <label>
+    <input type="submit" name="rating" value="4" formaction="{{ url_for('book.rate', isbn=isbn) }}" formmethod="POST" />
+    <span class="icon fa fa-star"></span>
+    <span class="icon fa fa-star"></span>
+    <span class="icon fa fa-star"></span>
+    <span class="icon fa fa-star"></span>
+  </label>
+  <label>
+    <input type="submit" name="rating" value="5" formaction="{{ url_for('book.rate', isbn=isbn) }}" formmethod="POST" />
+    <span class="icon fa fa-star"></span>
+    <span class="icon fa fa-star"></span>
+    <span class="icon fa fa-star"></span>
+    <span class="icon fa fa-star"></span>
+    <span class="icon fa fa-star"></span>
+  </label>
+</form>
+{% endmacro %}
+
+{% macro rate_display(rating) %}
+<div style="display: inline; vertical-align: top;">
+  {% if rating <= 0.25 %}
+  <span class="fa fa-star"></span>
+  <span class="fa fa-star"></span>
+  <span class="fa fa-star"></span>
+  <span class="fa fa-star"></span>
+  <span class="fa fa-star"></span>
+  {% elif rating <= 0.75 %}
+  <span class="fa fa-star-half-o checked"></span>
+  <span class="fa fa-star"></span>
+  <span class="fa fa-star"></span>
+  <span class="fa fa-star"></span>
+  <span class="fa fa-star"></span>
+  {% elif rating <= 1.25 %}
+  <span class="fa fa-star checked"></span>
+  <span class="fa fa-star"></span>
+  <span class="fa fa-star"></span>
+  <span class="fa fa-star"></span>
+  <span class="fa fa-star"></span>
+  {% elif rating <= 1.75 %}
+  <span class="fa fa-star checked"></span>
+  <span class="fa fa-star-half-o checked"></span>
+  <span class="fa fa-star"></span>
+  <span class="fa fa-star"></span>
+  <span class="fa fa-star"></span>
+  {% elif rating <= 2.25 %}
+  <span class="fa fa-star checked"></span>
+  <span class="fa fa-star checked"></span>
+  <span class="fa fa-star"></span>
+  <span class="fa fa-star"></span>
+  <span class="fa fa-star"></span>
+  {% elif rating <= 2.75 %}
+  <span class="fa fa-star checked"></span>
+  <span class="fa fa-star checked"></span>
+  <span class="fa fa-star-half-o checked"></span>
+  <span class="fa fa-star"></span>
+  <span class="fa fa-star"></span>
+  {% elif rating <= 3.25 %}
+  <span class="fa fa-star checked"></span>
+  <span class="fa fa-star checked"></span>
+  <span class="fa fa-star checked"></span>
+  <span class="fa fa-star"></span>
+  <span class="fa fa-star"></span>
+  {% elif rating <= 3.75 %}
+  <span class="fa fa-star checked"></span>
+  <span class="fa fa-star checked"></span>
+  <span class="fa fa-star checked"></span>
+  <span class="fa fa-star-half-o checked"></span>
+  <span class="fa fa-star"></span>
+  {% elif rating <= 4.25 %}
+  <span class="fa fa-star checked"></span>
+  <span class="fa fa-star checked"></span>
+  <span class="fa fa-star checked"></span>
+  <span class="fa fa-star checked"></span>
+  <span class="fa fa-star"></span>
+  {% elif rating <= 4.75 %}
+  <span class="fa fa-star checked"></span>
+  <span class="fa fa-star checked"></span>
+  <span class="fa fa-star checked"></span>
+  <span class="fa fa-star checked"></span>
+  <span class="fa fa-star-half-o checked"></span>
+  {% else %}
+  <span class="fa fa-star checked"></span>
+  <span class="fa fa-star checked"></span>
+  <span class="fa fa-star checked"></span>
+  <span class="fa fa-star checked"></span>
+  <span class="fa fa-star checked"></span>
+  {% endif %}
+</div>
+{% endmacro %}

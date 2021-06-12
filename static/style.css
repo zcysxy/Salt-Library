@@ -94,7 +94,7 @@ input[type="number"]::-webkit-outer-spin-button {
 
 .rating label:last-child {
   position: static;
-  margin-bottom: -0.5em;
+  margin-bottom: 0em;
 }
 
 .rating label:nth-child(1) {
@@ -140,7 +140,7 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 .rating label input:focus:not(:checked) ~ .icon:last-child {
-  color: #000;
+  color: orange;
   text-shadow: 0 0 5px orange;
 }
 

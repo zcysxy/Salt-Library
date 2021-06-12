@@ -1,38 +1,34 @@
 {% extends "base.html" %}
-
+{% block title %} Sales Records {% endblock %}
 {% block content %}
-<section class="py-5 container">
-  <div class="row">
-    <div class="col-md-8">
-      <h1 class="fw-bold">{% block title %} Sales Records {% endblock %}</h1>
-    </div>
-  </div>
-</section>
+
+{{ center_head('Sales Records') }}
 
 <section>
-  <form class="form-inline" method="POST">
-    <div class="form-group mx-sm-3 mb-2">
-      <label for="start_date" style="font-weight: bold;">Select the time period: &emsp;</label>
-      <input class="form-control" type="date" name="start_date" value="{{start_date or request.form['start_date']}}" />
+  <div class="card border-warning m-3">
+    <div class="card-header">
+      <form class="form-inline" method="POST">
+        <h3 class="mr-3" style="vertical-align: top">Time Period</h3>
+        <div class="form-group">
+          <input class="form-control" type="date" name="start_date" value="{{start_date or request.form['start_date']}}" />
+        </div>
+        <div class="form-group">
+          <label for="end_date" style="font-weight: bold;" class="mx-1">to</label>
+          <input class="form-control" type="date" name="end_date" value="{{end_date or request.form['end_date']}}" />
+        </div>
+        <button type="submit" class="btn btn-primary ml-2">Apply</button>
+        <a href="/sales"><button class="btn btn-warning ml-2" formmethod="GET">All Time</button></a>
+      </form>
     </div>
-    <div class="form-group mx-sm-3 mb-2">
-      <label for="end_date" style="font-weight: bold;"> to&emsp;&emsp;</label>
-      <input class="form-control" type="date" name="end_date" value="{{end_date or request.form['end_date']}}" />
-    </div>
-    <button type="submit" class="btn btn-primary mb-2">Apply</button>
-    <a href="/sales"><button class="btn btn-warning ml-2 mb-2" formmethod="GET">All Time</button></a>
-  </form>
+      <div class="card-body text-warning">
+        <span style="font-weight: bold;">
+          <h3>Total sales for this period of time is <span class="badge badge-warning">{{total_sales}}</span></h3>
+        </span>
+      </div>
+  </div>
 </section>
 
-<div class="card mb-3 mt-3">
-  <div class="card-body">
-    <span style="font-weight: bold; font-size: 20pt;">
-      Total sales for this period of time is <span class="badge badge-warning">{{total_sales}}</span>
-    </span>
-  </div>
-</div>
-
-<table class="table table-hover">
+<table class="table table-hover m-3">
   <thead>
     <tr>
       <th scope="col">Miner ID</th>

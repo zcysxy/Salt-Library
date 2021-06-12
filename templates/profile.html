@@ -1,9 +1,8 @@
 {% extends "base.html" %}
-
+{% block title %}Profile{% endblock %}
 {% block content %}
-<h1 class="title">
-  Welcome, {{ profile['name'] }}!
-</h1>
+
+{{ center_head('Welcome, ' + profile['name'] + '!') }}
 
 <!-- Buttons -->
 <section>
@@ -39,52 +38,104 @@
 <hr>
 
 <!-- Activities -->
+<!-- Statisitcs -->
 <section>
-  <h2 class="title">Your Activities</h2>
-  <table class="table table-hover">
+  {{ left_head('Your Activities') }}
+  <div class="card my-4">
+    <div class="card-header">
+      <form class="form-inline" method="POST">
+        <h3 class="mr-3">Statistics</h3>
+        <div class="form-group">
+          <label class="mx-1" for="start_date">from</label>
+          <input class="form-control" type="date" name="start_date" value="{{request.form['start_date']}}" />
+        </div>
+        <div class="form-group">
+          <label class="mx-1" for="end_date">to</label>
+          <input class="form-control" type="date" name="end_date" value="{{request.form['end_date']}}" />
+        </div>
+        <button type="submit" class="btn btn-primary ml-1">Apply</button>
+        <a href="/profile"><button class="btn btn-warning ml-1" formmethod="GET">All Time</button></a>
+      </form>
+    </div>
+
+    <div class="card-body">
+      <div class="row">
+        <div class="col">
+          <div class="card">
+            <div class="card-header"><b>Buy</b></div>
+            <div class="card-body">
+              {% if request.form %}In this time period, you{% else %}You{% endif %}
+              bought <span class="badge badge-warning"
+                style="font-weight: bold; font-size:12pt;">{{buy['bought_num']}}</span> books,
+              spent ￥<span class="badge badge-warning"
+                style="font-weight: bold; font-size:12pt;">{{buy['bought_sum']}}</span>
+              {% if request.form %}.{% else %} in total!{% endif %}
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card">
+            <div class="card-header"><b>Read</b></div>
+            <div class="card-body">
+              {% if request.form %}In this time period, you{% else %}You{% endif %}
+              finished <span class="badge badge-success"
+                style="font-weight: bold; font-size:12pt;">{{read['book_num']}}</span> books
+              {% if not request.form %} in total{% endif %}
+              {% if read['book_time'] %}, and it took you <span class="badge badge-success"
+                style="font-weight: bold; font-size:12pt;">{{read['book_time']}}</span>
+              days in average to finish these books{% endif %}.
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card">
+            <div class="card-header"><b>Rate</b></div>
+            <div class="card-body">
+              {% if request.form %}In this time period, you{% else %}You{% endif %}
+              rated <span class="badge badge-danger"
+                style="font-weight: bold; font-size:12pt;">{{rate['rate_num']}}</span> books
+              {% if not request.form %} in total{% endif %}
+              {% if rate['avg_rating'] %}, and give average rating of <span class="badge badge-danger"
+                style="font-weight: bold; font-size:12pt;">{{rate['avg_rating']}}</span>{% endif %}.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Activity table -->
+<section>
+  <table class="table table-hover" style="font-size: 16pt;">
     <thead>
       <tr>
-        <th scope="col">Miner ID</th>
-        <th scope="col">Name</th>
-        <th scope="col">Email</th>
-        <th scope="col">Phone</th>
-        <th scope="col">Gender</th>
-        <th scope="col">Age</th>
-        <th scope="col">Registration Date</th>
-        <th scope="col">Active Index</th>
-        <th scope="col">Consumption</th>
+        <th scope="col">Operation</th>
+        <th scope="col">Book</th>
+        <th scope="col">Time</th>
       </tr>
     </thead>
     <tbody>
       {% for act in acts %}
       <tr>
-        <th scope="row">{{ miner['id'] }}</th>
-        <td>{{ miner['name'] }}</td>
-        <td>{{ miner['mail'] if miner['mail'] }}</td>
-        <td>{{ miner['phone'] if miner['phone'] }}</td>
-        <td>{{ ('Male' if miner['gender']==0) or ('Female' if miner['gender']==1) or ('Non-binary' if
-          miner['gender']==2)}}</td>
-        <td>{{ miner['age'] if miner['age'] }}</td>
-        <td>{{ miner['reg_date'] if miner['reg_date'] }}</td>
-        <td>{{ miner['active_index'] }}</td>
-        <td>{{ miner['consumption'] }}</td>
+        <th scope="row">
+          <span class="badge badge-lg badge-{{
+            ('warning' if act['operation_name'] == 'bought') or
+            ('danger' if act['operation_name'] == 'rated') or
+            ('info' if act['operation_name'] == 'tagged') or
+            ('success' if act['operation_name'] == 'reviewed')
+          }}">{{
+            act['operation_name'] }}</span>
+        </th>
+        <td>
+          <a href="/{{act['isbn']}}">《{{
+            act['title'] }}》</a>
+        </td>
+        <td>{{ act['mark_time'] }}</td>
       </tr>
       {% endfor %}
     </tbody>
   </table>
-
-  {% for act in acts %}
-  <div class="card mb-3">
-    <div class="card-body">
-      <span style="font-size: 16pt; font-weight: bold;">You <span class="badge badge-warning">{{
-          act['operation_name'] }}</span> the book <a href="/{{act['isbn']}}"><span class="badge badge-primary">《{{
-            act['title'] }}》</span></a> on <span class="badge badge-success">{{ act['mark_date'] }}</span>.</span>
-    </div>
-  </div>
-  {% endfor %}
-  {% else %}
-  <blockquote>You haven't done anything. Go do some!</blockquote>
-  {% endif %}
 
 </section>
 

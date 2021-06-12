@@ -2,95 +2,72 @@
 
 {% block content %}
 <section class="py-5 text-center container">
-    <div class="row py-lg-5">
-        <div class="col-md-8 mx-auto">
-            <h1 class="fw-bold">{% block title %}Salt Library {{test}} {% endblock %}</h1>
-            <p class="lead text-muted"> Welcome to a library where books taste salty.</p>
-            {% if not current_user.is_authenticated %}
-            <p>
-                <a href="/signup" class="w-25 mt-3 btn btn-lg btn-primary">Sign Up</a>
-                <a href="/login" class="w-25 mt-3 btn btn-lg btn-secondary">Log In</a>
-            </p>
-            {% endif %}
-        </div>
-    </div>
+	<div class="row py-lg-5">
+		<div class="col-md-8 mx-auto">
+			<img src="/static/sl_logo.PNG" alt="sl_logo" width="120px" class="mb-3">
+			<h1 class="fw-bold">{% block title %}Salt Library{% endblock %}</h1>
+			<p class="lead text-muted"> Welcome to a library where books taste salty.</p>
+			{% if not current_user.is_authenticated %}
+			<p>
+				<a href="/signup" class="w-25 mt-3 btn btn-lg btn-primary">Sign Up</a>
+				<a href="/login" class="w-25 mt-3 btn btn-lg btn-secondary">Log In</a>
+			</p>
+			{% endif %}
+		</div>
+	</div>
 </section>
 
 <section class="py-5" style="margin-top: -4em;">
-    <form method="post" class="d-flex">
-        <input type="text" name="title" placeholder="What book are you looking for?" class="form-control"
-            value="{{ request.form['title'] }}">&ensp;
-        </input>
-        <button type="submit" class="btn btn-primary">Search</button>&ensp;
-        <a href="/ad_search">
-            <button type="button" class="btn btn-secondary" style="white-space: nowrap;">Advanced Search</button>
-        </a>
-    </form>
+	<form method="post" class="d-flex">
+		<input type="text" name="title" placeholder="What book are you looking for?" class="form-control"
+			value="{{ request.form['title'] }}">&ensp;
+		</input>
+		<button type="submit" class="btn btn-primary">Search</button>&ensp;
+		<a href="/ad_search">
+			<button type="button" class="btn btn-secondary" style="white-space: nowrap;">Advanced Search</button>
+		</a>
+	</form>
 </section>
 
 <!-- <hr class="md-5 mt-5"> -->
 
 <div class="m-16">
-<ul class="nav nav-tabs">
-    <li class="nav-item">
-        <a class="nav-link active" href="#bs" data-toggle="tab">
-            <h4 class="fw-bold">Best Sellers</h4>
-        </a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="#br" data-toggle="tab">
-            <h4 class="fw-bold">Best Rated</h4>
-        </a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="#ab" data-toggle="tab">
-            <h4 class="fw-bold">All Books</h4>
-        </a>
-    </li>
-</ul>
+	<ul class="nav nav-tabs">
+		<li class="nav-item">
+			<a class="nav-link active" href="#bs" data-toggle="tab">
+				<h4 class="fw-bold">Best Sellers</h4>
+			</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" href="#tr" data-toggle="tab">
+				<h4 class="fw-bold">Top Rated</h4>
+			</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" href="#ab" data-toggle="tab">
+				<h4 class="fw-bold">All Books</h4>
+			</a>
+		</li>
+	</ul>
 </div>
 
 <div class="tab-content m-16">
-    <div class="tab-pane fade show active" id="bs">
-        {% for book in bs %}
-        <a href="/{{ book['isbn']}}">
-            <h2>《{{ book['title'] }}》</h2>
-        </a>
-        <span class='badge badge-primary'>ISBN: {{ book['isbn']}}</span>
-        <span class='badge badge-primary'>Author: {{ book['author']}}</span>
-        <span class='badge badge-primary'>Publisher: {{ book['publisher']}}</span>
-        <span class='badge badge-primary'>Publish Date: {{ book['publish_year'] }}-{{ book['publish_month']}}</span>
-        <span class='badge badge-primary bg-warning'>{{ book['sold'] }} <b>SOLD</b></span>
-        <hr>
-        {% endfor %}
-    </div>
+	<div class="tab-pane fade show active" id="bs">
+		{% for book in bs %}
+		{{ book_card(book) }}
+		{% endfor %}
+	</div>
 
-    <div class="tab-pane fade" id="br">
-        {% for book in br %}
-        <a href="/{{ book['isbn']}}">
-            <h2>《{{ book['title'] }}》</h2>
-        </a>
-        <span class='badge badge-primary'>ISBN: {{ book['isbn']}}</span>
-        <span class='badge badge-primary'>Author: {{ book['author']}}</span>
-        <span class='badge badge-primary'>Publisher: {{ book['publisher']}}</span>
-        <span class='badge badge-primary'>Publish Date: {{ book['publish_year'] }}-{{ book['publish_month']}}</span>
-        <span class='badge badge-primary bg-warning'><b>USER RATING:</b> {{ book['u_rating'] }}</span>
-        <hr>
-        {% endfor %}
-    </div>
+	<div class="tab-pane fade" id="tr">
+		{% for book in tr %}
+		{{ book_card(book) }}
+		{% endfor %}
+	</div>
 
-    <div class="tab-pane fade" id="ab">
-        {% for book in ab %}
-        <a href="/{{ book['isbn']}}">
-            <h2>《{{ book['title'] }}》</h2>
-        </a>
-        <span class='badge badge-primary'>ISBN: {{ book['isbn']}}</span>
-        <span class='badge badge-primary'>Author: {{ book['author']}}</span>
-        <span class='badge badge-primary'>Publisher: {{ book['publisher']}}</span>
-        <span class='badge badge-primary'>Publish Date: {{ book['publish_year'] }}-{{ book['publish_month']}}</span>
-        <!-- <span class='badge badge-primary bg-warning'>{{ book['sold'] }} <b>SOLD</b></span> -->
-        <hr>
-        {% endfor %}
-    </div>
+	<div class="tab-pane fade" id="ab">
+		{% for book in ab %}
+		{{ book_card(book) }}
+		{% endfor %}
+	</div>
 </div>
-    {% endblock %}
+{% endblock %}

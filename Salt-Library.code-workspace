@@ -12,6 +12,14 @@
 		"markdownlint.config": {
 			"MD007": { "indent": 4 } 
 		},
-		"liveServer.settings.port": 5501
+		"liveServer.settings.port": 5501,
+		"[html]": {
+			"editor.tabSize": 2,
+		},
+		"[markdown]": {
+			"editor.wordWrap": "on",
+			"editor.quickSuggestions": false,
+			"editor.suggest.showSnippets": false,
+		},
 	}
 }

@@ -1,163 +1,154 @@
 {% extends "base.html" %}
-
+{% block title %} Manage Miners {% endblock %}
 {% block content %}
-<section class="py-5 container">
-  <div class="row">
-    <div class="col-md-8">
-      <h1 class="fw-bold">{% block title %} Manage Miners {% endblock %}</h1>
-    </div>
-  </div>
-</section>
+
+{{ center_head('Manage Miners') }}
 
 <!--Filters -->
 <section>
-  <form method="POST">
-    <!-- Time -->
-    <div class="form-row">
-      <div class="form-group form-inline ml-3 mb-2">
-        <label for="start_date" style="font-weight: bold;">Select the time period: &emsp;</label>
-        <input class="form-control" type="date" name="start_date"
-          value="{{start_date or request.form['start_date']}}" />
-      </div>
-      <div class="form-group form-inline mx-sm-3 mb-2">
-        <label for="end_date" style="font-weight: bold;"> to&emsp;</label>
-        <input class="form-control" type="date" name="end_date" value="{{end_date or request.form['end_date']}}" />
-      </div>
-      <button type="submit" class="btn btn-primary mb-2">Apply</button>
-      <a href="/sales"><button class="btn btn-warning ml-2 mb-2" formmethod="GET">All Time</button></a>
+  <div class="card m-3">
+    <div class="card-header">
+      <h3 style="display: inline; vertical-align: top;">Filters</h3>
+      <a href="/miners"><button class="btn btn-warning ml-3" formmethod="GET">No Filter</button></a>
     </div>
-
-    <!-- Order -->
-    <div class="form-row">
-      <div class="form-group ml-3 mb-2 form-inline">
-        <label for="order_by" style="font-weight: bold;">Order by: &emsp;</label>
-        <select name="order_by" class="form-control">
-          <option value="reg_date" {{"selected" if (order_by=="reg_date" )}}>Registration Date</option>
-          <option value="active_index" {{"selected" if (order_by=="active_index" )}}>Active Index</option>
-          <option value="consumption" {{"selected" if (order_by=="consumption" )}}>Consumption</option>
-        </select>
-      </div>
-      <div class="form-group mx-sm-3 mb-2 form-inline">
-        <select name="order" class="form-control">
-          <option value="ASC" {{"selected" if (order=="ASC" )}}>Ascending</option>
-          <option value="DESC" {{"selected" if (order=="DESC" )}}>Descending</option>
-        </select>
-      </div>
-      <button type="submit" class="btn btn-primary mb-2">Apply</button>
-      <a href="/miners"><button class="btn btn-warning ml-2 mb-2" formmethod="GET">Default</button></a>
+    <div class="card-body">
+      <form method="POST">
+        <!-- Time -->
+        <div class="form-row">
+          <div class="form-group form-inline ml-3 mb-2">
+            <label for="start_date" style="font-weight: bold;">Select the time period: &emsp;</label>
+            <input class="form-control" type="date" name="start_date"
+              value="{{start_date or request.form['start_date']}}" />
+          </div>
+          <div class="form-group form-inline mx-sm-3 mb-2">
+            <label for="end_date" style="font-weight: bold;"> to&emsp;</label>
+            <input class="form-control" type="date" name="end_date" value="{{end_date or request.form['end_date']}}" />
+          </div>
+        </div>
+        <!-- Order -->
+        <div class="form-row">
+          <div class="form-group ml-3 mb-2 form-inline">
+            <label for="order_by" style="font-weight: bold;">Order by: &emsp;</label>
+            <select name="order_by" class="form-control">
+              <option value="reg_date" {{"selected" if (order_by=="reg_date" )}}>Registration Date</option>
+              <option value="active_index" {{"selected" if (order_by=="active_index" )}}>Active Index</option>
+              <option value="consumption" {{"selected" if (order_by=="consumption" )}}>Consumption</option>
+            </select>
+          </div>
+          <div class="form-group mx-sm-3 mb-2 form-inline">
+            <select name="order" class="form-control">
+              <option value="ASC" {{"selected" if (order=="ASC" )}}>Ascending</option>
+              <option value="DESC" {{"selected" if (order=="DESC" )}}>Descending</option>
+            </select>
+          </div>
+        </div>
+        <!-- Filters -->
+        <div class="form-row">
+          <input class="ml-3 mt-3 btn btn-primary" type="button" value="Advanced Filters" onclick="showDiv()" />
+        </div>
+        <div id="hiddenDiv" style="display: none;" class="mt-3">
+          <!-- Gender -->
+          <div class="form-row">
+            <div class="form-inline form-group ml-3 mb-2">
+              <label for="gender"><b>Gender</b></label>
+              <div class="custom-control custom-checkbox custom-checkbox-inline ml-2">
+                <input type="checkbox" class="custom-control-input" name="female" id="1" value="1" {{'checked' if 1 in
+                  gender}}>
+                <label class="custom-control-label" for="1">Female</label>
+              </div>
+              <div class="custom-control custom-checkbox custom-checkbox-inline ml-2">
+                <input type="checkbox" class="custom-control-input" name="male" id="0" value="0" {{'checked' if 0 in
+                  gender}}>
+                <label class="custom-control-label" for="0">Male</label>
+              </div>
+              <div class="custom-control custom-checkbox custom-checkbox-inline ml-2">
+                <input type="checkbox" class="custom-control-input" name="non-binary" id="2" value="2" {{'checked' if 2
+                  in gender}}>
+                <label class="custom-control-label" for="2">Non-binary</label>
+              </div>
+            </div>
+          </div>
+          <!-- Age -->
+          <div class="form-row">
+            <div class="form-group form-inline ml-3 mb-2">
+              <label for="min_age" style="font-weight: bold;">Age Range: &emsp;</label>
+              <input class="form-control" type="number" step="1" min="0" name="min_age"
+                value="{{request.form['min_age']}}" />
+            </div>
+            <div class="form-group form-inline ml-3 mb-2">
+              <label for="max_age" style="font-weight: bold;"> to&emsp;</label>
+              <input class="form-control" type="number" step="1" min="0" name="max_age"
+                value="{{request.form['max_age']}}" />
+            </div>
+          </div>
+          <!-- Reg date -->
+          <div class="form-row">
+            <div class="form-group form-inline ml-3 mb-2">
+              <label for="start_reg_date" style="font-weight: bold;">Registration Date Range: &emsp;</label>
+              <input class="form-control" type="date" name="start_reg_date"
+                value="{{request.form['start_reg_date']}}" />
+            </div>
+            <div class="form-group form-inline ml-3 mb-2">
+              <label for="end_reg_date" style="font-weight: bold;"> to&emsp;</label>
+              <input class="form-control" type="date" name="end_reg_date" value="{{request.form['end_reg_date']}}" />
+            </div>
+          </div>
+          <!-- Active index -->
+          <div class="form-row">
+            <div class="form-group form-inline ml-3 mb-2">
+              <label for="min_ai" style="font-weight: bold;">Active Index Range: &emsp;</label>
+              <input class="form-control" type="number" step="1" min="0" name="min_ai"
+                value="{{request.form['min_ai']}}" />
+            </div>
+            <div class="form-group form-inline ml-3 mb-2">
+              <label for="max_ai" style="font-weight: bold;"> to&emsp;</label>
+              <input class="form-control" type="number" step="0.01" min="0" name="max_ai"
+                value="{{request.form['max_ai']}}" />
+            </div>
+          </div>
+          <!-- Consumption -->
+          <div class="form-row">
+            <div class="form-group form-inline ml-3 mb-2">
+              <label for="min_cons" style="font-weight: bold;">Consumption Range: &emsp;</label>
+              <input class="form-control" type="number" step="0.01" min="0" name="min_cons"
+                value="{{request.form['min_cons']}}" />
+            </div>
+            <div class="form-group form-inline ml-3 mb-2">
+              <label for="max_cons" style="font-weight: bold;"> to&emsp;</label>
+              <input class="form-control" type="number" step="1" min="0" name="max_cons"
+                value="{{request.form['max_cons']}}" />
+            </div>
+          </div>
+          <!-- Mail & phone -->
+          <div class="form-row">
+            <div class="form-inline form-group ml-3 mb-2">
+              <div class="custom-control custom-checkbox custom-checkbox-inline ml-2">
+                <input type="checkbox" class="custom-control-input" name="mail" id="mail" value="1" {{'checked' if
+                  request.form.get('mail')}}>
+                <label class="custom-control-label" for="mail"><b>Must Have Email</b></label>
+              </div>
+              <div class="custom-control custom-checkbox custom-checkbox-inline ml-2">
+                <input type="checkbox" class="custom-control-input" name="phone" id="phone" value="1" {{'checked' if
+                  request.form.get('phone')}}>
+                <label class="custom-control-label" for="phone"><b>Must Have Phone</b></label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-row"><button type="submit" class="ml-3 mt-3 btn btn-primary">Apply</button></div>
+      </form>
     </div>
-
-    <!-- Filters -->
-    <div class="form-row">
-      <input class="ml-3 my-3 btn btn-primary" type="button" value="Advanced Filters" onclick="showDiv()" />
-    </div>
-
-    <div id="hiddenDiv" style="display: none;">
-      <!-- Gender -->
-      <div class="form-row">
-        <div class="form-inline form-group ml-3 mb-2">
-          <label for="gender"><b>Gender</b></label>
-          <div class="custom-control custom-checkbox custom-checkbox-inline ml-2">
-            <input type="checkbox" class="custom-control-input" name="female" id="1" value="1" {{'checked' if 1 in
-              gender}}>
-            <label class="custom-control-label" for="1">Female</label>
-          </div>
-          <div class="custom-control custom-checkbox custom-checkbox-inline ml-2">
-            <input type="checkbox" class="custom-control-input" name="male" id="0" value="0" {{'checked' if 0 in
-              gender}}>
-            <label class="custom-control-label" for="0">Male</label>
-          </div>
-          <div class="custom-control custom-checkbox custom-checkbox-inline ml-2">
-            <input type="checkbox" class="custom-control-input" name="non-binary" id="2" value="2" {{'checked' if 2 in
-              gender}}>
-            <label class="custom-control-label" for="2">Non-binary</label>
-          </div>
-        </div>
-      </div>
-
-      <!-- Age -->
-      <div class="form-row">
-        <div class="form-group form-inline ml-3 mb-2">
-          <label for="min_age" style="font-weight: bold;">Age Range: &emsp;</label>
-          <input class="form-control" type="number" step="1" min="0" name="min_age"
-            value="{{request.form['min_age']}}" />
-        </div>
-        <div class="form-group form-inline ml-3 mb-2">
-          <label for="max_age" style="font-weight: bold;"> to&emsp;</label>
-          <input class="form-control" type="number" step="1" min="0" name="max_age"
-            value="{{request.form['max_age']}}" />
-        </div>
-      </div>
-
-      <!-- Reg date -->
-      <div class="form-row">
-        <div class="form-group form-inline ml-3 mb-2">
-          <label for="start_reg_date" style="font-weight: bold;">Registration Date Range: &emsp;</label>
-          <input class="form-control" type="date" name="start_reg_date" value="{{request.form['start_reg_date']}}" />
-        </div>
-        <div class="form-group form-inline ml-3 mb-2">
-          <label for="end_reg_date" style="font-weight: bold;"> to&emsp;</label>
-          <input class="form-control" type="date" name="end_reg_date" value="{{request.form['end_reg_date']}}" />
-        </div>
-      </div>
-
-      <!-- Active index -->
-      <div class="form-row">
-        <div class="form-group form-inline ml-3 mb-2">
-          <label for="min_ai" style="font-weight: bold;">Active Index Range: &emsp;</label>
-          <input class="form-control" type="number" step="1" min="0" name="min_ai" value="{{request.form['min_ai']}}" />
-        </div>
-        <div class="form-group form-inline ml-3 mb-2">
-          <label for="max_ai" style="font-weight: bold;"> to&emsp;</label>
-          <input class="form-control" type="number" step="0.01" min="0" name="max_ai"
-            value="{{request.form['max_ai']}}" />
-        </div>
-      </div>
-
-      <!-- Consumption -->
-      <div class="form-row">
-        <div class="form-group form-inline ml-3 mb-2">
-          <label for="min_cons" style="font-weight: bold;">Consumption Range: &emsp;</label>
-          <input class="form-control" type="number" step="0.01" min="0" name="min_cons"
-            value="{{request.form['min_cons']}}" />
-        </div>
-        <div class="form-group form-inline ml-3 mb-2">
-          <label for="max_cons" style="font-weight: bold;"> to&emsp;</label>
-          <input class="form-control" type="number" step="1" min="0" name="max_cons"
-            value="{{request.form['max_cons']}}" />
-        </div>
-      </div>
-
-      <!-- Mail & phone -->
-      <div class="form-row">
-        <div class="form-inline form-group ml-3 mb-2">
-          <div class="custom-control custom-checkbox custom-checkbox-inline ml-2">
-            <input type="checkbox" class="custom-control-input" name="mail" id="mail" value="1" {{'checked' if
-            request.form.get('mail')}}>
-            <label class="custom-control-label" for="mail"><b>Must Have Email</b></label>
-          </div>
-          <div class="custom-control custom-checkbox custom-checkbox-inline ml-2">
-            <input type="checkbox" class="custom-control-input" name="phone" id="phone" value="1" {{'checked' if
-            request.form.get('phone')}}>
-            <label class="custom-control-label" for="phone"><b>Must Have Phone</b></label>
-          </div>
-        </div>
-      </div>
-
-      <button type="submit" class="btn btn-primary mb-2">Apply</button>
-      <a href="/miners"><button class="btn btn-warning ml-2 mb-2" formmethod="GET">Default</button></a>
-    </div>
-  </form>
+  </div>
 
 </section>
 
-<div class="card mb-3 mt-3">
-  <div class="card-body">
-    <span style="font-weight: bold; font-size: 20pt;">
-      There are <span class="badge badge-warning">{{miner_num}}</span> registered Miners under such filter.
-    </span>
-  </div>
-</div>
+{% call warning_card() %}
+{% if request.form %}
+<h3>There are <span class="badge badge-warning">{{miner_num}}</span> registered Miners under such filter. </h3>
+{% else %}
+<h3>The library has <span class="badge badge-warning">{{miner_num}}</span> registered Miners!</h3>
+{% endif %}
+{% endcall %}
 
 <table class="table table-hover">
   <thead>

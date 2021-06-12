@@ -1,18 +1,18 @@
 {% extends 'base.html' %}
-
+{% block title %} 《{{ content['title'] }}》 {% endblock %}
 {% block content %}
 
-<h1 style="margin: 1em;">{% block title %} 《{{ content['title'] }}》 {% endblock %}</h1>
+{{ left_head('《' + content['title'] + '》') }}
 
 <!-- Book Info -->
 <section>
-  <div style="margin-top: 2em; margin-bottom: 2em;">
+  <div class="m-3">
     <ul class="list-group">
-      <li class="list-group-item">ISBN: {{ content['isbn'] }}</li>
-      <li class="list-group-item">Author: {{ content['author'] }}</li>
-      <li class="list-group-item">Publisher: {{ content['publisher'] }}</li>
-      <li class="list-group-item">Publish Date: {{ content['publish_year'] }}-{{ content['publish_month'] }}</li>
-      <li class="list-group-item">Price: {{ content['price'] }}</li>
+      <li class="list-group-item"><b>ISBN</b>: {{ content['isbn'] }}</li>
+      <li class="list-group-item"><b>Author</b>: {{ content['author'] }}</li>
+      <li class="list-group-item"><b>Publisher</b>: {{ content['publisher'] }}</li>
+      <li class="list-group-item"><b>Publish Date</b>: {{ content['publish_year'] }}-{{ content['publish_month'] }}</li>
+      <li class="list-group-item"><b>Price</b>: {{ content['price'] }}</li>
     </ul>
   </div>
 </section>
@@ -20,7 +20,7 @@
 <!-- Curator operations -->
 {% if session['role'] == 'curator' %}
 <section>
-  <div style="display: inline;">
+  <div class="ml-3" style="display: inline;">
     <a href="/{{ content['isbn'] }}/edit">
       <button type="button" class="btn btn-primary">EDIT</button>
     </a>
@@ -34,335 +34,147 @@
   {% endif %}
 </section>
 
-<hr>
-
 <!-- Cart-->
-{% if session['role'] != 'curator' %}
-<section>
-  <form action="{{ url_for('book.add2chart', isbn=content['isbn']) }}" class="form-inline" style="display: inline; float: left;">
-    <div class="input-group form-inline" style="width: 12em">
-      <input type="number" class="form-control ml-1" min="1" name="num" value="{{ 1 or request.form['num'] }}">
-      <div class="input-group-append" style="display: inline;">
-        <button class="btn btn-success" type="submit" style="display: inline;" formmethod="POST">
-          Add to Cart
+<div class="card border-warning m-3">
+  <div class="card-header">
+    <h2 class="my-n1">Buy it!</h2>
+  </div>
+  <div class="card-dody m-3">
+    {% if session['role'] != 'curator' %}
+    <section class="mb-3">
+      <form action="{{ url_for('book.add2chart', isbn=content['isbn']) }}" class="form-inline"
+        style="display: inline; float: left;">
+        <div class="input-group form-inline" style="width: 12em">
+          <input type="number" class="form-control" min="1" name="num" value="{{ 1 or request.form['num'] }}">
+          <div class="input-group-append" style="display: inline;">
+            <button class="btn btn-success" type="submit" style="display: inline;" formmethod="POST">
+              Add to Cart
+            </button>
+          </div>
+        </div>
+      </form>
+
+      <a href="{{url_for('miner.cart')}}">
+        <button class="btn btn-warning ml-2" style="display: inline;">
+          My Cart
         </button>
-      </div>
-    </div>
-  </form>
-
-  <a href="{{url_for('miner.cart')}}">
-  <button class="btn btn-warning ml-2" style="display: inline;">
-    My Cart
-  </button>
-  </a>
-</section>
-
-<hr>
-{% endif %}
+      </a>
+      
+    </section>
+    {% endif %}
+    <p class="ml-0 mb-0" style="font-size: 14pt;">
+      <span class="badge badge-warning"><b>{{ content['sold']}}</b></span>
+      copies sold!
+    </p>
+  </div>
+</div>
 
 <!-- Tag -->
 <section>
-  <h2 class="mb-4 mt-4">Tag it!</h2>
+  <div class="card border-info m-3">
+    <div class="card-header">
+      <h2 class="my-n1">Tag it!</h2>
+    </div>
 
-  {% if session['role'] != 'curator' %}
-  <form style="display: inline;">
-    <input type="submit" class="btn {{('btn-warning' if tag_state['tag_state']==1) or 'btn-outline-warning' }}"
-      formaction="{{ url_for('book.tag', isbn=content['isbn']) }}" formmethod="POST" name="tag" value="To Read">
-    <input type="submit" class="btn {{('btn-info' if tag_state['tag_state']==2) or 'btn-outline-info' }}"
-      formaction="{{ url_for('book.tag', isbn=content['isbn']) }}" formmethod="POST" name="tag" value="Reading">
-    <input type="submit" class="btn {{('btn-success' if tag_state['tag_state']==3) or 'btn-outline-success' }}"
-      formaction="{{ url_for('book.tag', isbn=content['isbn']) }}" formmethod="POST" name="tag" value="Read">
-  </form><br>
-  {% endif %}
+    <div class="card-body">
+      {% if session['role'] != 'curator' %}
+      <form class="form-inline">
+        <input type="submit" class="mr-2 btn {{('btn-warning' if tag_state['tag_state']==1) or 'btn-outline-warning' }}"
+          formaction="{{ url_for('book.tag', isbn=content['isbn']) }}" formmethod="POST" name="tag" value="To Read">
+        <input type="submit" class="mr-2 btn {{('btn-info' if tag_state['tag_state']==2) or 'btn-outline-info' }}"
+          formaction="{{ url_for('book.tag', isbn=content['isbn']) }}" formmethod="POST" name="tag" value="Reading">
+        <input type="submit" class="mr-2 btn {{('btn-success' if tag_state['tag_state']==3) or 'btn-outline-success' }}"
+          formaction="{{ url_for('book.tag', isbn=content['isbn']) }}" formmethod="POST" name="tag" value="Read">
+      </form><br>
+      {% endif %}
 
-  <ul class="list-group ml-4">
-    {% if current_user.is_authenticated and session['role'] != 'curator' %}
-    {% if tag_state['tag_state']==1 %}
-    <li> You have been wanted to read this book since <span class="badge badge-warning">{{tag_state['tag_date']}}</span>
-    </li>
-    {% elif tag_state['tag_state']==2 %}
-    <li>You have been reading this book since <span class="badge badge-info">{{tag_state['tag_date']}}</span></li>
-    {% elif tag_state['tag_state']==3 %}
-    <li>You have finished this book on <span class="badge badge-success">{{tag_state['tag_date']}}</span></li>
-    {% endif %}
-    {% endif %}
+      <ul class="list-group ml-4" style="font-size: 14pt;">
+        {% if current_user.is_authenticated and session['role'] != 'curator' %}
+        {% if tag_state['tag_state']==1 %}
+        <li> You have been wanted to read this book since <span
+            class="badge badge-warning">{{tag_state['tag_date']}}</span>
+        </li>
+        {% elif tag_state['tag_state']==2 %}
+        <li>You have been reading this book since <span class="badge badge-info">{{tag_state['tag_date']}}</span></li>
+        {% elif tag_state['tag_state']==3 %}
+        <li>You have finished this book on <span class="badge badge-success">{{tag_state['tag_date']}}</span></li>
+        {% endif %}
+        {% endif %}
 
-    <li><span class='badge badge-primary'>{{tag_stat.get(1,0)}}</span> people want to read this book</li>
-    <li><span class='badge badge-primary'>{{tag_stat.get(2,0)}}</span> people are reading this book</li>
-    <li><span class='badge badge-primary'>{{tag_stat.get(3,0)}}</span> people have read this book</li>
-  </ul>
+        <li><span class='badge badge-primary'>{{tag_stat.get(1,0)}}</span> people want to read this book</li>
+        <li><span class='badge badge-primary'>{{tag_stat.get(2,0)}}</span> people are reading this book</li>
+        <li><span class='badge badge-primary'>{{tag_stat.get(3,0)}}</span> people have read this book</li>
+      </ul>
+    </div>
+  </div>
 </section>
-<hr>
 
 <!-- Rating -->
 <section>
-  <h2 class="mt-4" style="width: 100%;">Rate it!</h2>
-
-  {% if not rating and session['role'] != 'curator' %}
-  <div class="m-4">
-    <b>Your Rating:&emsp;</b>
-    <form class="rating">
-      <label>
-        <input type="submit" name="rating" value="1" formaction="{{ url_for('book.rate', isbn=content['isbn']) }}"
-          formmethod="POST" />
-        <span class="icon fa fa-star"></span>
-      </label>
-      <label>
-        <input type="submit" name="rating" value="2" formaction="{{ url_for('book.rate', isbn=content['isbn']) }}"
-          formmethod="POST" />
-        <span class="icon fa fa-star"></span>
-        <span class="icon fa fa-star"></span>
-      </label>
-      <label>
-        <input type="submit" name="rating" value="3" formaction="{{ url_for('book.rate', isbn=content['isbn']) }}"
-          formmethod="POST" />
-        <span class="icon fa fa-star"></span>
-        <span class="icon fa fa-star"></span>
-        <span class="icon fa fa-star"></span>
-      </label>
-      <label>
-        <input type="submit" name="rating" value="4" formaction="{{ url_for('book.rate', isbn=content['isbn']) }}"
-          formmethod="POST" />
-        <span class="icon fa fa-star"></span>
-        <span class="icon fa fa-star"></span>
-        <span class="icon fa fa-star"></span>
-        <span class="icon fa fa-star"></span>
-      </label>
-      <label>
-        <input type="submit" name="rating" value="5" formaction="{{ url_for('book.rate', isbn=content['isbn']) }}"
-          formmethod="POST" />
-        <span class="icon fa fa-star"></span>
-        <span class="icon fa fa-star"></span>
-        <span class="icon fa fa-star"></span>
-        <span class="icon fa fa-star"></span>
-        <span class="icon fa fa-star"></span>
-      </label>
-    </form>
-  </div>
-  {% endif %}
-
-  {% if rating %}
-  <div class="m-4" style="width: 50%; float: left;">
-    <div>
-      <b>Your Rating:&emsp;</b>
-      {% if rating['rating']==1 %}
-      <span class="fa fa-star checked"></span>
-      <span class="fa fa-star"></span>
-      <span class="fa fa-star"></span>
-      <span class="fa fa-star"></span>
-      <span class="fa fa-star"></span>
-      {% elif rating['rating']==2 %}
-      <span class="fa fa-star checked"></span>
-      <span class="fa fa-star checked"></span>
-      <span class="fa fa-star"></span>
-      <span class="fa fa-star"></span>
-      <span class="fa fa-star"></span>
-      {% elif rating['rating']==3 %}
-      <span class="fa fa-star checked"></span>
-      <span class="fa fa-star checked"></span>
-      <span class="fa fa-star checked"></span>
-      <span class="fa fa-star"></span>
-      <span class="fa fa-star"></span>
-      {% elif rating['rating']==4 %}
-      <span class="fa fa-star checked"></span>
-      <span class="fa fa-star checked"></span>
-      <span class="fa fa-star checked"></span>
-      <span class="fa fa-star checked"></span>
-      <span class="fa fa-star"></span>
-      {% elif rating['rating']==5 %}
-      <span class="fa fa-star checked"></span>
-      <span class="fa fa-star checked"></span>
-      <span class="fa fa-star checked"></span>
-      <span class="fa fa-star checked"></span>
-      <span class="fa fa-star checked"></span>
-      {% endif %}
+  <div class="card border-danger m-3">
+    <div class="card-header">
+      <h2 class="my-n1">Rate it!</h2>
     </div>
+    <div class="card-body">
+      <div class="row mx-3">
+        {% if session['role'] != 'curator' %}
+        <div class="col">
+          {% if not rating %}
+          <div class="mb-3">
+            <b>Your Rating:&emsp;</b>
+            {{ rate_form(content['isbn']) }}
+          </div>
+          {% endif %}
 
-    <div style="margin-left: 60%; margin-top: -1.8em; width: 50%;">
-      <b>Re-Rate:&emsp;</b>
-      <form class="rating">
-        <label>
-          <input type="submit" name="rating" value="1" formaction="{{ url_for('book.rate', isbn=content['isbn']) }}"
-            formmethod="POST" />
-          <span class="icon fa fa-star"></span>
-        </label>
-        <label>
-          <input type="submit" name="rating" value="2" formaction="{{ url_for('book.rate', isbn=content['isbn']) }}"
-            formmethod="POST" />
-          <span class="icon fa fa-star"></span>
-          <span class="icon fa fa-star"></span>
-        </label>
-        <label>
-          <input type="submit" name="rating" value="3" formaction="{{ url_for('book.rate', isbn=content['isbn']) }}"
-            formmethod="POST" />
-          <span class="icon fa fa-star"></span>
-          <span class="icon fa fa-star"></span>
-          <span class="icon fa fa-star"></span>
-        </label>
-        <label>
-          <input type="submit" name="rating" value="4" formaction="{{ url_for('book.rate', isbn=content['isbn']) }}"
-            formmethod="POST" />
-          <span class="icon fa fa-star"></span>
-          <span class="icon fa fa-star"></span>
-          <span class="icon fa fa-star"></span>
-          <span class="icon fa fa-star"></span>
-        </label>
-        <label>
-          <input type="submit" name="rating" value="5" formaction="{{ url_for('book.rate', isbn=content['isbn']) }}"
-            formmethod="POST" />
-          <span class="icon fa fa-star"></span>
-          <span class="icon fa fa-star"></span>
-          <span class="icon fa fa-star"></span>
-          <span class="icon fa fa-star"></span>
-          <span class="icon fa fa-star"></span>
-        </label>
-      </form>
-    </div>
-  </div>
-  {% endif %}
+          {% if rating %}
+          <b>Your Rating:&emsp;</b>
+          {{ rate_display(rating['rating']) }}
 
-  {% if content['u_rating'] %}
-  <div class="m-4" style="clear: both;">
-    <b>User Rating:&emsp;</b>
-    {% if content['u_rating'] <= 0.25 %} <span class="fa fa-star"></span>
-      <span class="fa fa-star"></span>
-      <span class="fa fa-star"></span>
-      <span class="fa fa-star"></span>
-      <span class="fa fa-star"></span>
-      {% elif content['u_rating'] <= 0.75 %} <span class="fa fa-star-half-o checked"></span>
-        <span class="fa fa-star"></span>
-        <span class="fa fa-star"></span>
-        <span class="fa fa-star"></span>
-        <span class="fa fa-star"></span>
-        {% elif content['u_rating'] <= 1.25 %} <span class="fa fa-star checked"></span>
-          <span class="fa fa-star"></span>
-          <span class="fa fa-star"></span>
-          <span class="fa fa-star"></span>
-          <span class="fa fa-star"></span>
-          {% elif content['u_rating'] <= 1.75 %} <span class="fa fa-star checked"></span>
-            <span class="fa fa-star-half-o checked"></span>
-            <span class="fa fa-star"></span>
-            <span class="fa fa-star"></span>
-            <span class="fa fa-star"></span>
-            {% elif content['u_rating'] <= 2.25 %} <span class="fa fa-star checked"></span>
-              <span class="fa fa-star checked"></span>
-              <span class="fa fa-star"></span>
-              <span class="fa fa-star"></span>
-              <span class="fa fa-star"></span>
-              {% elif content['u_rating'] <= 2.75 %} <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star-half-o checked"></span>
-                <span class="fa fa-star"></span>
-                <span class="fa fa-star"></span>
-                {% elif content['u_rating'] <= 3.25 %} <span class="fa fa-star checked"></span>
-                  <span class="fa fa-star checked"></span>
-                  <span class="fa fa-star checked"></span>
-                  <span class="fa fa-star"></span>
-                  <span class="fa fa-star"></span>
-                  {% elif content['u_rating'] <= 3.75 %} <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star-half-o checked"></span>
-                    <span class="fa fa-star"></span>
-                    {% elif content['u_rating'] <= 4.25 %} <span class="fa fa-star checked"></span>
-                      <span class="fa fa-star checked"></span>
-                      <span class="fa fa-star checked"></span>
-                      <span class="fa fa-star checked"></span>
-                      <span class="fa fa-star"></span>
-                      {% elif content['u_rating'] <= 4.75 %} <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star-half-o checked"></span>
-                        {% else %}
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        {% endif %}
-  </div>
+          <div class="row my-3" style="margin-left: 1.8em;">
+            <b>Re-Rate: &emsp;</b>
+            {{ rate_form(content['isbn']) }}
+          </div>
+          {% endif %}
+        </div>
+        {% endif %}
 
-  <p class="ml-4 h5"><span class="badge badge-warning"><b>{{ content['u_rating'] }}</b></span>
-    average score based on <span class="badge badge-primary">{{ content['u_num'] }}</span> user ratings.</p>
-  {% else %}
-  <div class="m-4" style="clear: both;">
-  <b><i>No User Rating</i></b>
-  </div>
-  {% endif %}
-  <!-- <div class="row ml-2">
-    <div class="side">
-      <div>5 star</div>
-    </div>
-    <div class="middle">
-      <div class="bar-container">
-        <div class="bar-5"></div>
+        <div class="col">
+          {% if content['u_rating'] %}
+          <b>User Rating:&emsp;</b>
+          {{ rate_display(content['u_rating']) }}
+          {% endif %}
+        </div>
+      </div>
+
+      <div class="row mx-3">
+        {% if content['u_rating'] %}
+        <p class="ml-3 mb-0" style="font-size: 14pt;">
+          <span class="badge badge-danger"><b>{{ content['u_rating']}}</b></span>
+          average score based on
+          <span class="badge badge-primary">{{ content['u_num'] }}</span> user ratings.
+        </p>
+        {% else %}
+        <div class="ml-3 text-muted" style="clear: both;">
+          <b><i>No User Rating</i></b>
+        </div>
+        {% endif %}
       </div>
     </div>
-    <div class="side right">
-      <div>150</div>
-    </div>
-
-    <div class="side">
-      <div>4 star</div>
-    </div>
-    <div class="middle">
-      <div class="bar-container">
-        <div class="bar-4"></div>
-      </div>
-    </div>
-    <div class="side right">
-      <div>63</div>
-    </div>
-
-    <div class="side">
-      <div>3 star</div>
-    </div>
-    <div class="middle">
-      <div class="bar-container">
-        <div class="bar-3"></div>
-      </div>
-    </div>
-    <div class="side right">
-      <div>15</div>
-    </div>
-
-    <div class="side">
-      <div>2 star</div>
-    </div>
-    <div class="middle">
-      <div class="bar-container">
-        <div class="bar-2"></div>
-      </div>
-    </div>
-    <div class="side right">
-      <div>6</div>
-    </div>
-
-    <div class="side">
-      <div>1 star</div>
-    </div>
-    <div class="middle">
-      <div class="bar-container">
-        <div class="bar-1"></div>
-      </div>
-    </div>
-    <div class="side right">
-      <div>20</div>
-    </div>
-  </div>-->
 </section>
-
-<hr>
 
 <!-- Review -->
 <section>
-  <h2 class="mb-4 mt-4">Review it!</h2>
+  <div class="card border-success m-3">
+    <div class="card-header">
+      <h2 class="my-n1">Review it!</h2>
+    </div>
+  </div>
 
+  <!-- Review form -->
   {% if not review and session['role'] != 'curator' %}
-  <form class="form" method="POST">
+  <form class="form m-3" method="POST">
     <div class="form-group">
-      <label for="review"><b> Your Review </b></label>
+      <label for="review" class="h2">Your Review</label>
       <textarea name="review" class="form-control" placeholder="What's your thought about this book?"
         rows="3">{{ request.form['review'] }}</textarea>
     </div>
@@ -373,57 +185,54 @@
   </form>
   {% endif %}
 
+  <!-- Your review -->
   {% if review %}
-  <b> Your Review </b>
-  <div class="container border border-success rounded mt-3 mb-3">
-    <div class="media mt-3 mb-30 media-comment">
-      <div class="media-body u-shadow-v18 pa-30">
-        <div class="mb-15">
-          <p class="h5 fw-bold mb-0">{{ current_user.id }}</p>
-          <span class="lead text-muted"><small>{{ review['review_date'] }}</small></span>
-        </div>
-        <p>{{ review['content'] }}</p>
-      </div>
+  <div class="card border-success m-3">
+    <div class="card-header">
+      <h5 style="display: inline;">Your Review</h5> &emsp; <span class="text-muted">{{ review['review_date'] }}</span>
     </div>
+    <div class="card-body" style="white-space: pre-wrap;">{{ review['content'] }}</div>
   </div>
 
-  <input class="btn btn-primary mb-3" type="button" value="Edit" onclick="showDiv()" />
-  <br>
-  <div id="hiddenDiv" style="display: none;">
-    <form class="form" method="POST">
-      <div class="form-group">
-        <label for="review"><b> Re-Review </b></label>
-        <textarea name="review" class="form-control" placeholder="What's your UPDATED thought about this book?"
-          rows="3">{{ request.form['review'] }}</textarea>
-      </div>
-      <div class="form-group">
-        <button type="submit" formaction="{{url_for('book.review', isbn=content['isbn'])}}" formmethod="POST"
-          class="btn btn-primary">Save</button>
-      </div>
-    </form>
-  </div>
+  <!-- Edit review-->
+  <section>
+    <div class="m-3">
+      <input class="btn btn-primary" type="button" value="Edit" onclick="showDiv()"/>
+    </div>
+    <div id="hiddenDiv" style="display: none;">
+      <form class="form m-3" method="POST">
+        <div class="form-group">
+          <label for="review"><b> Re-Review </b></label>
+          <textarea name="review" class="form-control" placeholder="What's your UPDATED thought about this book?"
+            rows="3">{{ request.form['review'] }}</textarea>
+        </div>
+        <div class="form-group">
+          <button type="submit" formaction="{{url_for('book.review', isbn=content['isbn'])}}" formmethod="POST"
+            class="btn btn-success">Save</button>
+        </div>
+      </form>
+    </div>
+  </section>
   {% endif %}
 
+  <!-- Users Reviews -->
   <div>
-    <b>Users Review</b>
+    <h2 class="m-3">Users Reviews</h5>
     {% if u_reviews %}
     {% for u_review in u_reviews %}
-    <div class="container border border-primary rounded mb-3 mt-3">
-      <div class="media mt-3 mb-30 media-comment">
-        <div class="media-body u-shadow-v18 pa-30">
-          <div class="mb-15">
-            <p class="h5 fw-bold mb-0">{{ u_review['id'] }}</p>
-            <span class="lead text-muted"><small>{{ u_review['review_date'] }}</small></span>
-          </div>
-          <p>{{ u_review['content'] }}</p>
-        </div>
+    <div class="card border-primary m-3">
+      <div class="card-header">
+        <h5 style="display: inline;">{{ u_review['id'] }}</h5> &emsp;
+        <span class="text-muted">{{ u_review['review_date'] }}</span> &emsp;
+        {% if u_review['rating'] %}
+          {{ rate_display(u_review['rating']) }}
+        {% endif %}
       </div>
+      <div class="card-body" style="white-space: pre-wrap;">{{ u_review['content'] }}</div>
     </div>
     {% endfor %}
     {% endif %}
-  </div>
-
-
+  </div>  
 </section>
 
 {% endblock %}

@@ -1,0 +1,10 @@
+# {{title}}
+
+[[Functions]]
+
+page::
+
+---
+
+## Code
+
