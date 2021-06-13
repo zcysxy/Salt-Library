@@ -58,9 +58,11 @@
 
 ### [[E-R 模型设计]]
 
-### [[Relational Schemas]]
+### [[转化为关系模式]]
 
-index
+### [[函数依赖与范式]]
+
+### [[索引]]
 function
 procedures
 triggers
