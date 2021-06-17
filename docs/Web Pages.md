@@ -7,7 +7,7 @@ The list of pages is
 * [[home]]
 * [[search_result]]
 * [[ad_search]]
-* [[book]]
+* [[book_info]]
 * [[signup]]
 * [[login]]
 * [[profile]]
@@ -22,6 +22,7 @@ The list of pages is
 * [[editbook]] #curator 
 * [[books]] #curator
 * [[sales]] #curator
+* [[sql]] #curator
 
 <!-- display-none pages -->
 

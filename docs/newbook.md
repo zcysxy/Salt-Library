@@ -20,4 +20,4 @@ This page offers a **form** for the **curator** to add a new book.
 
 ## Connections
 
-* [[book]]
+* [[book_info]]

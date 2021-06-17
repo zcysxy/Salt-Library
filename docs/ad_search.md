@@ -20,5 +20,5 @@ This page offers the function of "advanced search", i.e. an user can use any inf
 
 ## Connections
 
-* [[book]]
+* [[book_info]]
 * [[requestbook]]

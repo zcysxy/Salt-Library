@@ -23,7 +23,7 @@ The home page/ control panel for the curator.
 
 ## Connections
 
-* [[book]]
+* [[book_info]]
 * [[books]]
 * [[miners]]
 * [[sales]]

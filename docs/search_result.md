@@ -21,6 +21,6 @@ This page shows the search result by **simple search** (only search title in the
 
 ## Connections
 
-* [[book]]
+* [[book_info]]
 * [[ad_search]]
 * [[requestbook]]

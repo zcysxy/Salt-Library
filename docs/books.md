@@ -32,6 +32,6 @@ This page is for the curator to manage all miners, under certain filters.
 
 ## Connections
 
-* [[book]]
+* [[book_info]]
 * [[editbook]]
 * [[deletebook]]

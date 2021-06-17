@@ -6,16 +6,16 @@ kanban-plugin: basic
 
 ## Report
 
-- [ ] 请求系统与退货付款系统的等价性
 - [ ] SQL data definitions 替换掉 描述性模式
 - [ ] list 句号
 - [ ] figures caption
+- [ ] figure route
+- [ ] code route
+- [ ] references ;; [[
 
 
 ## Todo
 
-- [ ] Textbook dynamic & embedded SQL
-- [ ] Textbook chapter Application #imp
 - [ ] buy & request skip to specific part of mylibrary
 - [ ] 几个管理页面跳转到结果
 
@@ -34,6 +34,8 @@ kanban-plugin: basic
 - [x] Roles management #hard
 - [x] DEADLINE #❗❗❗ @{2021-06-10}
 - [x] [[E-R Diagram]] drawing #later
+- [x] 符号整理 ""
+- [x] 请求系统与退货付款系统的等价性
 
 
 ## Maybe
@@ -46,6 +48,8 @@ kanban-plugin: basic
 - [ ] other index type
 - [ ] better date filter for ad_search
 - [ ] Previous ratings
+- [ ] Textbook dynamic & embedded SQL
+- [ ] Textbook chapter Application #imp
 
 
 ***

@@ -2,7 +2,7 @@
 
 [[Web Pages]]
 
-#curator
+#miner 
 
 ---
 

@@ -25,7 +25,7 @@ This page is the index/home page of the whole app
 
 ## Connection
 
-* [[book]]
+* [[book_info]]
 * [[signup]]
 * [[login]]
 * [[search_result]]

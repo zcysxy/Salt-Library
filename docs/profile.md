@@ -2,7 +2,7 @@
 
 [[Web Pages]]
 
-#curator #hub 
+#miner #hub 
 
 ---
 
@@ -27,3 +27,4 @@ A place where all info and statistics about an user show.
 * [[editprofile]]
 * [[mylibrary]]
 * [[requestbook]]
+* [[logout]]

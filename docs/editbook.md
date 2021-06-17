@@ -16,4 +16,4 @@ This page offers a **form** for the **curator** to edit the book info.
 
 ## Connections
 
-* [[book]]
+* [[book_info]]

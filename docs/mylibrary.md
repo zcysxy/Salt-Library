@@ -2,6 +2,8 @@
 
 [[Web Pages]]
 
+#miner
+
 ---
 
 ## Description
@@ -26,4 +28,4 @@ This pages show different lists of books and corresponding info about these book
 
 ## Connections
 
-* [[book]]
+* [[book_info]]

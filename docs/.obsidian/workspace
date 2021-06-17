@@ -4,179 +4,6 @@
     "type": "split",
     "children": [
       {
-        "id": "ba3f2d1781b3a02c",
-        "type": "leaf",
-        "state": {
-          "type": "graph",
-          "state": {}
-        },
-        "pane-relief:history-v1": {
-          "pos": 0,
-          "stack": [
-            {
-              "leaf": "ba3f2d1781b3a02c",
-              "group": null,
-              "state": "{\"type\":\"graph\",\"state\":{}}",
-              "eState": "{}"
-            },
-            {
-              "leaf": "ba3f2d1781b3a02c",
-              "group": null,
-              "state": "{\"type\":\"markdown\",\"state\":{\"file\":\"Web Pages.md\",\"mode\":\"preview\"}}",
-              "eState": "{\"scroll\":0}"
-            },
-            {
-              "leaf": "ba3f2d1781b3a02c",
-              "group": null,
-              "state": "{\"type\":\"markdown\",\"state\":{\"file\":\"视图.md\",\"mode\":\"preview\"}}",
-              "eState": "{}"
-            },
-            {
-              "leaf": "ba3f2d1781b3a02c",
-              "group": null,
-              "state": "{\"type\":\"markdown\",\"state\":{\"file\":\"requirement.md\",\"mode\":\"preview\"}}",
-              "eState": "{\"scroll\":8.262729605448614}"
-            }
-          ]
-        }
-      },
-      {
-        "id": "76face30738bf0df",
-        "type": "leaf",
-        "state": {
-          "type": "markdown",
-          "state": {
-            "file": "书籍管理.md",
-            "mode": "source"
-          }
-        },
-        "pane-relief:history-v1": {
-          "pos": 0,
-          "stack": [
-            {
-              "leaf": "76face30738bf0df",
-              "group": null,
-              "state": "{\"type\":\"markdown\",\"state\":{\"file\":\"书籍管理.md\",\"mode\":\"source\"}}",
-              "eState": "{\"cursor\":{\"from\":{\"line\":0,\"ch\":0},\"to\":{\"line\":0,\"ch\":0}},\"scroll\":52.42013708750407}"
-            },
-            {
-              "leaf": "76face30738bf0df",
-              "group": null,
-              "state": "{\"type\":\"markdown\",\"state\":{\"file\":\"添加新书.md\",\"mode\":\"preview\"}}",
-              "eState": "{\"scroll\":2.96}"
-            },
-            {
-              "leaf": "76face30738bf0df",
-              "group": null,
-              "state": "{\"type\":\"markdown\",\"state\":{\"file\":\"请求书籍.md\",\"mode\":\"source\"}}",
-              "eState": "{\"cursor\":{\"from\":{\"line\":38,\"ch\":97},\"to\":{\"line\":38,\"ch\":97}},\"scroll\":30.856394206260678}"
-            },
-            {
-              "leaf": "76face30738bf0df",
-              "group": null,
-              "state": "{\"type\":\"markdown\",\"state\":{\"file\":\"newbook.md\",\"mode\":\"source\"}}",
-              "eState": "{\"scroll\":18.16304843101736}"
-            },
-            {
-              "leaf": "76face30738bf0df",
-              "group": null,
-              "state": "{\"type\":\"markdown\",\"state\":{\"file\":\"requests.md\",\"mode\":\"source\"}}",
-              "eState": "{\"cursor\":{\"from\":{\"line\":25,\"ch\":9},\"to\":{\"line\":25,\"ch\":9}},\"scroll\":17.817982322291325}"
-            },
-            {
-              "leaf": "76face30738bf0df",
-              "group": null,
-              "state": "{\"type\":\"markdown\",\"state\":{\"file\":\"sales.md\",\"mode\":\"source\"}}",
-              "eState": "{\"scroll\":16.517361323038738}"
-            },
-            {
-              "leaf": "76face30738bf0df",
-              "group": null,
-              "state": "{\"type\":\"markdown\",\"state\":{\"file\":\"miners.md\",\"mode\":\"source\"}}",
-              "eState": "{\"scroll\":26.678677073158617}"
-            },
-            {
-              "leaf": "76face30738bf0df",
-              "group": null,
-              "state": "{\"type\":\"markdown\",\"state\":{\"file\":\"editbook.md\",\"mode\":\"source\"}}",
-              "eState": "{\"scroll\":0}"
-            },
-            {
-              "leaf": "76face30738bf0df",
-              "group": null,
-              "state": "{\"type\":\"markdown\",\"state\":{\"file\":\"books.md\",\"mode\":\"source\"}}",
-              "eState": "{\"cursor\":{\"from\":{\"line\":35,\"ch\":7},\"to\":{\"line\":35,\"ch\":7}},\"scroll\":21.425438328793174}"
-            },
-            {
-              "leaf": "76face30738bf0df",
-              "group": null,
-              "state": "{\"type\":\"markdown\",\"state\":{\"file\":\"curator_panel.md\",\"mode\":\"source\"}}",
-              "eState": "{\"cursor\":{\"from\":{\"line\":26,\"ch\":5},\"to\":{\"line\":26,\"ch\":5}},\"scroll\":21.59563852281143}"
-            },
-            {
-              "leaf": "76face30738bf0df",
-              "group": null,
-              "state": "{\"type\":\"markdown\",\"state\":{\"file\":\"editprofile.md\",\"mode\":\"source\"}}",
-              "eState": "{\"scroll\":16.449617441961184}"
-            },
-            {
-              "leaf": "76face30738bf0df",
-              "group": null,
-              "state": "{\"type\":\"markdown\",\"state\":{\"file\":\"login.md\",\"mode\":\"source\"}}",
-              "eState": "{\"scroll\":0}"
-            },
-            {
-              "leaf": "76face30738bf0df",
-              "group": null,
-              "state": "{\"type\":\"markdown\",\"state\":{\"file\":\"signup.md\",\"mode\":\"source\"}}",
-              "eState": "{\"cursor\":{\"from\":{\"line\":19,\"ch\":20},\"to\":{\"line\":19,\"ch\":20}},\"scroll\":18.624682064020966}"
-            },
-            {
-              "leaf": "76face30738bf0df",
-              "group": null,
-              "state": "{\"type\":\"markdown\",\"state\":{\"file\":\"newbook.md\",\"mode\":\"source\"}}",
-              "eState": "{\"scroll\":18.042581622132932}"
-            },
-            {
-              "leaf": "76face30738bf0df",
-              "group": null,
-              "state": "{\"type\":\"markdown\",\"state\":{\"file\":\"miners.md\",\"mode\":\"source\"}}",
-              "eState": "{\"scroll\":26.6910706986489}"
-            },
-            {
-              "leaf": "76face30738bf0df",
-              "group": null,
-              "state": "{\"type\":\"markdown\",\"state\":{\"file\":\"sql.md\",\"mode\":\"source\"}}",
-              "eState": "{\"scroll\":12.385964845356188}"
-            },
-            {
-              "leaf": "76face30738bf0df",
-              "group": null,
-              "state": "{\"type\":\"markdown\",\"state\":{\"file\":\"mylibrary.md\",\"mode\":\"source\"}}",
-              "eState": "{\"scroll\":4.7499996821085615}"
-            },
-            {
-              "leaf": "76face30738bf0df",
-              "group": null,
-              "state": "{\"type\":\"markdown\",\"state\":{\"file\":\"profile.md\",\"mode\":\"source\"}}",
-              "eState": "{\"cursor\":{\"from\":{\"line\":27,\"ch\":9},\"to\":{\"line\":27,\"ch\":9}},\"scroll\":21.47156495345507}"
-            },
-            {
-              "leaf": "76face30738bf0df",
-              "group": null,
-              "state": "{\"type\":\"markdown\",\"state\":{\"file\":\"signup.md\",\"mode\":\"preview\"}}",
-              "eState": "{\"scroll\":0}"
-            },
-            {
-              "leaf": "76face30738bf0df",
-              "group": null,
-              "state": "{\"type\":\"markdown\",\"state\":{\"file\":\"ad_search.md\",\"mode\":\"preview\"}}",
-              "eState": "{\"scroll\":18.096826914599177}"
-            }
-          ]
-        }
-      },
-      {
         "id": "279e1e1e62fc8890",
         "type": "leaf",
         "state": {
@@ -188,6 +15,18 @@
         "pane-relief:history-v1": {
           "pos": 0,
           "stack": [
+            {
+              "leaf": "279e1e1e62fc8890",
+              "group": null,
+              "state": "{\"type\":\"kanban\",\"state\":{\"file\":\"DB Project Kanban.md\"}}",
+              "eState": "{}"
+            },
+            {
+              "leaf": "279e1e1e62fc8890",
+              "group": null,
+              "state": "{\"type\":\"graph\",\"state\":{}}",
+              "eState": "{}"
+            },
             {
               "leaf": "279e1e1e62fc8890",
               "group": null,
@@ -315,7 +154,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "书籍管理.md"
+                "file": "DB Project Kanban.md"
               }
             },
             "pane-relief:history-v1": {
@@ -344,7 +183,7 @@
             "state": {
               "type": "localgraph",
               "state": {
-                "file": "书籍管理.md",
+                "file": "DB Project Kanban.md",
                 "options": {
                   "collapse-filter": false,
                   "search": "",
@@ -414,7 +253,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "书籍管理.md",
+                "file": "DB Project Kanban.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -454,17 +293,17 @@
     "width": 327,
     "collapsed": true
   },
-  "active": "76face30738bf0df",
+  "active": "279e1e1e62fc8890",
   "lastOpenFiles": [
-    "书籍管理.md",
-    "添加新书.md",
-    "请求书籍.md",
-    "newbook.md",
-    "requests.md",
     "DB Project Kanban.md",
-    "Web Pages.md",
-    "sales.md",
-    "修改用户信息.md",
-    "miners.md"
+    "book.md",
+    "curator.md",
+    "mylibrary.md",
+    "requestbook.md",
+    "editprofile.md",
+    "cart.md",
+    "profile.md",
+    "书籍管理.md",
+    "buybook.md"
   ]
 }

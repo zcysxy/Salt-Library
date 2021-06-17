@@ -2,6 +2,8 @@
 
 [[Web Pages]]
 
+#miner
+
 ---
 
 ## Description

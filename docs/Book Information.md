@@ -2,7 +2,7 @@
 
 [[Functions]]
 
-page:: [[book]]
+page:: [[book_info]]
 
 ---
 
