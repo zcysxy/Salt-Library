@@ -9,16 +9,15 @@ app.config['SECRET_KEY'] = 'SaltLibrary'
 # Register blueprints
 # 4 parts: auth, book, miner, curator
 from auth import auth
-
 app.register_blueprint(auth)
+
 from book import book
-
 app.register_blueprint(book)
+
 from miner import miner
-
 app.register_blueprint(miner)
-from curator import curator
 
+from curator import curator
 app.register_blueprint(curator)
 
 # Set up login manager
@@ -40,4 +39,4 @@ if __name__ == '__main__':
 
     # For waitress deployment mode
     from waitress import serve
-    serve(app, host="0.0.0.0", port=8080)
+    serve(app, host="0.0.0.0", port=5000)

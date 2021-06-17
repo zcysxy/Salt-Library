@@ -14,6 +14,11 @@ A page for users to sign up.
 
 * A form of *miners* table
 
+## Snapshots
+
+![](img/signup-1.png)
+![](img/signup-2.png)
+
 ## Connections
 
 * [[login]]

@@ -87,7 +87,7 @@ EXECUTE PROCEDURE change_request_state();
 
 /**
  * Requested Book Trigger
- * auto remove the infomation of a requested book after 
+ * auto remove the information of a requested book after 
  * the request state of that book is changed to "added" or "turned down"
  */
 CREATE OR REPLACE FUNCTION delete_requested_book_fun()

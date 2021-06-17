@@ -11,16 +11,23 @@ This page offers the detailed information of a single book. It also offers diffe
 ## Components
 
 * Book info
-* Operation buttons
-    * For curator: edit, delete
-    * For miners: add to cart, tag, rate, review
-* Rating
-* My rating #logged
-* Review, and my review first (if #logged)
+* For curator: edit, delete
+* Buy it
+* Tag it
+* Rate it
+* Review it
+
+## Snapshots
+
+![book-1](book-1.png)
+:> Book page for tourists <:
 
 ## Connections
 
 * [[editbook]]
 * [[deletebook]]
-* [[buybook]]
+* [[add2cart]]
+* [[cart]]
+* [[tag]]
+* [[rate]]
 * [[review]]

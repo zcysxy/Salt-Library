@@ -8,26 +8,33 @@ The list of pages is
 * [[search_result]]
 * [[ad_search]]
 * [[book]]
-* [[newbook]] #curator 
-* [[editbook]] #curator 
-* [[buybook]]
-* [[requestbook]]
-* [[profile]]
-* [[mylibrary]]
-* [[review]]
 * [[signup]]
 * [[login]]
+* [[profile]]
 * [[editprofile]]
-* [[curator]]
-* [[mark]] #curator
-* [[requests]] #curator 
+* [[mylibrary]]
+* [[requestbook]]
+* [[cart]]
+* [[curator_panel]] #curator
 * [[miners]] #curator
-* [[sell]] #curator
+* [[requests]] #curator 
+* [[newbook]] #curator 
+* [[editbook]] #curator 
+* [[books]] #curator
+* [[sales]] #curator
 
 <!-- display-none pages -->
 
-* [[logout]] #logged
-* [[deletebook]]
+* [[logout]] #miner
+* [[add2cart]] #miner
+* [[tag]] #miner
+* [[rate]] #miner
+* [[review]] #miner
+* [[remove4cart]] #miner
+* [[buy]] #miner
+* [[deletebook]] #curator 
+* [[add_request]] #curator 
+* [[turndown]] #curator 
 
 The last several pages are **display-none** pages. That is, they don't have a HTML file that tells the app what to display, instead, they conduct some operations and then immediately redirect to other pages.
 

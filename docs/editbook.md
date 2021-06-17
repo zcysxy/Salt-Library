@@ -12,6 +12,8 @@ This page offers a **form** for the **curator** to edit the book info.
 
 * A form for *books* table
 
+## Snapshots
+
 ## Connections
 
 * [[book]]

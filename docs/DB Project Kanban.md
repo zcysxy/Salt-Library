@@ -7,12 +7,17 @@ kanban-plugin: basic
 ## Report
 
 - [ ] 请求系统与退货付款系统的等价性
+- [ ] SQL data definitions 替换掉 描述性模式
+- [ ] list 句号
+- [ ] figures caption
 
 
 ## Todo
 
 - [ ] Textbook dynamic & embedded SQL
 - [ ] Textbook chapter Application #imp
+- [ ] buy & request skip to specific part of mylibrary
+- [ ] 几个管理页面跳转到结果
 
 
 ## In Progress
@@ -21,7 +26,6 @@ kanban-plugin: basic
 - [ ] check all the can-be-null attributes (like publish_month)
 - [ ] revise all input forms
 - [ ] Extensibility: a real enjoyable personal database #later
-- [ ] [[E-R Diagram]] drawing #later
 
 
 ## Done
@@ -29,6 +33,7 @@ kanban-plugin: basic
 **Complete**
 - [x] Roles management #hard
 - [x] DEADLINE #❗❗❗ @{2021-06-10}
+- [x] [[E-R Diagram]] drawing #later
 
 
 ## Maybe

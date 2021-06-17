@@ -1,9 +1,12 @@
 {% extends "base.html" %}
-
+{% block title %}
+    Log In
+{% endblock title %}
 {% block content %}
+{{ center_head('Please Log In') }}
+
 <main class="form-signin">
 <form method="POST">
-    <h1 class="mb-2 mt-3">Please log in</h1>
 
     <div class="form-floating mb-2">
         <label for="id">Account ID</label>

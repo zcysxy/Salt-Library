@@ -14,6 +14,11 @@ This page shows the search result by **simple search** (only search title in the
 * Request a book button
 * Result
 
+## Snapshots
+
+![search_result](search_result.png)
+:> 一个模糊搜索结果 ("看见光" ≈ "所有我们看不见的光") <:
+
 ## Connections
 
 * [[book]]

@@ -12,6 +12,8 @@ This page offers a form for the miner to edit their basic information.
 
 * A form for *miners* relation
 
-## Connections
+## Snapshot
 
-* [[profile]]
+![](img/editprofile.png)
+
+## Connections

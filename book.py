@@ -72,16 +72,19 @@ def home():
 def search_result():
     '''Simple fuzzy search'''
 
-    # Construct the fuzzy pattern of the book title
-    like_title = '%' + '%'.join(request.args.get('title')) + '%'
+    if request.args.get('title'):
+        # Construct the fuzzy pattern of the book title
+        like_title = '%' + '%'.join(request.args.get('title')) + '%'
 
-    con = Connect()
-    rows = con.query(
-        """
-        SELECT *
-        FROM books
-        WHERE title LIKE %s
-        """, (like_title, ))
+        con = Connect()
+        rows = con.query(
+            """
+            SELECT *
+            FROM books
+            WHERE title LIKE %s
+            """, (like_title, ))
+    else:
+        rows = []
 
     if request.method == 'POST':
         title = request.form['title']
@@ -236,10 +239,10 @@ def book_info(isbn):
 
 # POST only/ non-view makes that navigating to the page raise an error,
 # since web browser default to GET requests
-@book.route('/<int:isbn>/add2chart', methods=('POST', ))
+@book.route('/<int:isbn>/add2cart', methods=('POST', ))
 @login_required
 @role_required('miner')
-def add2chart(isbn):
+def add2cart(isbn):
     '''Non-view page, for adding to cart'''
 
     num = request.form['num']
@@ -252,7 +255,7 @@ def add2chart(isbn):
         DO UPDATE SET cart_num = cart.cart_num + EXCLUDED.cart_num
         ''', [str(isbn), current_user.id, num])
 
-    flash('The book is added to your chart!', 'success')
+    flash('The book is added to your cart!', 'success')
 
     return redirect('/%d' % isbn)
 
@@ -317,32 +320,27 @@ def review(isbn):
     return redirect('/%d' % isbn)
 
 
-@book.route('/requestbook/', methods=('GET', 'POST'))
+@book.route('/requestbook', methods=('GET', 'POST'))
 @login_required
 @role_required('miner')
 def requestbook():
     '''For Miners to request missing books'''
 
     if request.method == 'POST':
-        isbn = request.form['isbn']
-        title = request.form['title']
-        author = request.form['author']
-        publisher = request.form['publisher']
+        isbn = request.form['isbn'] or None
+        title = request.form['title'] or None
+        author = request.form['author'] or None
+        publisher = request.form['publisher'] or None
         publish_year = request.form['publish_year'] or None
         publish_month = request.form['publish_month'] or None
         price = request.form['price'] or None
 
-        if not isbn:
-            msg = 'ISBN is required!'
-        elif not title:
-            msg = 'Title is required!'
-        else:
-            con = Connect(session['role'], session['db_pw'])
-            # Call SQL function insert_request to request
-            msg = con.query('SELECT insert_request(%s,%s,%s,%s,%s,%s,%s,%s)', [
-                current_user.id, isbn, title, author, publisher, publish_year,
-                publish_month, price
-            ], 1)[0]
+        con = Connect(session['role'], session['db_pw'])
+        # Call SQL function insert_request to request
+        msg = con.query('SELECT insert_request(%s,%s,%s,%s,%s,%s,%s,%s)', [
+            current_user.id, isbn, title, author, publisher, publish_year,
+            publish_month, price
+        ], 1)[0]
 
         if msg:
             # Return the error message

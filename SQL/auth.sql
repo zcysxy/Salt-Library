@@ -13,30 +13,38 @@ ON miners
 TO public;
 
 /* Miner privileges */
-GRANT ALL
+GRANT SELECT, UPDATE, INSERT, DELETE
 ON cart
 TO miner;
 
 GRANT UPDATE
-ON miners, tag
+ON miners
 TO miner;
 
-GRANT SELECT
-ON marks, buy, tag, request, requested_books, mark_book_view, buy_view
+GRANT INSERT
+ON marks
+TO miner;
+
+GRANT SELECT, INSERT
+ON buy
+TO miner;
+
+GRANT INSERT, DELETE
+ON tag, review, rate
 TO miner;
 
 GRANT USAGE, SELECT
 ON SEQUENCE marks_mark_id_seq
 TO miner;
 
-GRANT INSERT
-ON marks, buy, requested_books, request, tag, rate, review
-TO miner;
-
-GRANT DELETE
-ON tag, rate, review
-TO miner;
-
 GRANT UPDATE (u_rating, u_num, sold)
 ON books
+TO miner;
+
+GRANT SELECT, INSERT
+ON request, requested_books
+TO miner;
+
+GRANT SELECT
+ON mark_book_view, buy_view
 TO miner;

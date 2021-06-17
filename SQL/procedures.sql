@@ -117,7 +117,7 @@ BEGIN
         (isbn_in, id_in, 3)
         RETURNING mark_id INTO new_mark_id;
 
-    /* Insert a new rating */
+    /* Insert a new review */
     INSERT INTO review VALUES (new_mark_id, content_in);
 END;
 $$ LANGUAGE plpgsql;

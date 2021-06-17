@@ -7,7 +7,7 @@
 <!-- Book Info -->
 <section>
   <div class="m-3">
-    <ul class="list-group">
+    <ul class="list-group" style="box-shadow: 0 4px 5px 0 rgba(0, 0, 0, .14), 0 1px 10px 0 rgba(0, 0, 0, .12), 0 2px 4px -1px rgba(0, 0, 0, .2); border-radius: 3pt;">
       <li class="list-group-item"><b>ISBN</b>: {{ content['isbn'] }}</li>
       <li class="list-group-item"><b>Author</b>: {{ content['author'] }}</li>
       <li class="list-group-item"><b>Publisher</b>: {{ content['publisher'] }}</li>
@@ -42,10 +42,10 @@
   <div class="card-dody m-3">
     {% if session['role'] != 'curator' %}
     <section class="mb-3">
-      <form action="{{ url_for('book.add2chart', isbn=content['isbn']) }}" class="form-inline"
+      <form action="{{ url_for('book.add2cart', isbn=content['isbn']) }}" class="form-inline"
         style="display: inline; float: left;">
         <div class="input-group form-inline" style="width: 12em">
-          <input type="number" class="form-control" min="1" name="num" value="{{ 1 or request.form['num'] }}">
+          <input type="number" class="form-control" min="1" name="num" value="{{ 1 or request.form['num'] }}" style="box-shadow: 0 4px 5px 0 rgba(0, 0, 0, .14), 0 1px 10px 0 rgba(0, 0, 0, .12), 0 2px 4px -1px rgba(0, 0, 0, .2);">
           <div class="input-group-append" style="display: inline;">
             <button class="btn btn-success" type="submit" style="display: inline;" formmethod="POST">
               Add to Cart

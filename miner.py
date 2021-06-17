@@ -14,7 +14,7 @@ from datetime import datetime
 miner = Blueprint('miner', __name__)
 
 
-@miner.route('/profile/', methods=['POST', 'GET'])
+@miner.route('/profile', methods=['POST', 'GET'])
 @login_required
 @role_required('miner')
 def profile():
@@ -43,8 +43,8 @@ def profile():
             COALESCE(SUM(bought_num * price),0) AS bought_sum
         FROM (
                 SELECT bought_num, isbn
-                FROM buy NATURAL JOIN marks
-                WHERE (id = %s) AND (DATE(mark_time) BETWEEN %s AND %s)
+                FROM buy_view
+                WHERE (id = %s) AND (bought_date BETWEEN %s AND %s)
             ) AS r NATURAL JOIN books
         ''', [current_user.id, start_date, end_date], 1)
 
@@ -60,8 +60,8 @@ def profile():
     rate = con.query(
         '''
         SELECT COUNT(*) AS rate_num, ROUND(AVG(rating),2) AS avg_rating
-        FROM rate NATURAL JOIN marks
-        WHERE (id = %s) AND (DATE(mark_time) BETWEEN %s AND %s)
+        FROM rate_view
+        WHERE (id = %s) AND (rate_date BETWEEN %s AND %s)
         ''', [current_user.id, start_date, end_date], 1)
 
     return render_template('profile.html',

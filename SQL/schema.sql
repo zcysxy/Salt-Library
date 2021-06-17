@@ -1,7 +1,7 @@
 /* Books */
 DROP TABLE IF EXISTS books CASCADE;
 CREATE TABLE books (
-    ISBN CHAR(13) PRIMARY KEY,
+    ISBN CHAR(13) PRIMARY KEY CHECK(ISBN SIMILAR TO '[0-9]{12}[0-9Xx]'),
     title VARCHAR(100) NOT NULL,
     author VARCHAR(100),
     publisher VARCHAR(100),
@@ -57,7 +57,7 @@ CREATE TABLE request (
 
 DROP TABLE IF EXISTS cart;
 CREATE TABLE cart (
-    ISBN CHAR(13) REFERENCES books(ISBN),
+    ISBN CHAR(13) REFERENCES books(ISBN) ON DELETE CASCADE,
     ID VARCHAR(10) REFERENCES miners(ID),
     cart_num INT CHECK(cart_num > 0),
     PRIMARY KEY (ISBN, ID)
@@ -67,7 +67,7 @@ CREATE TABLE cart (
 DROP TABLE IF EXISTS marks CASCADE;
 CREATE TABLE marks (
     mark_id SERIAL PRIMARY KEY,
-    ISBN CHAR(13) NOT NULL REFERENCES books(ISBN),
+    ISBN CHAR(13) NOT NULL REFERENCES books(ISBN) ON DELETE CASCADE,
     ID VARCHAR(10) NOT NULL REFERENCES miners(ID),
     mark_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     operation INT NOT NULL CHECK(operation IN (1,2,3,4)), /*1 for buy, 2 for tag, 3 for review, 4 for rate*/
@@ -77,28 +77,28 @@ CREATE INDEX marks_index ON marks(operation, mark_id DESC);
 
 DROP TABLE IF EXISTS buy;
 CREATE TABLE buy (
-    mark_id INT PRIMARY KEY REFERENCES marks(mark_id),
+    mark_id INT PRIMARY KEY REFERENCES marks(mark_id) ON DELETE CASCADE,
     bought_num INT NOT NULL CHECK(bought_num > 0)
 );
 CREATE INDEX buy_index ON buy(mark_id DESC);
 
 DROP TABLE IF EXISTS tag;
 CREATE TABLE tag (
-    mark_id INT PRIMARY KEY REFERENCES marks(mark_id),
+    mark_id INT PRIMARY KEY REFERENCES marks(mark_id) ON DELETE CASCADE,
     tag_state INT CHECK(tag_state IN (1,2,3)) /* 1 for To Read, 2 for Reading, 3 for Read */
 );
 CREATE INDEX tag_index ON tag(tag_state, mark_id DESC);
 
 DROP TABLE IF EXISTS review;
 CREATE TABLE review (
-    mark_id INT PRIMARY KEY REFERENCES marks(mark_id),
+    mark_id INT PRIMARY KEY REFERENCES marks(mark_id) ON DELETE CASCADE,
     content VARCHAR
 );
 CREATE INDEX review_index ON review(mark_id DESC);
 
 DROP TABLE IF EXISTS rate;
 CREATE TABLE rate (
-    mark_id INT PRIMARY KEY REFERENCES marks(mark_id),
+    mark_id INT PRIMARY KEY REFERENCES marks(mark_id) ON DELETE CASCADE,
     rating INT CHECK(rating BETWEEN 0 AND 5)
 );
 CREATE INDEX rate_index ON rate(mark_id DESC);

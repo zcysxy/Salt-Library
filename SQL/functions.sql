@@ -34,6 +34,7 @@ RETURNS VARCHAR AS $msg$
 DECLARE msg VARCHAR;
 DECLARE state_txt VARCHAR;
 BEGIN
+    /* Transform the state value to text */
     state_txt = (
         CASE
             WHEN tag_state_in = 2 THEN '"reading"!'
@@ -41,7 +42,7 @@ BEGIN
         END
     );
 
-    /* check before the miner tag the book reading or read */
+    /* Check before the miner tag the book reading or read */
     IF (tag_state_in=2 OR tag_state_in=3) AND NOT EXISTS (
         SELECT *
         FROM buy_view
@@ -71,7 +72,7 @@ CREATE OR REPLACE FUNCTION change_rating(
 RETURNS VARCHAR AS $msg$
 DECLARE msg VARCHAR;
 BEGIN
-    /* check before the miner rate the book */
+    /* Check before the miner rate the book */
     IF NOT EXISTS (
         SELECT *
         FROM tag_view
@@ -101,7 +102,7 @@ CREATE OR REPLACE FUNCTION change_review(
 RETURNS VARCHAR AS $msg$
 DECLARE msg VARCHAR;
 BEGIN
-    /* check before the miner rate the book */
+    /* Check before the miner rate the book */
     IF NOT EXISTS (
         SELECT *
         FROM tag_view
@@ -180,7 +181,7 @@ $msg$ LANGUAGE plpgsql;
 
 /**
  * Function to check the validation of the profile update information,
- * and update it valid
+ * and update it if valid
  */
 CREATE OR REPLACE FUNCTION update_miners(
     id_in VARCHAR,
@@ -323,26 +324,10 @@ BEGIN
     FROM marks
     WHERE mark_id = mark_id_in;
 
-    /* Check if the Miner tagged it reading */
+    /* We take the date they bought the books as the start date*/
     SELECT DATE(mark_time) INTO date_start
-    FROM (
-        SELECT * 
-        FROM marks 
-        WHERE id=id_in AND isbn=isbn_temp AND operation=2
-    ) AS r1 NATURAL JOIN (
-        SELECT *
-        FROM tag
-        WHERE tag_state=2
-    ) AS r2
-    ORDER BY mark_time
-    LIMIT 1;
-
-    /* Otherwise, we take the date they bought the books as the start date*/
-    IF date_start IS NULL THEN
-        SELECT DATE(mark_time) INTO date_start
-        FROM marks
-        WHERE id=id_in AND isbn=isbn_temp AND operation=1;
-    END IF;
+    FROM marks
+    WHERE id=id_in AND isbn=isbn_temp AND operation=1;
     ts = 1 + DATE_PART('DAY', date_end::TIMESTAMP - date_start::TIMESTAMP);
     RETURN ts;
 END;

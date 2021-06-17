@@ -5,6 +5,7 @@
 		}
 	],
 	"settings": {
+		"files.exclude": { "**/.obsidian": true },
 		"editor.fontFamily": "Fira Code Medium, Glow Sans SC Medium, '微软雅黑', Cascadia code, Consolas, 'Courier New', monospace",
 		"editor.fontLigatures": true,
 		"editor.fontSize": 16,
@@ -21,5 +22,6 @@
 			"editor.quickSuggestions": false,
 			"editor.suggest.showSnippets": false,
 		},
+		"cSpell.enabled": true,
 	}
 }

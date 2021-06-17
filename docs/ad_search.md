@@ -1,6 +1,5 @@
 # ad_search
 
-
 [[Web Pages]]
 
 ---
@@ -12,8 +11,12 @@ This page offers the function of "advanced search", i.e. an user can use any inf
 ## Components
 
 * Advanced search form
-* Request a book button
+* info card
 * Result
+
+## Snapshots
+
+![ad_search](ad_search.png)
 
 ## Connections
 

@@ -97,6 +97,11 @@ Fill in the information you know.
 </script>
 {% endif %}
 
+<!-- Request prompt -->
+{% call info_card() %}
+    Didn't find the book you are looking for? <a href="{{url_for('book.requestbook')}}"><button class="btn btn-info">Request</button></a> it!
+{% endcall %}
+
 {% for book in result %}
 {{ book_card(book) }}
 {% endfor %}
