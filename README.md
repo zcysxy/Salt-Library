@@ -94,20 +94,20 @@
     具体地利用 PSQL CLI 创建数据库的指令如下 (假设已经以其他超级管理员身份登入, 按顺序**分别执行每行指令**)
 
     ```txt
-    # \i ini.sql
+    # \i SQL/ini.sql
     # \c saltlibrary curator
     ```
 
     输入密码 `SaltLibrary`
 
     ```txt
-    # \i schema.sql
-    # \i views.sql
-    # \i auth.sql
-    # \i functions.sql
-    # \i procedures.sql
-    # \i triggers.sql
-    # \i date.sql
+    # \i SQL/schema.sql
+    # \i SQL/views.sql
+    # \i SQL/auth.sql
+    # \i SQL/functions.sql
+    # \i SQL/procedures.sql
+    # \i SQL/triggers.sql
+    # \i SQL/date.sql
     ```
 
 3. 运行应用

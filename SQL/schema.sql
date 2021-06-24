@@ -54,7 +54,7 @@ CREATE TABLE request (
     ISBN CHAR(13) PRIMARY KEY REFERENCES requested_books(ISBN),
     ID VARCHAR(10) REFERENCES miners(ID),
     request_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    request_state INT CHECK(request_state IN (1,2,3)), /* 1 for pending, 2 for added, 3 for turned down */
+    request_state INT CHECK(request_state IN (1,2,3)) /* 1 for pending, 2 for added, 3 for turned down */
 );
 
 DROP TABLE IF EXISTS cart;

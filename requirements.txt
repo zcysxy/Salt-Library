@@ -4,4 +4,4 @@ numpy
 werkzeug
 psycopg2
 datetime
-functools
+waitress
