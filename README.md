@@ -126,7 +126,7 @@
     flask run
     ```
 
-    或者你可以使用 **VS Code** 的debug 模式. 首先你需要注释掉以 WSGI server 连接应用的语句, 取消注释以开发模式运行应用的语句, 即将 [`app.py`](app.py) 最后几行代码改为以下结果
+    或者你可以使用 **VS Code** 的 debug 模式. 首先你需要注释掉以 WSGI server 连接应用的语句, 取消注释以开发模式运行应用的语句, 即将 [`app.py`](app.py) 最后几行代码改为以下结果
 
     ```python
     # For VS Code debug mode
