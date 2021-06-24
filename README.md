@@ -2,10 +2,7 @@
 
 ## About Salt-Library
 
-<center>
-
-![](docs/img/sl_logo.png)
-</center>
+<img src="docs/img/sl_logo.png" align="center" max-height=300px>
 
 > This is a library where books taste salty!
 
