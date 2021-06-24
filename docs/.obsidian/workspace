@@ -4,7 +4,7 @@
     "type": "split",
     "children": [
       {
-        "id": "e79dd3b05f90a64b",
+        "id": "1adccaf56ee179b7",
         "type": "leaf",
         "state": {
           "type": "empty",
@@ -14,7 +14,7 @@
           "pos": 0,
           "stack": [
             {
-              "leaf": "e79dd3b05f90a64b",
+              "leaf": "1adccaf56ee179b7",
               "group": null,
               "state": "{\"type\":\"empty\",\"state\":{}}",
               "eState": "{}"
@@ -77,8 +77,7 @@
               "stack": []
             }
           }
-        ],
-        "currentTab": 1
+        ]
       },
       {
         "id": "72f0f39511a4b5d5",
@@ -241,17 +240,17 @@
     "width": 327,
     "collapsed": true
   },
-  "active": "e79dd3b05f90a64b",
+  "active": "1adccaf56ee179b7",
   "lastOpenFiles": [
-    "Security.md",
+    "README.md",
     "DB Project Kanban.md",
+    "Security.md",
     "E-R 模型设计.md",
     "Fine Tune Kanban.md",
     "Report.md",
     "权限.md",
     "请求书籍.md",
     "book.md",
-    "curator.md",
-    "mylibrary.md"
+    "curator.md"
   ]
 }

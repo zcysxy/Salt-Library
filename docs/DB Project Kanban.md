@@ -6,18 +6,13 @@ kanban-plugin: basic
 
 ## Todo
 
-- [ ] 安全性分析
 - [ ] 总结
-- [ ] 密码说明
-- [ ] 角色说明
+- [ ] [[README]]
 
 
 ## In Progress
 
 - [ ] Document @{2021-06-07}
-- [ ] check all the can-be-null attributes (like publish_month)
-- [ ] revise all input forms
-- [ ] Extensibility: a real enjoyable personal database #later
 
 
 ## Done
@@ -25,7 +20,14 @@ kanban-plugin: basic
 **Complete**
 - [x] Roles management #hard
 - [x] DEADLINE #❗❗❗ @{2021-06-10}
+- [x] 哲学
+- [x] check all the can-be-null attributes (like publish_month)
+- [x] Extensibility: a real enjoyable personal database #later
+- [x] revise all input forms
+- [x] 角色说明
+- [x] 密码说明
 - [x] [[E-R Diagram]] drawing #later
+- [x] 安全性分析
 - [x] 符号整理 ""
 - [x] 请求系统与退货付款系统的等价性
 - [x] SQL data definitions 替换掉 描述性模式
