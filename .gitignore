@@ -1,1 +1,6 @@
 myenv/
+__pycache__/
+archive/
+Salt-Library.code-workspace
+docs/.obsidian
+docs/templates
