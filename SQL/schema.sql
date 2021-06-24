@@ -16,7 +16,7 @@ CREATE TABLE books (
 );
 CREATE INDEX books_title_index ON books(title);
 
-/* Users */
+/* Miners */
 DROP TABLE IF EXISTS miners CASCADE;
 CREATE TABLE miners (
     ID VARCHAR(10) PRIMARY KEY CHECK(ID SIMILAR TO '[a-zA-Z0-9_]{1,10}'),
@@ -38,13 +38,15 @@ INSERT INTO miners VALUES ('curator', MD5('SaltLibrary'), 'iodin', 'salt@library
 /* Book requests */
 DROP TABLE IF EXISTS requested_books CASCADE;
 CREATE TABLE requested_books (
-    ISBN CHAR(13) PRIMARY KEY,
+    ISBN CHAR(13) PRIMARY KEY CHECK(ISBN SIMILAR TO '[0-9]{12}[0-9Xx]'),
     title VARCHAR(100) NOT NULL,
     author VARCHAR(100),
     publisher VARCHAR(100),
-    publish_year INT CHECK(publish_year BETWEEN 0 AND EXTRACT('year' FROM CURRENT_DATE)),
+    publish_year INT,
     publish_month INT CHECK(publish_month BETWEEN 1 AND 12),
-    price NUMERIC(6,2)
+    price NUMERIC(6,2),
+    CHECK(NOT(publish_month IS NOT NULL AND publish_year IS NULL)),
+    CHECK((publish_year, publish_month) < (DATE_PART('year', CURRENT_DATE), DATE_PART('month', CURRENT_DATE)))
 );
 
 DROP TABLE IF EXISTS request;

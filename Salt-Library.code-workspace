@@ -12,7 +12,8 @@
 		"debug.console.fontFamily": "Fira Code Medium",
 		"markdownlint.config": {
 			"MD007": { "indent": 4 },
-			"MD033": false
+			"MD033": false,
+			"MD045": false,
 		},
 		"liveServer.settings.port": 5501,
 		"[html]": {
@@ -25,5 +26,6 @@
 		},
 		"cSpell.enabled": true,
 		"pasteImage.path": "${currentFileDir}\\img",
+		"markdown-preview-enhanced.scrollSync": false,
 	}
 }

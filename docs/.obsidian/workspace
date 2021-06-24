@@ -4,68 +4,20 @@
     "type": "split",
     "children": [
       {
-        "id": "279e1e1e62fc8890",
+        "id": "e79dd3b05f90a64b",
         "type": "leaf",
         "state": {
-          "type": "kanban",
-          "state": {
-            "file": "DB Project Kanban.md"
-          }
+          "type": "empty",
+          "state": {}
         },
         "pane-relief:history-v1": {
           "pos": 0,
           "stack": [
             {
-              "leaf": "279e1e1e62fc8890",
+              "leaf": "e79dd3b05f90a64b",
               "group": null,
-              "state": "{\"type\":\"kanban\",\"state\":{\"file\":\"DB Project Kanban.md\"}}",
+              "state": "{\"type\":\"empty\",\"state\":{}}",
               "eState": "{}"
-            },
-            {
-              "leaf": "279e1e1e62fc8890",
-              "group": null,
-              "state": "{\"type\":\"graph\",\"state\":{}}",
-              "eState": "{}"
-            },
-            {
-              "leaf": "279e1e1e62fc8890",
-              "group": null,
-              "state": "{\"type\":\"kanban\",\"state\":{\"file\":\"DB Project Kanban.md\"}}",
-              "eState": "{}"
-            }
-          ]
-        }
-      },
-      {
-        "id": "15c7432f47a4f71d",
-        "type": "leaf",
-        "state": {
-          "type": "markdown",
-          "state": {
-            "file": "请求书籍.md",
-            "mode": "preview"
-          }
-        },
-        "pane-relief:history-v1": {
-          "pos": 0,
-          "stack": [
-            {
-              "leaf": "15c7432f47a4f71d",
-              "group": null,
-              "state": "{\"type\":\"markdown\",\"state\":{\"file\":\"请求书籍.md\",\"mode\":\"preview\"}}",
-              "eState": "{\"scroll\":18.06666717529297}"
-            },
-            {
-              "leaf": "15c7432f47a4f71d",
-              "group": null,
-              "state": "{\"type\":\"markdown\",\"state\":{\"file\":\"修改用户信息.md\",\"mode\":\"preview\"}}",
-              "eState": "{\"scroll\":15.10069465637207}"
-            },
-            {
-              "leaf": "15c7432f47a4f71d",
-              "group": null,
-              "state": "{\"type\":\"markdown\",\"state\":{\"file\":\"书友注册与登录.md\",\"mode\":\"source\"}}",
-              "eState": "{\"scroll\":112.8145139869866}"
             }
           ]
         }
@@ -100,7 +52,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "[[编辑书籍]]",
+                "query": "vs",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -153,9 +105,7 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {
-                "file": "DB Project Kanban.md"
-              }
+              "state": {}
             },
             "pane-relief:history-v1": {
               "pos": 0,
@@ -183,7 +133,6 @@
             "state": {
               "type": "localgraph",
               "state": {
-                "file": "DB Project Kanban.md",
                 "options": {
                   "collapse-filter": false,
                   "search": "",
@@ -253,7 +202,6 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "DB Project Kanban.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -293,17 +241,17 @@
     "width": 327,
     "collapsed": true
   },
-  "active": "279e1e1e62fc8890",
+  "active": "e79dd3b05f90a64b",
   "lastOpenFiles": [
+    "Security.md",
     "DB Project Kanban.md",
+    "E-R 模型设计.md",
+    "Fine Tune Kanban.md",
+    "Report.md",
+    "权限.md",
+    "请求书籍.md",
     "book.md",
     "curator.md",
-    "mylibrary.md",
-    "requestbook.md",
-    "editprofile.md",
-    "cart.md",
-    "profile.md",
-    "书籍管理.md",
-    "buybook.md"
+    "mylibrary.md"
   ]
 }

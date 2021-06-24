@@ -4,20 +4,12 @@ kanban-plugin: basic
 
 ---
 
-## Report
-
-- [ ] SQL data definitions 替换掉 描述性模式
-- [ ] list 句号
-- [ ] figures caption
-- [ ] figure route
-- [ ] code route
-- [ ] references ;; [[
-
-
 ## Todo
 
-- [ ] buy & request skip to specific part of mylibrary
-- [ ] 几个管理页面跳转到结果
+- [ ] 安全性分析
+- [ ] 总结
+- [ ] 密码说明
+- [ ] 角色说明
 
 
 ## In Progress
@@ -36,13 +28,22 @@ kanban-plugin: basic
 - [x] [[E-R Diagram]] drawing #later
 - [x] 符号整理 ""
 - [x] 请求系统与退货付款系统的等价性
+- [x] SQL data definitions 替换掉 描述性模式
+- [x] code route
+- [x] list 句号
+- [x] figures caption
+- [x] 拓展性分析
+- [x] figure route
+- [x] references ;; [[
 
 
 ## Maybe
 
 - [ ] forget password
+- [ ] buy & request skip to specific part of mylibrary
 - [ ] friends
 - [ ] custom statistic table
+- [ ] 几个管理页面跳转到结果
 - [ ] Remove part of the books in cart
 - [ ] curator manage miners activities
 - [ ] other index type
@@ -50,6 +51,10 @@ kanban-plugin: basic
 - [ ] Previous ratings
 - [ ] Textbook dynamic & embedded SQL
 - [ ] Textbook chapter Application #imp
+
+
+## Report
+
 
 
 ***
